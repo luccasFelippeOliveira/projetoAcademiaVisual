@@ -5,6 +5,8 @@
  */
 package DataBase;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -16,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -42,6 +45,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Aluno.findByValidade", query = "SELECT a FROM Aluno a WHERE a.validade = :validade"),
     @NamedQuery(name = "Aluno.findByUltimaEntrada", query = "SELECT a FROM Aluno a WHERE a.ultimaEntrada = :ultimaEntrada")})
 public class Aluno implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -111,7 +116,9 @@ public class Aluno implements Serializable {
     }
 
     public void setId(Integer id) {
+        Integer oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getNome() {
@@ -119,7 +126,9 @@ public class Aluno implements Serializable {
     }
 
     public void setNome(String nome) {
+        String oldNome = this.nome;
         this.nome = nome;
+        changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
     public String getCpf() {
@@ -127,7 +136,9 @@ public class Aluno implements Serializable {
     }
 
     public void setCpf(String cpf) {
+        String oldCpf = this.cpf;
         this.cpf = cpf;
+        changeSupport.firePropertyChange("cpf", oldCpf, cpf);
     }
 
     public Date getDataNascimento() {
@@ -135,7 +146,9 @@ public class Aluno implements Serializable {
     }
 
     public void setDataNascimento(Date dataNascimento) {
+        Date oldDataNascimento = this.dataNascimento;
         this.dataNascimento = dataNascimento;
+        changeSupport.firePropertyChange("dataNascimento", oldDataNascimento, dataNascimento);
     }
 
     public float getPeso() {
@@ -143,7 +156,9 @@ public class Aluno implements Serializable {
     }
 
     public void setPeso(float peso) {
+        float oldPeso = this.peso;
         this.peso = peso;
+        changeSupport.firePropertyChange("peso", oldPeso, peso);
     }
 
     public float getAltura() {
@@ -151,7 +166,9 @@ public class Aluno implements Serializable {
     }
 
     public void setAltura(float altura) {
+        float oldAltura = this.altura;
         this.altura = altura;
+        changeSupport.firePropertyChange("altura", oldAltura, altura);
     }
 
     public String getEndereco() {
@@ -159,7 +176,9 @@ public class Aluno implements Serializable {
     }
 
     public void setEndereco(String endereco) {
+        String oldEndereco = this.endereco;
         this.endereco = endereco;
+        changeSupport.firePropertyChange("endereco", oldEndereco, endereco);
     }
 
     public String getLogin() {
@@ -167,7 +186,9 @@ public class Aluno implements Serializable {
     }
 
     public void setLogin(String login) {
+        String oldLogin = this.login;
         this.login = login;
+        changeSupport.firePropertyChange("login", oldLogin, login);
     }
 
     public String getSenha() {
@@ -175,7 +196,9 @@ public class Aluno implements Serializable {
     }
 
     public void setSenha(String senha) {
+        String oldSenha = this.senha;
         this.senha = senha;
+        changeSupport.firePropertyChange("senha", oldSenha, senha);
     }
 
     public String getEmail() {
@@ -183,7 +206,9 @@ public class Aluno implements Serializable {
     }
 
     public void setEmail(String email) {
+        String oldEmail = this.email;
         this.email = email;
+        changeSupport.firePropertyChange("email", oldEmail, email);
     }
 
     public Date getValidade() {
@@ -191,7 +216,9 @@ public class Aluno implements Serializable {
     }
 
     public void setValidade(Date validade) {
+        Date oldValidade = this.validade;
         this.validade = validade;
+        changeSupport.firePropertyChange("validade", oldValidade, validade);
     }
 
     public Date getUltimaEntrada() {
@@ -199,7 +226,9 @@ public class Aluno implements Serializable {
     }
 
     public void setUltimaEntrada(Date ultimaEntrada) {
+        Date oldUltimaEntrada = this.ultimaEntrada;
         this.ultimaEntrada = ultimaEntrada;
+        changeSupport.firePropertyChange("ultimaEntrada", oldUltimaEntrada, ultimaEntrada);
     }
 
     @Override
@@ -225,6 +254,14 @@ public class Aluno implements Serializable {
     @Override
     public String toString() {
         return "DataBase.Aluno[ id=" + id + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
