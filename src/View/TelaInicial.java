@@ -7,6 +7,7 @@
 package View;
 
 import academiavisual.FormPrincipal;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,69 +32,121 @@ public class TelaInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuArquivo = new javax.swing.JMenu();
+        jMenuItemLogout = new javax.swing.JMenuItem();
+        jMenuItemFechar = new javax.swing.JMenuItem();
+        jMenuCadastros = new javax.swing.JMenu();
+        jMenuItemCadastroAluno = new javax.swing.JMenuItem();
+        jMenuItemCadastroTreinador = new javax.swing.JMenuItem();
+        jMenuItemCadastroModalidade = new javax.swing.JMenuItem();
+        jMenuItemCadastroProduto = new javax.swing.JMenuItem();
+        jMenuTreinos = new javax.swing.JMenu();
+        jMenuItemAdicionarTreino = new javax.swing.JMenuItem();
+        jMenuProdutos = new javax.swing.JMenu();
+        jMenuItemConsultaProdutos = new javax.swing.JMenuItem();
+        jMenuAluno = new javax.swing.JMenu();
+        jMenuItemConsultaTreino = new javax.swing.JMenuItem();
+        jMenuItemConsultaEvolucao = new javax.swing.JMenuItem();
+        jMenuAjuda = new javax.swing.JMenu();
+        jMenuItemInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("projetoAcademiaVisual");
         setName("telaInicial"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
 
-        jMenu4.setText("Arquivo");
-        jMenu4.setName("arquivoMenu"); // NOI18N
+        jMenuArquivo.setText("Arquivo");
+        jMenuArquivo.setName("arquivoMenu"); // NOI18N
 
-        jMenuItem1.setText("Log out");
-        jMenuItem1.setName("logoutMenu"); // NOI18N
-        jMenuItem1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenuItemLogout.setText("Log out");
+        jMenuItemLogout.setName("logoutMenu"); // NOI18N
+        jMenuItemLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem1MouseClicked(evt);
+                jMenuItemLogoutMouseClicked(evt);
             }
         });
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemLogoutActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem1);
+        jMenuArquivo.add(jMenuItemLogout);
 
-        jMenuItem2.setText("Fechar");
-        jMenuItem2.setName("sairMenu"); // NOI18N
-        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenuItemFechar.setText("Fechar");
+        jMenuItemFechar.setName("sairMenu"); // NOI18N
+        jMenuItemFechar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem2MouseClicked(evt);
+                jMenuItemFecharMouseClicked(evt);
             }
         });
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemFechar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemFecharActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem2);
+        jMenuArquivo.add(jMenuItemFechar);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenuArquivo);
 
-        jMenu5.setText("Cadastro");
-        jMenu5.setName("cadastroMenu"); // NOI18N
+        jMenuCadastros.setText("Cadastros");
+        jMenuCadastros.setName("cadastroMenu"); // NOI18N
 
-        jMenuItem3.setText("Cadastro Aluno");
-        jMenu5.add(jMenuItem3);
+        jMenuItemCadastroAluno.setText("Cadastro Aluno");
+        jMenuCadastros.add(jMenuItemCadastroAluno);
 
-        jMenuItem4.setText("Cadastro Treinador");
-        jMenu5.add(jMenuItem4);
+        jMenuItemCadastroTreinador.setText("Cadastro Treinador");
+        jMenuItemCadastroTreinador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroTreinadorActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemCadastroTreinador);
 
-        jMenuBar1.add(jMenu5);
+        jMenuItemCadastroModalidade.setText("Cadastro Modalidade");
+        jMenuCadastros.add(jMenuItemCadastroModalidade);
 
-        jMenu6.setText("Treinos");
-        jMenu6.setName("treinosMenu"); // NOI18N
+        jMenuItemCadastroProduto.setText("Cadastro Produto");
+        jMenuCadastros.add(jMenuItemCadastroProduto);
 
-        jMenuItem5.setText("Adicionar Treino");
-        jMenu6.add(jMenuItem5);
+        jMenuBar1.add(jMenuCadastros);
 
-        jMenuBar1.add(jMenu6);
+        jMenuTreinos.setText("Treinos");
+        jMenuTreinos.setName("treinosMenu"); // NOI18N
+
+        jMenuItemAdicionarTreino.setText("Adicionar Treino");
+        jMenuTreinos.add(jMenuItemAdicionarTreino);
+
+        jMenuBar1.add(jMenuTreinos);
+
+        jMenuProdutos.setText("Produtos");
+
+        jMenuItemConsultaProdutos.setText("Consulta Produtos");
+        jMenuProdutos.add(jMenuItemConsultaProdutos);
+
+        jMenuBar1.add(jMenuProdutos);
+
+        jMenuAluno.setText("Aluno");
+
+        jMenuItemConsultaTreino.setText("Consulta Treino");
+        jMenuAluno.add(jMenuItemConsultaTreino);
+
+        jMenuItemConsultaEvolucao.setText("Grafico Evolucao");
+        jMenuAluno.add(jMenuItemConsultaEvolucao);
+
+        jMenuBar1.add(jMenuAluno);
+
+        jMenuAjuda.setText("Ajuda");
+
+        jMenuItemInfo.setText("Info");
+        jMenuItemInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemInfoActionPerformed(evt);
+            }
+        });
+        jMenuAjuda.add(jMenuItemInfo);
+
+        jMenuBar1.add(jMenuAjuda);
 
         setJMenuBar(jMenuBar1);
 
@@ -111,23 +164,31 @@ public class TelaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
+    private void jMenuItemLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemLogoutMouseClicked
         dispose();
         new FormPrincipal().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1MouseClicked
+    }//GEN-LAST:event_jMenuItemLogoutMouseClicked
 
-    private void jMenuItem2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MouseClicked
+    private void jMenuItemFecharMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemFecharMouseClicked
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem2MouseClicked
+    }//GEN-LAST:event_jMenuItemFecharMouseClicked
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogoutActionPerformed
         dispose();
         new FormPrincipal().setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemFecharActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuItemFecharActionPerformed
+
+    private void jMenuItemInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInfoActionPerformed
+        JOptionPane.showMessageDialog(rootPane, "Em caso de duvida entre em contato:\n email: academiaVisual@hotmail.com\n telefone: (34) 9999-9999");
+    }//GEN-LAST:event_jMenuItemInfoActionPerformed
+
+    private void jMenuItemCadastroTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroTreinadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItemCadastroTreinadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,14 +226,23 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenuAjuda;
+    private javax.swing.JMenu jMenuAluno;
+    private javax.swing.JMenu jMenuArquivo;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItemAdicionarTreino;
+    private javax.swing.JMenuItem jMenuItemCadastroAluno;
+    private javax.swing.JMenuItem jMenuItemCadastroModalidade;
+    private javax.swing.JMenuItem jMenuItemCadastroProduto;
+    private javax.swing.JMenuItem jMenuItemCadastroTreinador;
+    private javax.swing.JMenuItem jMenuItemConsultaEvolucao;
+    private javax.swing.JMenuItem jMenuItemConsultaProdutos;
+    private javax.swing.JMenuItem jMenuItemConsultaTreino;
+    private javax.swing.JMenuItem jMenuItemFechar;
+    private javax.swing.JMenuItem jMenuItemInfo;
+    private javax.swing.JMenuItem jMenuItemLogout;
+    private javax.swing.JMenu jMenuProdutos;
+    private javax.swing.JMenu jMenuTreinos;
     // End of variables declaration//GEN-END:variables
 }
