@@ -3,11 +3,16 @@
   <persistence-unit name="AcademiaVisualPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>DataBase.Treinador</class>
+    <class>DataBase.Aluno</class>
+    <class>DataBase.Exercicios</class>
+    <class>DataBase.Produtos</class>
+    <class>DataBase.Modalidades</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/projetoacademiavisual?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value=""/>
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

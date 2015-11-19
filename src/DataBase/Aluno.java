@@ -24,21 +24,24 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author afnsoo
  */
 @Entity
-@Table(name = "treinador", uniqueConstraints = {
+@Table(name = "aluno", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"cpf"})})
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Treinador.findAll", query = "SELECT t FROM Treinador t"),
-    @NamedQuery(name = "Treinador.findById", query = "SELECT t FROM Treinador t WHERE t.id = :id"),
-    @NamedQuery(name = "Treinador.findByNome", query = "SELECT t FROM Treinador t WHERE t.nome = :nome"),
-    @NamedQuery(name = "Treinador.findByCpf", query = "SELECT t FROM Treinador t WHERE t.cpf = :cpf"),
-    @NamedQuery(name = "Treinador.findByDataNascimento", query = "SELECT t FROM Treinador t WHERE t.dataNascimento = :dataNascimento"),
-    @NamedQuery(name = "Treinador.findByEndereco", query = "SELECT t FROM Treinador t WHERE t.endereco = :endereco"),
-    @NamedQuery(name = "Treinador.findByLogin", query = "SELECT t FROM Treinador t WHERE t.login = :login"),
-    @NamedQuery(name = "Treinador.findBySenha", query = "SELECT t FROM Treinador t WHERE t.senha = :senha"),
-    @NamedQuery(name = "Treinador.findByAdministrador", query = "SELECT t FROM Treinador t WHERE t.administrador = :administrador"),
-    @NamedQuery(name = "Treinador.findByEmail", query = "SELECT t FROM Treinador t WHERE t.email = :email")})
-public class Treinador implements Serializable {
+    @NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a"),
+    @NamedQuery(name = "Aluno.findById", query = "SELECT a FROM Aluno a WHERE a.id = :id"),
+    @NamedQuery(name = "Aluno.findByNome", query = "SELECT a FROM Aluno a WHERE a.nome = :nome"),
+    @NamedQuery(name = "Aluno.findByCpf", query = "SELECT a FROM Aluno a WHERE a.cpf = :cpf"),
+    @NamedQuery(name = "Aluno.findByDataNascimento", query = "SELECT a FROM Aluno a WHERE a.dataNascimento = :dataNascimento"),
+    @NamedQuery(name = "Aluno.findByPeso", query = "SELECT a FROM Aluno a WHERE a.peso = :peso"),
+    @NamedQuery(name = "Aluno.findByAltura", query = "SELECT a FROM Aluno a WHERE a.altura = :altura"),
+    @NamedQuery(name = "Aluno.findByEndereco", query = "SELECT a FROM Aluno a WHERE a.endereco = :endereco"),
+    @NamedQuery(name = "Aluno.findByLogin", query = "SELECT a FROM Aluno a WHERE a.login = :login"),
+    @NamedQuery(name = "Aluno.findBySenha", query = "SELECT a FROM Aluno a WHERE a.senha = :senha"),
+    @NamedQuery(name = "Aluno.findByEmail", query = "SELECT a FROM Aluno a WHERE a.email = :email"),
+    @NamedQuery(name = "Aluno.findByValidade", query = "SELECT a FROM Aluno a WHERE a.validade = :validade"),
+    @NamedQuery(name = "Aluno.findByUltimaEntrada", query = "SELECT a FROM Aluno a WHERE a.ultimaEntrada = :ultimaEntrada")})
+public class Aluno implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -48,45 +51,59 @@ public class Treinador implements Serializable {
     @Column(name = "nome", nullable = false, length = 40)
     private String nome;
     @Basic(optional = false)
-    @Column(name = "cpf", nullable = false, length = 15)
+    @Column(name = "cpf", nullable = false, length = 14)
     private String cpf;
     @Basic(optional = false)
     @Column(name = "dataNascimento", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     @Basic(optional = false)
+    @Column(name = "peso", nullable = false)
+    private float peso;
+    @Basic(optional = false)
+    @Column(name = "altura", nullable = false)
+    private float altura;
+    @Basic(optional = false)
     @Column(name = "endereco", nullable = false, length = 40)
     private String endereco;
     @Basic(optional = false)
-    @Column(name = "login", nullable = false, length = 15)
+    @Column(name = "login", nullable = false, length = 10)
     private String login;
     @Basic(optional = false)
-    @Column(name = "senha", nullable = false, length = 60)
+    @Column(name = "senha", nullable = false, length = 15)
     private String senha;
-    @Basic(optional = false)
-    @Column(name = "administrador", nullable = false)
-    private int administrador;
     @Basic(optional = false)
     @Column(name = "email", nullable = false, length = 40)
     private String email;
+    @Basic(optional = false)
+    @Column(name = "validade", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date validade;
+    @Basic(optional = false)
+    @Column(name = "ultimaEntrada", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date ultimaEntrada;
 
-    public Treinador() {
+    public Aluno() {
     }
 
-    public Treinador(Integer id) {
+    public Aluno(Integer id) {
         this.id = id;
     }
 
-    public Treinador(Integer id, String nome, String cpf, Date dataNascimento, String endereco, String login, String senha, int administrador, String email) {
+    public Aluno(Integer id, String nome, String cpf, Date dataNascimento, float peso, float altura, String endereco, String login, String senha, String email, Date validade, Date ultimaEntrada) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.peso = peso;
+        this.altura = altura;
         this.endereco = endereco;
         this.login = login;
         this.senha = senha;
-        this.administrador = administrador;
         this.email = email;
+        this.validade = validade;
+        this.ultimaEntrada = ultimaEntrada;
     }
 
     public Integer getId() {
@@ -121,6 +138,22 @@ public class Treinador implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
+    public float getPeso() {
+        return peso;
+    }
+
+    public void setPeso(float peso) {
+        this.peso = peso;
+    }
+
+    public float getAltura() {
+        return altura;
+    }
+
+    public void setAltura(float altura) {
+        this.altura = altura;
+    }
+
     public String getEndereco() {
         return endereco;
     }
@@ -145,20 +178,28 @@ public class Treinador implements Serializable {
         this.senha = senha;
     }
 
-    public int getAdministrador() {
-        return administrador;
-    }
-
-    public void setAdministrador(int administrador) {
-        this.administrador = administrador;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Date getValidade() {
+        return validade;
+    }
+
+    public void setValidade(Date validade) {
+        this.validade = validade;
+    }
+
+    public Date getUltimaEntrada() {
+        return ultimaEntrada;
+    }
+
+    public void setUltimaEntrada(Date ultimaEntrada) {
+        this.ultimaEntrada = ultimaEntrada;
     }
 
     @Override
@@ -171,10 +212,10 @@ public class Treinador implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Treinador)) {
+        if (!(object instanceof Aluno)) {
             return false;
         }
-        Treinador other = (Treinador) object;
+        Aluno other = (Aluno) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -183,7 +224,7 @@ public class Treinador implements Serializable {
 
     @Override
     public String toString() {
-        return "DataBase.Treinador[ id=" + id + " ]";
+        return "DataBase.Aluno[ id=" + id + " ]";
     }
     
 }
