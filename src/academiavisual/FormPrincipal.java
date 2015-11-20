@@ -6,6 +6,7 @@
 package academiavisual;
 
 import View.TelaInicial;
+import Autenticacao.Permissao;
 
 /**
  *
@@ -16,6 +17,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FormPrincipal
      */
+    
+    
     public FormPrincipal() {
         initComponents();
     }
@@ -158,8 +161,22 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        /*Botao de Login*/
+        /*Index 0 => Aluno;
+         Index 1 => Treinador;
+        */
+        int currentSelection = jComboBoxLogin.getSelectedIndex();
+        permissao = new Permissao();
+        switch(currentSelection) {
+            case 0:
+                permissao.setPermissaoUsuario(Permissao.P_ALUNO);
+                break;
+            case 1:
+                permissao.setPermissaoUsuario(Permissao.P_TREINADOR);
+                break;
+        }
         dispose();
-        new TelaInicial().setVisible(true);                
+        new TelaInicial(permissao).setVisible(true);                
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
@@ -203,7 +220,9 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });        
     }
-        
+    //Para autenticação:
+    private Permissao permissao;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

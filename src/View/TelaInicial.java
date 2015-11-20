@@ -8,6 +8,8 @@ package View;
 
 import academiavisual.FormPrincipal;
 import javax.swing.JOptionPane;
+import Autenticacao.Permissao;
+import java.beans.PropertyVetoException;
 
 /**
  *
@@ -18,8 +20,14 @@ public class TelaInicial extends javax.swing.JFrame {
     /**
      * Creates new form TelaInicial
      */
-    public TelaInicial() {
+    public TelaInicial(Permissao p) {
+        permissao = p;
         initComponents();
+        if(permissao.isUsuario()) {
+            /*Desabilita as opções de cadastro -- que involvem a inserção de dados no DB*/
+            jMenuItemCadastroAluno.setEnabled(false);
+        }
+            
     }
 
     /**
@@ -214,7 +222,18 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemInfoActionPerformed
 
     private void jMenuItemCadastroTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroTreinadorActionPerformed
-        // TODO add your handling code here:
+        if((cadastroTreinador == null) || (cadastroTreinador.isClosed())) {
+            /*Apenas abre o jInternalFrame, se o mesmo não tiver sido criado, ou estiver fechado*/
+            cadastroTreinador = new JInternalFrameCadastroTreinador();
+            jDesktopPaneInicial.add(cadastroTreinador);
+        }
+        try {
+            cadastroTreinador.setMaximum(rootPaneCheckingEnabled);
+        }catch (PropertyVetoException e){
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        /*Aparece JInternalFrame */
+        cadastroTreinador.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroTreinadorActionPerformed
 
     private void jMenuItemCadastroAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroAlunoActionPerformed
@@ -230,40 +249,42 @@ public class TelaInicial extends javax.swing.JFrame {
         cadastroAluno.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroAlunoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaInicial().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TelaInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new TelaInicial().setVisible(true);
+//            }
+//        });
+//    }
+    //Para o sistema de permissão
+    Autenticacao.Permissao permissao;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPaneInicial;

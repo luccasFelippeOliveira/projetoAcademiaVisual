@@ -5,6 +5,8 @@
  */
 package DataBase;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -16,6 +18,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -39,6 +42,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Treinador.findByAdministrador", query = "SELECT t FROM Treinador t WHERE t.administrador = :administrador"),
     @NamedQuery(name = "Treinador.findByEmail", query = "SELECT t FROM Treinador t WHERE t.email = :email")})
 public class Treinador implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -94,7 +99,9 @@ public class Treinador implements Serializable {
     }
 
     public void setId(Integer id) {
+        Integer oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public String getNome() {
@@ -102,7 +109,9 @@ public class Treinador implements Serializable {
     }
 
     public void setNome(String nome) {
+        String oldNome = this.nome;
         this.nome = nome;
+        changeSupport.firePropertyChange("nome", oldNome, nome);
     }
 
     public String getCpf() {
@@ -110,7 +119,9 @@ public class Treinador implements Serializable {
     }
 
     public void setCpf(String cpf) {
+        String oldCpf = this.cpf;
         this.cpf = cpf;
+        changeSupport.firePropertyChange("cpf", oldCpf, cpf);
     }
 
     public Date getDataNascimento() {
@@ -118,7 +129,9 @@ public class Treinador implements Serializable {
     }
 
     public void setDataNascimento(Date dataNascimento) {
+        Date oldDataNascimento = this.dataNascimento;
         this.dataNascimento = dataNascimento;
+        changeSupport.firePropertyChange("dataNascimento", oldDataNascimento, dataNascimento);
     }
 
     public String getEndereco() {
@@ -126,7 +139,9 @@ public class Treinador implements Serializable {
     }
 
     public void setEndereco(String endereco) {
+        String oldEndereco = this.endereco;
         this.endereco = endereco;
+        changeSupport.firePropertyChange("endereco", oldEndereco, endereco);
     }
 
     public String getLogin() {
@@ -134,7 +149,9 @@ public class Treinador implements Serializable {
     }
 
     public void setLogin(String login) {
+        String oldLogin = this.login;
         this.login = login;
+        changeSupport.firePropertyChange("login", oldLogin, login);
     }
 
     public String getSenha() {
@@ -142,7 +159,9 @@ public class Treinador implements Serializable {
     }
 
     public void setSenha(String senha) {
+        String oldSenha = this.senha;
         this.senha = senha;
+        changeSupport.firePropertyChange("senha", oldSenha, senha);
     }
 
     public int getAdministrador() {
@@ -150,7 +169,9 @@ public class Treinador implements Serializable {
     }
 
     public void setAdministrador(int administrador) {
+        int oldAdministrador = this.administrador;
         this.administrador = administrador;
+        changeSupport.firePropertyChange("administrador", oldAdministrador, administrador);
     }
 
     public String getEmail() {
@@ -158,7 +179,9 @@ public class Treinador implements Serializable {
     }
 
     public void setEmail(String email) {
+        String oldEmail = this.email;
         this.email = email;
+        changeSupport.firePropertyChange("email", oldEmail, email);
     }
 
     @Override
@@ -184,6 +207,14 @@ public class Treinador implements Serializable {
     @Override
     public String toString() {
         return "DataBase.Treinador[ id=" + id + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

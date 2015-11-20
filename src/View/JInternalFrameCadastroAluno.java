@@ -38,10 +38,14 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         alunoQuery = java.beans.Beans.isDesignTime() ? null : AcademiaVisualPUEntityManager.createQuery("SELECT a FROM Aluno a");
         alunoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : alunoQuery.getResultList();
         jTabbedPaneAluno = new javax.swing.JTabbedPane();
-        jPanelConsulta = new javax.swing.JPanel();
+        jPanelConsultaAluno = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAluno = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
+        jLabelProcurarAluno = new javax.swing.JLabel();
+        jTextFieldProcurarAluno = new javax.swing.JTextField();
+        jComboBoxProcurarAluno = new javax.swing.JComboBox();
+        jButtonProcurarAluno = new javax.swing.JButton();
+        jPanelAlterarAluno = new javax.swing.JPanel();
         jLabelNomeAluno = new javax.swing.JLabel();
         jLabelCpfAluno = new javax.swing.JLabel();
         jLabelDataNascimentoAluno = new javax.swing.JLabel();
@@ -122,18 +126,51 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTableAluno);
 
-        javax.swing.GroupLayout jPanelConsultaLayout = new javax.swing.GroupLayout(jPanelConsulta);
-        jPanelConsulta.setLayout(jPanelConsultaLayout);
-        jPanelConsultaLayout.setHorizontalGroup(
-            jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jLabelProcurarAluno.setText("Opção De Busca");
+
+        jTextFieldProcurarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldProcurarAlunoActionPerformed(evt);
+            }
+        });
+
+        jComboBoxProcurarAluno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Nome", "CPF", "Validade" }));
+
+        jButtonProcurarAluno.setText("Buscar");
+        jButtonProcurarAluno.setMaximumSize(new java.awt.Dimension(75, 23));
+        jButtonProcurarAluno.setMinimumSize(new java.awt.Dimension(75, 23));
+        jButtonProcurarAluno.setPreferredSize(new java.awt.Dimension(75, 23));
+
+        javax.swing.GroupLayout jPanelConsultaAlunoLayout = new javax.swing.GroupLayout(jPanelConsultaAluno);
+        jPanelConsultaAluno.setLayout(jPanelConsultaAlunoLayout);
+        jPanelConsultaAlunoLayout.setHorizontalGroup(
+            jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+            .addGroup(jPanelConsultaAlunoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelProcurarAluno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBoxProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanelConsultaLayout.setVerticalGroup(
-            jPanelConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+        jPanelConsultaAlunoLayout.setVerticalGroup(
+            jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaAlunoLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelProcurarAluno)
+                    .addComponent(jTextFieldProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        jTabbedPaneAluno.addTab("Consulta", jPanelConsulta);
+        jTabbedPaneAluno.addTab("Consulta", jPanelConsultaAluno);
 
         jLabelNomeAluno.setText("Nome:");
 
@@ -157,13 +194,13 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
 
         jButtonBuscarDataAluno.setText("...");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelAlterarAlunoLayout = new javax.swing.GroupLayout(jPanelAlterarAluno);
+        jPanelAlterarAluno.setLayout(jPanelAlterarAlunoLayout);
+        jPanelAlterarAlunoLayout.setHorizontalGroup(
+            jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelSenhaAluno)
                     .addComponent(jLabelLoginAluno)
                     .addComponent(jLabelEnderecoAluno)
@@ -175,70 +212,69 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                     .addComponent(jLabelValidadeAluno)
                     .addComponent(jLabelNomeAluno))
                 .addGap(97, 97, 97)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextFieldNomeAluno)
-                        .addComponent(jTextFieldCpfAluno)
-                        .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                        .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jTextFieldNomeAluno)
+                    .addComponent(jTextFieldCpfAluno)
+                    .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                    .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonBuscarDataAluno)
                 .addContainerGap(117, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelAlterarAlunoLayout.setVerticalGroup(
+            jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNomeAluno)
                     .addComponent(jTextFieldNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCpfAluno)
                     .addComponent(jTextFieldCpfAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDataNascimentoAluno)
                     .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPesoAluno)
                     .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAlturaAluno)
                     .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEnderecoAluno)
                     .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelLoginAluno)
                     .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelSenhaAluno)
                     .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEmailAluno)
                     .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelValidadeAluno)
                     .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscarDataAluno))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
 
-        jTabbedPaneAluno.addTab("Alterar", jPanel1);
+        jTabbedPaneAluno.addTab("Alterar", jPanelAlterarAluno);
 
         jButtonInserirAluno.setText("Inserir");
         jButtonInserirAluno.addActionListener(new java.awt.event.ActionListener() {
@@ -319,6 +355,10 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         jButtonCancelarAluno.setEnabled(true);
     }//GEN-LAST:event_jButtonInserirAlunoActionPerformed
 
+    private void jTextFieldProcurarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarAlunoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldProcurarAlunoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager AcademiaVisualPUEntityManager;
@@ -331,6 +371,8 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonExcluirAluno;
     private javax.swing.JButton jButtonFecharAluno;
     private javax.swing.JButton jButtonInserirAluno;
+    private javax.swing.JButton jButtonProcurarAluno;
+    private javax.swing.JComboBox jComboBoxProcurarAluno;
     private javax.swing.JLabel jLabelAlturaAluno;
     private javax.swing.JLabel jLabelCpfAluno;
     private javax.swing.JLabel jLabelDataNascimentoAluno;
@@ -339,10 +381,11 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabelLoginAluno;
     private javax.swing.JLabel jLabelNomeAluno;
     private javax.swing.JLabel jLabelPesoAluno;
+    private javax.swing.JLabel jLabelProcurarAluno;
     private javax.swing.JLabel jLabelSenhaAluno;
     private javax.swing.JLabel jLabelValidadeAluno;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanelConsulta;
+    private javax.swing.JPanel jPanelAlterarAluno;
+    private javax.swing.JPanel jPanelConsultaAluno;
     private javax.swing.JPasswordField jPasswordFieldSenhaAluno;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPaneAluno;
@@ -355,6 +398,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextFieldLoginAluno;
     private javax.swing.JTextField jTextFieldNomeAluno;
     private javax.swing.JTextField jTextFieldPesoAluno;
+    private javax.swing.JTextField jTextFieldProcurarAluno;
     private javax.swing.JTextField jTextFieldValidadeAluno;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables

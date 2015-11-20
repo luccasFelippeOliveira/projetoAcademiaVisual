@@ -90,6 +90,7 @@ public class Aluno implements Serializable {
     private Date ultimaEntrada;
 
     public Aluno() {
+        
     }
 
     public Aluno(Integer id) {
