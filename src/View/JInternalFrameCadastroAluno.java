@@ -353,8 +353,18 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         });
 
         jButtonAlterarAluno.setText("Alterar");
+        jButtonAlterarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarAlunoActionPerformed(evt);
+            }
+        });
 
         jButtonExcluirAluno.setText("Excluir");
+        jButtonExcluirAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirAlunoActionPerformed(evt);
+            }
+        });
 
         jButtonFecharAluno.setText("Fechar");
         jButtonFecharAluno.addActionListener(new java.awt.event.ActionListener() {
@@ -584,6 +594,14 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         //se nao houver erro.
         controle(CONFIRMAR);
     }//GEN-LAST:event_jButtonConfirmarAlunoActionPerformed
+
+    private void jButtonAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarAlunoActionPerformed
+        controle(ALTERAR);
+    }//GEN-LAST:event_jButtonAlterarAlunoActionPerformed
+
+    private void jButtonExcluirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirAlunoActionPerformed
+        controle(EXCLUIR);
+    }//GEN-LAST:event_jButtonExcluirAlunoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
