@@ -569,7 +569,13 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldProcurarAlunoActionPerformed
 
     private void jButtonCancelarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarAlunoActionPerformed
-        
+        if (ANTERIOR != EXCLUIR) {
+            alunoList.remove(alunoList.size() - 1);
+        }
+        jTableAluno.updateUI();
+        jTableAluno.repaint();
+        jTableAluno.setRowSelectionInterval(0, 0);
+        controleTela(telaConsultar);
     }//GEN-LAST:event_jButtonCancelarAlunoActionPerformed
 
     private void jButtonConfirmarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarAlunoActionPerformed
