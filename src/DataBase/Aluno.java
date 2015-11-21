@@ -5,6 +5,7 @@
  */
 package DataBase;
 
+import DAO.AlunoJpaController;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
@@ -12,14 +13,17 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.swing.JOptionPane;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -263,6 +267,37 @@ public class Aluno implements Serializable {
 
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
+    }
+    
+    //funções para incluir, alterar e excluir utilizando o jpaController.
+    public void incluir(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            AlunoJpaController alunoController = new AlunoJpaController(emf);
+            alunoController.create(this);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void alterar(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            AlunoJpaController alunoController = new AlunoJpaController(emf);
+            alunoController.edit(this);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void excluir(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            AlunoJpaController alunoController = new AlunoJpaController(emf);
+            alunoController.destroy(this.getId());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
 }

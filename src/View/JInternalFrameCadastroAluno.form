@@ -278,36 +278,59 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelSenhaAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelLoginAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEnderecoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAlturaAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelPesoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelDataNascimentoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelCpfAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEmailAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelValidadeAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelNomeAluno" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabelEnderecoAluno" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldEnderecoAluno" min="-2" pref="321" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabelCpfAluno" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelNomeAluno" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelDataNascimentoAluno" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelPesoAluno" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelLoginAluno" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelEmailAluno" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelValidadeAluno" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelIdAluno" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Component id="jFormattedTextFieldUltimaEntradaAluno" min="-2" pref="113" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                                      <Component id="jDateChooserAluno" min="-2" pref="145" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jTextFieldIdAluno" min="-2" pref="65" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldNomeAluno" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldEmailAluno" alignment="1" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jTextFieldPesoAluno" min="-2" pref="128" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabelAlturaAluno" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jTextFieldAlturaAluno" min="-2" pref="146" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jTextFieldLoginAluno" min="-2" pref="116" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabelSenhaAluno" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jPasswordFieldSenhaAluno" min="-2" pref="163" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jFormattedTextFieldDataAluno" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFormattedTextFieldValidadeAluno" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jFormattedTextFieldCpfAluno" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jPasswordFieldSenhaAluno" pref="321" max="32767" attributes="0"/>
-                          <Component id="jTextFieldNomeAluno" max="32767" attributes="0"/>
-                          <Component id="jTextFieldCpfAluno" max="32767" attributes="0"/>
-                          <Component id="jTextFieldDataNascimentoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldPesoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldAlturaAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEnderecoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldLoginAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEmailAluno" alignment="1" pref="321" max="32767" attributes="0"/>
-                          <Component id="jTextFieldValidadeAluno" alignment="1" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonBuscarDataAluno" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="117" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jCheckBoxSenhaAluno" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="144" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -316,56 +339,63 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelIdAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldIdAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelNomeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldNomeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelCpfAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldCpfAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldCpfAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelDataNascimentoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldDataNascimentoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldDataAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelPesoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldPesoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelAlturaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldAlturaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelAlturaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelEnderecoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldEnderecoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelLoginAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldLoginAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelSenhaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jPasswordFieldSenhaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jCheckBoxSenhaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelEmailAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldEmailAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelEmailAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelValidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldValidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonBuscarDataAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldValidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jDateChooserAluno" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jFormattedTextFieldUltimaEntradaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="53" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -422,29 +452,107 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldNomeAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldCpfAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldDataNascimentoAluno">
+              <BindingProperties>
+                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.nome}" target="jTextFieldNomeAluno" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldPesoAluno">
+              <BindingProperties>
+                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.peso}" target="jTextFieldPesoAluno" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldAlturaAluno">
+              <BindingProperties>
+                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.altura}" target="jTextFieldAlturaAluno" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldEnderecoAluno">
+              <BindingProperties>
+                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.endereco}" target="jTextFieldEnderecoAluno" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldLoginAluno">
+              <BindingProperties>
+                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.login}" target="jTextFieldLoginAluno" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldEmailAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldValidadeAluno">
-            </Component>
-            <Component class="javax.swing.JButton" name="jButtonBuscarDataAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-              </Properties>
+              <BindingProperties>
+                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.email}" target="jTextFieldEmailAluno" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordFieldSenhaAluno">
+              <BindingProperties>
+                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.senha}" target="jPasswordFieldSenhaAluno" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelIdAluno">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ID:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextFieldIdAluno">
+              <BindingProperties>
+                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.id}" target="jTextFieldIdAluno" targetPath="text" updateStrategy="0" immediately="false">
+                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
+                </BindingProperty>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="jCheckBoxSenhaAluno">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Trocar Senha P.A."/>
+              </Properties>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserAluno">
+              <Properties>
+                <Property name="dateFormatString" type="java.lang.String" value="M/d/yy"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataAluno">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format subtype="1" type="1"/>
+                </Property>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="value" source="jTableAluno" sourcePath="${selectedElement.dataNascimento}" target="jFormattedTextFieldDataAluno" targetPath="value" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldValidadeAluno">
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldUltimaEntradaAluno">
+              <BindingProperties>
+                <BindingProperty name="value" source="jTableAluno" sourcePath="${selectedElement.ultimaEntrada}" target="jFormattedTextFieldUltimaEntradaAluno" targetPath="value" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ultima Entrada:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldCpfAluno">
+              <Properties>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                  <Format format="###.###.###-##" subtype="-1" type="5"/>
+                </Property>
+              </Properties>
+              <BindingProperties>
+                <BindingProperty name="value" source="jTableAluno" sourcePath="${selectedElement.cpf}" target="jFormattedTextFieldCpfAluno" targetPath="value" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
             </Component>
           </SubComponents>
         </Container>
@@ -480,11 +588,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarAlunoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonConfirmarAluno">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConfirmarAlunoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

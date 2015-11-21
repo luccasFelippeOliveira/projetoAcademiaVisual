@@ -5,6 +5,11 @@
  */
 package View;
 
+import DataBase.Aluno;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author afnsoo
@@ -18,9 +23,6 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         initComponents();
         jTabbedPaneAluno.setEnabledAt(1, false);
         jButtonCancelarAluno.setEnabled(false);
-        //jButtonInserirAluno.setEnabled(false);
-        jButtonAlterarAluno.setEnabled(false);
-        jButtonExcluirAluno.setEnabled(false);
         jButtonConfirmarAluno.setEnabled(false);
     }
 
@@ -57,16 +59,21 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         jLabelEmailAluno = new javax.swing.JLabel();
         jLabelValidadeAluno = new javax.swing.JLabel();
         jTextFieldNomeAluno = new javax.swing.JTextField();
-        jTextFieldCpfAluno = new javax.swing.JTextField();
-        jTextFieldDataNascimentoAluno = new javax.swing.JTextField();
         jTextFieldPesoAluno = new javax.swing.JTextField();
         jTextFieldAlturaAluno = new javax.swing.JTextField();
         jTextFieldEnderecoAluno = new javax.swing.JTextField();
         jTextFieldLoginAluno = new javax.swing.JTextField();
         jTextFieldEmailAluno = new javax.swing.JTextField();
-        jTextFieldValidadeAluno = new javax.swing.JTextField();
-        jButtonBuscarDataAluno = new javax.swing.JButton();
         jPasswordFieldSenhaAluno = new javax.swing.JPasswordField();
+        jLabelIdAluno = new javax.swing.JLabel();
+        jTextFieldIdAluno = new javax.swing.JTextField();
+        jCheckBoxSenhaAluno = new javax.swing.JCheckBox();
+        jDateChooserAluno = new com.toedter.calendar.JDateChooser();
+        jFormattedTextFieldDataAluno = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldValidadeAluno = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldUltimaEntradaAluno = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jFormattedTextFieldCpfAluno = new javax.swing.JFormattedTextField();
         jButtonInserirAluno = new javax.swing.JButton();
         jButtonAlterarAluno = new javax.swing.JButton();
         jButtonExcluirAluno = new javax.swing.JButton();
@@ -192,7 +199,54 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
 
         jLabelValidadeAluno.setText("Validade:");
 
-        jButtonBuscarDataAluno.setText("...");
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), jTextFieldNomeAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.peso}"), jTextFieldPesoAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.altura}"), jTextFieldAlturaAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.endereco}"), jTextFieldEnderecoAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.login}"), jTextFieldLoginAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.email}"), jTextFieldEmailAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.senha}"), jPasswordFieldSenhaAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jLabelIdAluno.setText("ID:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.id}"), jTextFieldIdAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        jCheckBoxSenhaAluno.setText("Trocar Senha P.A.");
+
+        jDateChooserAluno.setDateFormatString("M/d/yy");
+
+        jFormattedTextFieldDataAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataNascimento}"), jFormattedTextFieldDataAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.ultimaEntrada}"), jFormattedTextFieldUltimaEntradaAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+
+        jLabel1.setText("Ultima Entrada:");
+
+        try {
+            jFormattedTextFieldCpfAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cpf}"), jFormattedTextFieldCpfAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout jPanelAlterarAlunoLayout = new javax.swing.GroupLayout(jPanelAlterarAluno);
         jPanelAlterarAluno.setLayout(jPanelAlterarAlunoLayout);
@@ -201,77 +255,100 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
             .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelSenhaAluno)
-                    .addComponent(jLabelLoginAluno)
-                    .addComponent(jLabelEnderecoAluno)
-                    .addComponent(jLabelAlturaAluno)
-                    .addComponent(jLabelPesoAluno)
-                    .addComponent(jLabelDataNascimentoAluno)
-                    .addComponent(jLabelCpfAluno)
-                    .addComponent(jLabelEmailAluno)
-                    .addComponent(jLabelValidadeAluno)
-                    .addComponent(jLabelNomeAluno))
-                .addGap(97, 97, 97)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addComponent(jTextFieldNomeAluno)
-                    .addComponent(jTextFieldCpfAluno)
-                    .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBuscarDataAluno)
-                .addContainerGap(117, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlterarAlunoLayout.createSequentialGroup()
+                        .addComponent(jLabelEnderecoAluno)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
+                        .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelCpfAluno)
+                            .addComponent(jLabelNomeAluno)
+                            .addComponent(jLabelDataNascimentoAluno)
+                            .addComponent(jLabelPesoAluno)
+                            .addComponent(jLabelLoginAluno)
+                            .addComponent(jLabelEmailAluno)
+                            .addComponent(jLabelValidadeAluno)
+                            .addComponent(jLabelIdAluno)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
+                                .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63)
+                                .addComponent(jDateChooserAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNomeAluno)
+                            .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlterarAlunoLayout.createSequentialGroup()
+                                .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabelAlturaAluno)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
+                                .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelSenhaAluno)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedTextFieldDataAluno)
+                            .addComponent(jFormattedTextFieldValidadeAluno)
+                            .addComponent(jFormattedTextFieldCpfAluno))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jCheckBoxSenhaAluno)
+                .addContainerGap(144, Short.MAX_VALUE))
         );
         jPanelAlterarAlunoLayout.setVerticalGroup(
             jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelIdAluno)
+                    .addComponent(jTextFieldIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelNomeAluno)
                     .addComponent(jTextFieldNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCpfAluno)
-                    .addComponent(jTextFieldCpfAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldCpfAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDataNascimentoAluno)
-                    .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldDataAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPesoAluno)
-                    .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAlturaAluno)
-                    .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAlturaAluno))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEnderecoAluno)
                     .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelLoginAluno)
-                    .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSenhaAluno)
-                    .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxSenhaAluno))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEmailAluno)
-                    .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmailAluno))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelValidadeAluno)
-                    .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBuscarDataAluno))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(jFormattedTextFieldValidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jDateChooserAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jTabbedPaneAluno.addTab("Alterar", jPanelAlterarAluno);
@@ -295,8 +372,18 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         });
 
         jButtonCancelarAluno.setText("Cancelar");
+        jButtonCancelarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarAlunoActionPerformed(evt);
+            }
+        });
 
         jButtonConfirmarAluno.setText("Confirmar");
+        jButtonConfirmarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarAlunoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -337,10 +424,102 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    //controle botoes CRUD.
+    private int ANTERIOR = 0;
+    private final int INSERIR = 1;
+    private final int ALTERAR = 2;
+    private final int EXCLUIR = 3;
+    private final int CONFIRMAR = 4;
+    private final int CANCELAR = 5;
+    
+    //controle alternancia entre tela consulta e alterar.
+    private final int telaConsultar = 1;
+    private final int telaAlterar = 2;
+    
+    private void controleTela(int opTela){
+        switch (opTela){
+            case telaConsultar: {                
+                jTabbedPaneAluno.setEnabledAt(0, true);
+                jTabbedPaneAluno.setEnabledAt(1, false);                
+                jTabbedPaneAluno.setSelectedIndex(0);
+                jButtonAlterarAluno.setEnabled(true);
+                jButtonInserirAluno.setEnabled(true);
+                jButtonExcluirAluno.setEnabled(true);
+                jButtonFecharAluno.setEnabled(true);
+                jButtonConfirmarAluno.setEnabled(false);
+                jButtonCancelarAluno.setEnabled(false);
+            }
+            case telaAlterar: {                
+                jTabbedPaneAluno.setEnabledAt(1, true);
+                jTabbedPaneAluno.setEnabledAt(0, false);                
+                jTabbedPaneAluno.setSelectedIndex(1);
+                jButtonAlterarAluno.setEnabled(false);
+                jButtonInserirAluno.setEnabled(false);
+                jButtonExcluirAluno.setEnabled(false);
+                jButtonFecharAluno.setEnabled(false);
+                jButtonConfirmarAluno.setEnabled(true);
+                jButtonCancelarAluno.setEnabled(true);
+            }
+        }
+    }
+    
+    private void controle(int op){
+        try {
+            switch(op){
+                case INSERIR: {
+                    this.ANTERIOR = INSERIR;
+                    controleTela(telaAlterar);
+                    alunoList.add(new Aluno());
+                    jTableAluno.updateUI();
+                    jTableAluno.repaint();
+                    jTableAluno.setRowSelectionInterval(jTableAluno.getRowCount() - 1, jTableAluno.getRowCount() - 1);
+                    break;                   
+                }
+                case ALTERAR: {
+                    this.ANTERIOR = ALTERAR;
+                    
+                    break;
+                }
+                case EXCLUIR: {
+                    this.ANTERIOR = EXCLUIR;
+                    
+                    break;
+                }
+                case CONFIRMAR: {
+                    switch (ANTERIOR) {
+                        case INSERIR: {
+                            alunoList.get(alunoList.size() - 1).incluir();
+                            controleTela(telaConsultar);
+                            jTableAluno.updateUI();
+                            jTableAluno.repaint();
+                            if (!alunoList.isEmpty()) {
+                                jTableAluno.setRowSelectionInterval(0, 0);
+                            }
+                            jTableAluno.updateUI();
+                            jTableAluno.repaint();
+                            jTableAluno.setRowSelectionInterval(0, 0);
+                            break;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public static final String DateFormat = "M/d/yy";
 
+    public static String diaAtual(){
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat(DateFormat);
+        return format.format(cal.getTime());
+    }
+    
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // fazer verificação de administrador para liberar os botoes de adicionar, alterar e excluir.
-        
+        jFormattedTextFieldUltimaEntradaAluno.setText(diaAtual());
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void jButtonFecharAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharAlunoActionPerformed
@@ -348,16 +527,23 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonFecharAlunoActionPerformed
 
     private void jButtonInserirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirAlunoActionPerformed
-        jTabbedPaneAluno.setSelectedIndex(1);
-        jTabbedPaneAluno.setEnabledAt(0, false);
-        jButtonFecharAluno.setEnabled(false);
-        jButtonConfirmarAluno.setEnabled(true);
-        jButtonCancelarAluno.setEnabled(true);
+        controle(INSERIR);
     }//GEN-LAST:event_jButtonInserirAlunoActionPerformed
 
     private void jTextFieldProcurarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarAlunoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldProcurarAlunoActionPerformed
+
+    private void jButtonCancelarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarAlunoActionPerformed
+        
+    }//GEN-LAST:event_jButtonCancelarAlunoActionPerformed
+
+    private void jButtonConfirmarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarAlunoActionPerformed
+        //verificações de todos os campos.
+        
+        //se nao houver erro.
+        controle(CONFIRMAR);
+    }//GEN-LAST:event_jButtonConfirmarAlunoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -365,19 +551,26 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private java.util.List<DataBase.Aluno> alunoList;
     private javax.persistence.Query alunoQuery;
     private javax.swing.JButton jButtonAlterarAluno;
-    private javax.swing.JButton jButtonBuscarDataAluno;
     private javax.swing.JButton jButtonCancelarAluno;
     private javax.swing.JButton jButtonConfirmarAluno;
     private javax.swing.JButton jButtonExcluirAluno;
     private javax.swing.JButton jButtonFecharAluno;
     private javax.swing.JButton jButtonInserirAluno;
     private javax.swing.JButton jButtonProcurarAluno;
+    private javax.swing.JCheckBox jCheckBoxSenhaAluno;
     private javax.swing.JComboBox jComboBoxProcurarAluno;
+    private com.toedter.calendar.JDateChooser jDateChooserAluno;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCpfAluno;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataAluno;
+    private javax.swing.JFormattedTextField jFormattedTextFieldUltimaEntradaAluno;
+    private javax.swing.JFormattedTextField jFormattedTextFieldValidadeAluno;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelAlturaAluno;
     private javax.swing.JLabel jLabelCpfAluno;
     private javax.swing.JLabel jLabelDataNascimentoAluno;
     private javax.swing.JLabel jLabelEmailAluno;
     private javax.swing.JLabel jLabelEnderecoAluno;
+    private javax.swing.JLabel jLabelIdAluno;
     private javax.swing.JLabel jLabelLoginAluno;
     private javax.swing.JLabel jLabelNomeAluno;
     private javax.swing.JLabel jLabelPesoAluno;
@@ -391,15 +584,13 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPaneAluno;
     private javax.swing.JTable jTableAluno;
     private javax.swing.JTextField jTextFieldAlturaAluno;
-    private javax.swing.JTextField jTextFieldCpfAluno;
-    private javax.swing.JTextField jTextFieldDataNascimentoAluno;
     private javax.swing.JTextField jTextFieldEmailAluno;
     private javax.swing.JTextField jTextFieldEnderecoAluno;
+    private javax.swing.JTextField jTextFieldIdAluno;
     private javax.swing.JTextField jTextFieldLoginAluno;
     private javax.swing.JTextField jTextFieldNomeAluno;
     private javax.swing.JTextField jTextFieldPesoAluno;
     private javax.swing.JTextField jTextFieldProcurarAluno;
-    private javax.swing.JTextField jTextFieldValidadeAluno;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
