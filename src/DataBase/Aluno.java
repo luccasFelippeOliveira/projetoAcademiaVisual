@@ -9,14 +9,17 @@ import DAO.AlunoJpaController;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,6 +28,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.swing.JOptionPane;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -49,6 +53,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Aluno.findByValidade", query = "SELECT a FROM Aluno a WHERE a.validade = :validade"),
     @NamedQuery(name = "Aluno.findByUltimaEntrada", query = "SELECT a FROM Aluno a WHERE a.ultimaEntrada = :ultimaEntrada")})
 public class Aluno implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
+    private Collection<Evolucaoaluno> evolucaoalunoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
+    private Collection<Ultimodiatreinoaluno> ultimodiatreinoalunoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
+    private Collection<Cadastroaluno> cadastroalunoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "alunoId")
+    private Collection<Treinos> treinosCollection;
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
@@ -298,6 +310,42 @@ public class Aluno implements Serializable {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+
+    @XmlTransient
+    public Collection<Evolucaoaluno> getEvolucaoalunoCollection() {
+        return evolucaoalunoCollection;
+    }
+
+    public void setEvolucaoalunoCollection(Collection<Evolucaoaluno> evolucaoalunoCollection) {
+        this.evolucaoalunoCollection = evolucaoalunoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Ultimodiatreinoaluno> getUltimodiatreinoalunoCollection() {
+        return ultimodiatreinoalunoCollection;
+    }
+
+    public void setUltimodiatreinoalunoCollection(Collection<Ultimodiatreinoaluno> ultimodiatreinoalunoCollection) {
+        this.ultimodiatreinoalunoCollection = ultimodiatreinoalunoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Cadastroaluno> getCadastroalunoCollection() {
+        return cadastroalunoCollection;
+    }
+
+    public void setCadastroalunoCollection(Collection<Cadastroaluno> cadastroalunoCollection) {
+        this.cadastroalunoCollection = cadastroalunoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Treinos> getTreinosCollection() {
+        return treinosCollection;
+    }
+
+    public void setTreinosCollection(Collection<Treinos> treinosCollection) {
+        this.treinosCollection = treinosCollection;
     }
     
 }

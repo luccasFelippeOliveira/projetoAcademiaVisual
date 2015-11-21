@@ -6,15 +6,19 @@
 package DataBase;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,6 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Exercicios.findById", query = "SELECT e FROM Exercicios e WHERE e.id = :id"),
     @NamedQuery(name = "Exercicios.findByNome", query = "SELECT e FROM Exercicios e WHERE e.nome = :nome")})
 public class Exercicios implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "exercicioId")
+    private Collection<Treinos> treinosCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -101,6 +107,15 @@ public class Exercicios implements Serializable {
     @Override
     public String toString() {
         return "DataBase.Exercicios[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Treinos> getTreinosCollection() {
+        return treinosCollection;
+    }
+
+    public void setTreinosCollection(Collection<Treinos> treinosCollection) {
+        this.treinosCollection = treinosCollection;
     }
     
 }

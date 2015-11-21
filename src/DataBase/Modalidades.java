@@ -6,15 +6,19 @@
 package DataBase;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +37,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Modalidades.findByMaxAlunos", query = "SELECT m FROM Modalidades m WHERE m.maxAlunos = :maxAlunos"),
     @NamedQuery(name = "Modalidades.findByPreco", query = "SELECT m FROM Modalidades m WHERE m.preco = :preco")})
 public class Modalidades implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modalidadeId")
+    private Collection<Ultimodiatreinoaluno> ultimodiatreinoalunoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modalidadeId")
+    private Collection<Cadastroaluno> cadastroalunoCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "modalidadeId")
+    private Collection<Treinos> treinosCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -141,6 +151,33 @@ public class Modalidades implements Serializable {
     @Override
     public String toString() {
         return "DataBase.Modalidades[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Ultimodiatreinoaluno> getUltimodiatreinoalunoCollection() {
+        return ultimodiatreinoalunoCollection;
+    }
+
+    public void setUltimodiatreinoalunoCollection(Collection<Ultimodiatreinoaluno> ultimodiatreinoalunoCollection) {
+        this.ultimodiatreinoalunoCollection = ultimodiatreinoalunoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Cadastroaluno> getCadastroalunoCollection() {
+        return cadastroalunoCollection;
+    }
+
+    public void setCadastroalunoCollection(Collection<Cadastroaluno> cadastroalunoCollection) {
+        this.cadastroalunoCollection = cadastroalunoCollection;
+    }
+
+    @XmlTransient
+    public Collection<Treinos> getTreinosCollection() {
+        return treinosCollection;
+    }
+
+    public void setTreinosCollection(Collection<Treinos> treinosCollection) {
+        this.treinosCollection = treinosCollection;
     }
     
 }

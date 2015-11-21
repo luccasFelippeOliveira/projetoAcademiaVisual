@@ -5,17 +5,21 @@
  */
 package DAO;
 
+import DAO.exceptions.IllegalOrphanException;
 import DAO.exceptions.NonexistentEntityException;
 import DAO.exceptions.PreexistingEntityException;
 import DataBase.Exercicios;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import DataBase.Treinos;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -33,11 +37,29 @@ public class ExerciciosJpaController implements Serializable {
     }
 
     public void create(Exercicios exercicios) throws PreexistingEntityException, Exception {
+        if (exercicios.getTreinosCollection() == null) {
+            exercicios.setTreinosCollection(new ArrayList<Treinos>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Collection<Treinos> attachedTreinosCollection = new ArrayList<Treinos>();
+            for (Treinos treinosCollectionTreinosToAttach : exercicios.getTreinosCollection()) {
+                treinosCollectionTreinosToAttach = em.getReference(treinosCollectionTreinosToAttach.getClass(), treinosCollectionTreinosToAttach.getId());
+                attachedTreinosCollection.add(treinosCollectionTreinosToAttach);
+            }
+            exercicios.setTreinosCollection(attachedTreinosCollection);
             em.persist(exercicios);
+            for (Treinos treinosCollectionTreinos : exercicios.getTreinosCollection()) {
+                Exercicios oldExercicioIdOfTreinosCollectionTreinos = treinosCollectionTreinos.getExercicioId();
+                treinosCollectionTreinos.setExercicioId(exercicios);
+                treinosCollectionTreinos = em.merge(treinosCollectionTreinos);
+                if (oldExercicioIdOfTreinosCollectionTreinos != null) {
+                    oldExercicioIdOfTreinosCollectionTreinos.getTreinosCollection().remove(treinosCollectionTreinos);
+                    oldExercicioIdOfTreinosCollectionTreinos = em.merge(oldExercicioIdOfTreinosCollectionTreinos);
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findExercicios(exercicios.getId()) != null) {
@@ -51,12 +73,45 @@ public class ExerciciosJpaController implements Serializable {
         }
     }
 
-    public void edit(Exercicios exercicios) throws NonexistentEntityException, Exception {
+    public void edit(Exercicios exercicios) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Exercicios persistentExercicios = em.find(Exercicios.class, exercicios.getId());
+            Collection<Treinos> treinosCollectionOld = persistentExercicios.getTreinosCollection();
+            Collection<Treinos> treinosCollectionNew = exercicios.getTreinosCollection();
+            List<String> illegalOrphanMessages = null;
+            for (Treinos treinosCollectionOldTreinos : treinosCollectionOld) {
+                if (!treinosCollectionNew.contains(treinosCollectionOldTreinos)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Treinos " + treinosCollectionOldTreinos + " since its exercicioId field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
+            }
+            Collection<Treinos> attachedTreinosCollectionNew = new ArrayList<Treinos>();
+            for (Treinos treinosCollectionNewTreinosToAttach : treinosCollectionNew) {
+                treinosCollectionNewTreinosToAttach = em.getReference(treinosCollectionNewTreinosToAttach.getClass(), treinosCollectionNewTreinosToAttach.getId());
+                attachedTreinosCollectionNew.add(treinosCollectionNewTreinosToAttach);
+            }
+            treinosCollectionNew = attachedTreinosCollectionNew;
+            exercicios.setTreinosCollection(treinosCollectionNew);
             exercicios = em.merge(exercicios);
+            for (Treinos treinosCollectionNewTreinos : treinosCollectionNew) {
+                if (!treinosCollectionOld.contains(treinosCollectionNewTreinos)) {
+                    Exercicios oldExercicioIdOfTreinosCollectionNewTreinos = treinosCollectionNewTreinos.getExercicioId();
+                    treinosCollectionNewTreinos.setExercicioId(exercicios);
+                    treinosCollectionNewTreinos = em.merge(treinosCollectionNewTreinos);
+                    if (oldExercicioIdOfTreinosCollectionNewTreinos != null && !oldExercicioIdOfTreinosCollectionNewTreinos.equals(exercicios)) {
+                        oldExercicioIdOfTreinosCollectionNewTreinos.getTreinosCollection().remove(treinosCollectionNewTreinos);
+                        oldExercicioIdOfTreinosCollectionNewTreinos = em.merge(oldExercicioIdOfTreinosCollectionNewTreinos);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -74,7 +129,7 @@ public class ExerciciosJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -85,6 +140,17 @@ public class ExerciciosJpaController implements Serializable {
                 exercicios.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The exercicios with id " + id + " no longer exists.", enfe);
+            }
+            List<String> illegalOrphanMessages = null;
+            Collection<Treinos> treinosCollectionOrphanCheck = exercicios.getTreinosCollection();
+            for (Treinos treinosCollectionOrphanCheckTreinos : treinosCollectionOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Exercicios (" + exercicios + ") cannot be destroyed since the Treinos " + treinosCollectionOrphanCheckTreinos + " in its treinosCollection field has a non-nullable exercicioId field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             em.remove(exercicios);
             em.getTransaction().commit();

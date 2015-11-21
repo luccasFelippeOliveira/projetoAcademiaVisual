@@ -63,6 +63,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuAluno = new javax.swing.JMenu();
         jMenuItemConsultaTreino = new javax.swing.JMenuItem();
         jMenuItemConsultaEvolucao = new javax.swing.JMenuItem();
+        jMenuItemAdicionarModalidade = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
         jMenuItemInfo = new javax.swing.JMenuItem();
 
@@ -168,6 +169,9 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenuItemConsultaEvolucao.setText("Grafico Evolucao");
         jMenuAluno.add(jMenuItemConsultaEvolucao);
+
+        jMenuItemAdicionarModalidade.setText("Adicionar Modalidade");
+        jMenuAluno.add(jMenuItemAdicionarModalidade);
 
         jMenuBar1.add(jMenuAluno);
 
@@ -293,6 +297,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuArquivo;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItemAdicionarModalidade;
     private javax.swing.JMenuItem jMenuItemAdicionarTreino;
     private javax.swing.JMenuItem jMenuItemCadastroAluno;
     private javax.swing.JMenuItem jMenuItemCadastroExercicio;

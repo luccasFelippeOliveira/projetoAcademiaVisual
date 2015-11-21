@@ -300,11 +300,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jFormattedTextFieldUltimaEntradaAluno" min="-2" pref="113" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                                      <Component id="jDateChooserAluno" min="-2" pref="145" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="jFormattedTextFieldUltimaEntradaAluno" min="-2" pref="113" max="-2" attributes="0"/>
                                   <Component id="jTextFieldIdAluno" min="-2" pref="65" max="-2" attributes="0"/>
                                   <Component id="jTextFieldNomeAluno" max="32767" attributes="0"/>
                                   <Component id="jTextFieldEmailAluno" alignment="1" max="32767" attributes="0"/>
@@ -388,12 +384,9 @@
                           <Component id="jFormattedTextFieldValidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jDateChooserAluno" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jFormattedTextFieldUltimaEntradaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jFormattedTextFieldUltimaEntradaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="53" max="32767" attributes="0"/>
                   </Group>
@@ -515,11 +508,6 @@
             <Component class="javax.swing.JCheckBox" name="jCheckBoxSenhaAluno">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Trocar Senha P.A."/>
-              </Properties>
-            </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserAluno">
-              <Properties>
-                <Property name="dateFormatString" type="java.lang.String" value="M/d/yy"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldDataAluno">

@@ -68,7 +68,6 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         jLabelIdAluno = new javax.swing.JLabel();
         jTextFieldIdAluno = new javax.swing.JTextField();
         jCheckBoxSenhaAluno = new javax.swing.JCheckBox();
-        jDateChooserAluno = new com.toedter.calendar.JDateChooser();
         jFormattedTextFieldDataAluno = new javax.swing.JFormattedTextField();
         jFormattedTextFieldValidadeAluno = new javax.swing.JFormattedTextField();
         jFormattedTextFieldUltimaEntradaAluno = new javax.swing.JFormattedTextField();
@@ -227,8 +226,6 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
 
         jCheckBoxSenhaAluno.setText("Trocar Senha P.A.");
 
-        jDateChooserAluno.setDateFormatString("M/d/yy");
-
         jFormattedTextFieldDataAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataNascimento}"), jFormattedTextFieldDataAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
@@ -272,10 +269,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
-                                .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(63, 63, 63)
-                                .addComponent(jDateChooserAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldNomeAluno)
                             .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -343,11 +337,9 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                     .addComponent(jLabelValidadeAluno)
                     .addComponent(jFormattedTextFieldValidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDateChooserAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)))
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -430,8 +422,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private final int INSERIR = 1;
     private final int ALTERAR = 2;
     private final int EXCLUIR = 3;
-    private final int CONFIRMAR = 4;
-    private final int CANCELAR = 5;
+    private final int CONFIRMAR = 4;    
     
     //controle alternancia entre tela consulta e alterar.
     private final int telaConsultar = 1;
@@ -476,28 +467,71 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                     jTableAluno.setRowSelectionInterval(jTableAluno.getRowCount() - 1, jTableAluno.getRowCount() - 1);
                     break;                   
                 }
-                case ALTERAR: {
-                    this.ANTERIOR = ALTERAR;
-                    
+                case ALTERAR: {                    
+                    if (!alunoList.isEmpty() && jTableAluno.getSelectedRow() != -1) {
+                        this.ANTERIOR = ALTERAR;                        
+                        controleTela(telaAlterar);                        
+                        Aluno a = alunoList.get(jTableAluno.getSelectedRow());
+                        alunoList.add(a);
+                        jTableAluno.updateUI();
+                        jTableAluno.repaint();
+                        jTableAluno.setRowSelectionInterval(jTableAluno.getRowCount() - 1, jTableAluno.getRowCount() - 1);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Selecione um aluno !");
+                    }
                     break;
                 }
                 case EXCLUIR: {
+                    if (!alunoList.isEmpty() && jTableAluno.getSelectedRow() != -1) {
                     this.ANTERIOR = EXCLUIR;
-                    
-                    break;
+                    int option = JOptionPane.showConfirmDialog(this, "Verifique com atenção os dados que deseja excluir!\n"
+                            + "Clique em sim se esse for mesmo o funcionário que deseja excluir.\n"
+                            + "Clique em cancelar para voltar.");
+                    if (option == JOptionPane.YES_OPTION) {
+                        try {   
+                            /*
+                                EXCLUIR O USUARIO DE TODOS AS TABELAS QUE UTILIZAM O MESMO !
+                            */        
+                            alunoList.get(jTableAluno.getSelectedRow()).excluir();
+                            alunoList.remove(jTableAluno.getSelectedRow());
+                            jTableAluno.updateUI();
+                            jTableAluno.repaint();
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Cancelado pelo usuário!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nem um item selecionado.");
+                }
+                break;
                 }
                 case CONFIRMAR: {
                     switch (ANTERIOR) {
                         case INSERIR: {
                             alunoList.get(alunoList.size() - 1).incluir();
                             controleTela(telaConsultar);
-                            jTableAluno.updateUI();
                             jTableAluno.repaint();
                             if (!alunoList.isEmpty()) {
                                 jTableAluno.setRowSelectionInterval(0, 0);
                             }
-                            jTableAluno.updateUI();
+                            jTableAluno.updateUI();                                                        
+                            break;
+                        }
+                        case ALTERAR: {
+                            alunoList.get(alunoList.size() - 1).alterar();
+                            controleTela(telaConsultar);
                             jTableAluno.repaint();
+                            if (!alunoList.isEmpty()) {
+                                jTableAluno.setRowSelectionInterval(0, 0);
+                            }
+                            jTableAluno.updateUI();                                                        
+                            break;
+                        }
+                        case EXCLUIR: {
+                            alunoList.get(jTableAluno.getSelectedRow()).excluir();
+                            controleTela(telaConsultar);
                             jTableAluno.setRowSelectionInterval(0, 0);
                             break;
                         }
@@ -559,7 +593,6 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonProcurarAluno;
     private javax.swing.JCheckBox jCheckBoxSenhaAluno;
     private javax.swing.JComboBox jComboBoxProcurarAluno;
-    private com.toedter.calendar.JDateChooser jDateChooserAluno;
     private javax.swing.JFormattedTextField jFormattedTextFieldCpfAluno;
     private javax.swing.JFormattedTextField jFormattedTextFieldDataAluno;
     private javax.swing.JFormattedTextField jFormattedTextFieldUltimaEntradaAluno;

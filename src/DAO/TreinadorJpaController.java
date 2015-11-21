@@ -7,15 +7,18 @@ package DAO;
 
 import DAO.exceptions.NonexistentEntityException;
 import DAO.exceptions.PreexistingEntityException;
-import DataBase.Treinador;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import DataBase.Cadastroaluno;
+import DataBase.Treinador;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -33,11 +36,29 @@ public class TreinadorJpaController implements Serializable {
     }
 
     public void create(Treinador treinador) throws PreexistingEntityException, Exception {
+        if (treinador.getCadastroalunoCollection() == null) {
+            treinador.setCadastroalunoCollection(new ArrayList<Cadastroaluno>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Collection<Cadastroaluno> attachedCadastroalunoCollection = new ArrayList<Cadastroaluno>();
+            for (Cadastroaluno cadastroalunoCollectionCadastroalunoToAttach : treinador.getCadastroalunoCollection()) {
+                cadastroalunoCollectionCadastroalunoToAttach = em.getReference(cadastroalunoCollectionCadastroalunoToAttach.getClass(), cadastroalunoCollectionCadastroalunoToAttach.getId());
+                attachedCadastroalunoCollection.add(cadastroalunoCollectionCadastroalunoToAttach);
+            }
+            treinador.setCadastroalunoCollection(attachedCadastroalunoCollection);
             em.persist(treinador);
+            for (Cadastroaluno cadastroalunoCollectionCadastroaluno : treinador.getCadastroalunoCollection()) {
+                Treinador oldTreinadorIdOfCadastroalunoCollectionCadastroaluno = cadastroalunoCollectionCadastroaluno.getTreinadorId();
+                cadastroalunoCollectionCadastroaluno.setTreinadorId(treinador);
+                cadastroalunoCollectionCadastroaluno = em.merge(cadastroalunoCollectionCadastroaluno);
+                if (oldTreinadorIdOfCadastroalunoCollectionCadastroaluno != null) {
+                    oldTreinadorIdOfCadastroalunoCollectionCadastroaluno.getCadastroalunoCollection().remove(cadastroalunoCollectionCadastroaluno);
+                    oldTreinadorIdOfCadastroalunoCollectionCadastroaluno = em.merge(oldTreinadorIdOfCadastroalunoCollectionCadastroaluno);
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findTreinador(treinador.getId()) != null) {
@@ -56,7 +77,34 @@ public class TreinadorJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Treinador persistentTreinador = em.find(Treinador.class, treinador.getId());
+            Collection<Cadastroaluno> cadastroalunoCollectionOld = persistentTreinador.getCadastroalunoCollection();
+            Collection<Cadastroaluno> cadastroalunoCollectionNew = treinador.getCadastroalunoCollection();
+            Collection<Cadastroaluno> attachedCadastroalunoCollectionNew = new ArrayList<Cadastroaluno>();
+            for (Cadastroaluno cadastroalunoCollectionNewCadastroalunoToAttach : cadastroalunoCollectionNew) {
+                cadastroalunoCollectionNewCadastroalunoToAttach = em.getReference(cadastroalunoCollectionNewCadastroalunoToAttach.getClass(), cadastroalunoCollectionNewCadastroalunoToAttach.getId());
+                attachedCadastroalunoCollectionNew.add(cadastroalunoCollectionNewCadastroalunoToAttach);
+            }
+            cadastroalunoCollectionNew = attachedCadastroalunoCollectionNew;
+            treinador.setCadastroalunoCollection(cadastroalunoCollectionNew);
             treinador = em.merge(treinador);
+            for (Cadastroaluno cadastroalunoCollectionOldCadastroaluno : cadastroalunoCollectionOld) {
+                if (!cadastroalunoCollectionNew.contains(cadastroalunoCollectionOldCadastroaluno)) {
+                    cadastroalunoCollectionOldCadastroaluno.setTreinadorId(null);
+                    cadastroalunoCollectionOldCadastroaluno = em.merge(cadastroalunoCollectionOldCadastroaluno);
+                }
+            }
+            for (Cadastroaluno cadastroalunoCollectionNewCadastroaluno : cadastroalunoCollectionNew) {
+                if (!cadastroalunoCollectionOld.contains(cadastroalunoCollectionNewCadastroaluno)) {
+                    Treinador oldTreinadorIdOfCadastroalunoCollectionNewCadastroaluno = cadastroalunoCollectionNewCadastroaluno.getTreinadorId();
+                    cadastroalunoCollectionNewCadastroaluno.setTreinadorId(treinador);
+                    cadastroalunoCollectionNewCadastroaluno = em.merge(cadastroalunoCollectionNewCadastroaluno);
+                    if (oldTreinadorIdOfCadastroalunoCollectionNewCadastroaluno != null && !oldTreinadorIdOfCadastroalunoCollectionNewCadastroaluno.equals(treinador)) {
+                        oldTreinadorIdOfCadastroalunoCollectionNewCadastroaluno.getCadastroalunoCollection().remove(cadastroalunoCollectionNewCadastroaluno);
+                        oldTreinadorIdOfCadastroalunoCollectionNewCadastroaluno = em.merge(oldTreinadorIdOfCadastroalunoCollectionNewCadastroaluno);
+                    }
+                }
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -85,6 +133,11 @@ public class TreinadorJpaController implements Serializable {
                 treinador.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The treinador with id " + id + " no longer exists.", enfe);
+            }
+            Collection<Cadastroaluno> cadastroalunoCollection = treinador.getCadastroalunoCollection();
+            for (Cadastroaluno cadastroalunoCollectionCadastroaluno : cadastroalunoCollection) {
+                cadastroalunoCollectionCadastroaluno.setTreinadorId(null);
+                cadastroalunoCollectionCadastroaluno = em.merge(cadastroalunoCollectionCadastroaluno);
             }
             em.remove(treinador);
             em.getTransaction().commit();

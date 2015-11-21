@@ -111,6 +111,11 @@
                 <Property name="text" type="java.lang.String" value="Grafico Evolucao"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemAdicionarModalidade">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Adicionar Modalidade"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuAjuda">

@@ -7,6 +7,10 @@
     <class>DataBase.Exercicios</class>
     <class>DataBase.Produtos</class>
     <class>DataBase.Modalidades</class>
+    <class>DataBase.Treinos</class>
+    <class>DataBase.Evolucaoaluno</class>
+    <class>DataBase.Ultimodiatreinoaluno</class>
+    <class>DataBase.Cadastroaluno</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/projetoacademiavisual?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
