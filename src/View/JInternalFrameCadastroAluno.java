@@ -510,10 +510,10 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(null, e);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Cancelado pelo usuário!");
+                        JOptionPane.showMessageDialog(null, "Cancelado pelo usuário !");
                     }
                 } else {
-                    JOptionPane.showMessageDialog(this, "Nem um item selecionado.");
+                    JOptionPane.showMessageDialog(null, "Selecione um aluno !");
                 }
                 break;
                 }
@@ -538,13 +538,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                             }
                             jTableAluno.updateUI();                                                        
                             break;
-                        }
-                        case EXCLUIR: {
-                            alunoList.get(jTableAluno.getSelectedRow()).excluir();
-                            controleTela(telaConsultar);
-                            jTableAluno.setRowSelectionInterval(0, 0);
-                            break;
-                        }
+                        }                       
                     }
                 }
             }
