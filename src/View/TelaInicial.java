@@ -23,6 +23,7 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial(Permissao p) {
         permissao = p;
         initComponents();
+        this.setLocationRelativeTo(null);
         if(permissao.isUsuario()) {
             /*Desabilita as opções de cadastro -- que involvem a inserção de dados no DB*/
             jMenuItemCadastroAluno.setEnabled(false);
@@ -72,6 +73,11 @@ public class TelaInicial extends javax.swing.JFrame {
         setName("telaInicial"); // NOI18N
         setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         javax.swing.GroupLayout jDesktopPaneInicialLayout = new javax.swing.GroupLayout(jDesktopPaneInicial);
         jDesktopPaneInicial.setLayout(jDesktopPaneInicialLayout);
@@ -252,6 +258,10 @@ public class TelaInicial extends javax.swing.JFrame {
         }
         cadastroAluno.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroAlunoActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+                        
+    }//GEN-LAST:event_formWindowOpened
 
 //    /**
 //     * @param args the command line arguments

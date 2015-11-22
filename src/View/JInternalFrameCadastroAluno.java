@@ -5,9 +5,14 @@
  */
 package View;
 
+import DAO.AlunoJpaController;
 import DataBase.Aluno;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +26,8 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
      */
     public JInternalFrameCadastroAluno() {
         initComponents();
-        jTabbedPaneAluno.setEnabledAt(1, false);
+        jTabbedPaneAluno.setEnabled(true);
+        jTabbedPaneAluno.setEnabledAt(0, false);        
         jButtonCancelarAluno.setEnabled(false);
         jButtonConfirmarAluno.setEnabled(false);
     }
@@ -226,13 +232,41 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
 
         jCheckBoxSenhaAluno.setText("Trocar Senha P.A.");
 
-        jFormattedTextFieldDataAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        jFormattedTextFieldDataAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/M/d"))));
+        jFormattedTextFieldDataAluno.setText("yyyy/M/d");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataNascimento}"), jFormattedTextFieldDataAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
 
+        jFormattedTextFieldDataAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jFormattedTextFieldDataAlunoMouseClicked(evt);
+            }
+        });
+
+        jFormattedTextFieldValidadeAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/M/d"))));
+        jFormattedTextFieldValidadeAluno.setText("yyyy/M/d");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.validade}"), jFormattedTextFieldValidadeAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        bindingGroup.addBinding(binding);
+
+        jFormattedTextFieldValidadeAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jFormattedTextFieldValidadeAlunoMouseClicked(evt);
+            }
+        });
+
+        jFormattedTextFieldUltimaEntradaAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/M/d"))));
+        jFormattedTextFieldUltimaEntradaAluno.setText("yyyy/M/d");
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.ultimaEntrada}"), jFormattedTextFieldUltimaEntradaAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
         bindingGroup.addBinding(binding);
+
+        jFormattedTextFieldUltimaEntradaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jFormattedTextFieldUltimaEntradaAlunoMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Ultima Entrada:");
 
@@ -251,43 +285,40 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
             jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlterarAlunoLayout.createSequentialGroup()
-                        .addComponent(jLabelEnderecoAluno)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
-                        .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelCpfAluno)
-                            .addComponent(jLabelNomeAluno)
-                            .addComponent(jLabelDataNascimentoAluno)
-                            .addComponent(jLabelPesoAluno)
-                            .addComponent(jLabelLoginAluno)
-                            .addComponent(jLabelEmailAluno)
-                            .addComponent(jLabelValidadeAluno)
-                            .addComponent(jLabelIdAluno)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldNomeAluno)
-                            .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlterarAlunoLayout.createSequentialGroup()
-                                .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabelAlturaAluno)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
-                                .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabelSenhaAluno)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jFormattedTextFieldDataAluno)
-                            .addComponent(jFormattedTextFieldValidadeAluno)
-                            .addComponent(jFormattedTextFieldCpfAluno))))
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelEnderecoAluno)
+                    .addComponent(jLabelCpfAluno)
+                    .addComponent(jLabelNomeAluno)
+                    .addComponent(jLabelDataNascimentoAluno)
+                    .addComponent(jLabelPesoAluno)
+                    .addComponent(jLabelLoginAluno)
+                    .addComponent(jLabelEmailAluno)
+                    .addComponent(jLabelValidadeAluno)
+                    .addComponent(jLabelIdAluno)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldNomeAluno)
+                        .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlterarAlunoLayout.createSequentialGroup()
+                            .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelAlturaAluno)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
+                            .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelSenhaAluno)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jFormattedTextFieldDataAluno)
+                        .addComponent(jFormattedTextFieldValidadeAluno)
+                        .addComponent(jFormattedTextFieldCpfAluno))
+                    .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBoxSenhaAluno)
                 .addContainerGap(144, Short.MAX_VALUE))
@@ -432,18 +463,36 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private final int INSERIR = 1;
     private final int ALTERAR = 2;
     private final int EXCLUIR = 3;
-    private final int CONFIRMAR = 4;    
+    private final int CONFIRMAR = 4;
+    private final int CANCELAR = 5;
     
     //controle alternancia entre tela consulta e alterar.
     private final int telaConsultar = 1;
     private final int telaAlterar = 2;
     
+    private void limparCamposCadastroAluno(){
+        jTextFieldAlturaAluno.setText("");
+        jTextFieldEmailAluno.setText("");
+        jTextFieldEnderecoAluno.setText("");
+        jTextFieldIdAluno.setText("");
+        jTextFieldLoginAluno.setText("");
+        jTextFieldNomeAluno.setText("");
+        jTextFieldPesoAluno.setText("");
+        jTextFieldProcurarAluno.setText("");
+        jFormattedTextFieldCpfAluno.setText("");
+        jFormattedTextFieldDataAluno.setText("");
+        jFormattedTextFieldUltimaEntradaAluno.setText("");
+        jFormattedTextFieldValidadeAluno.setText("");
+        jCheckBoxSenhaAluno.setSelected(false);
+    }
+    
     private void controleTela(int opTela){
         switch (opTela){
-            case telaConsultar: {                
+            case telaConsultar: {    
+                jTabbedPaneAluno.setEnabled(true);
                 jTabbedPaneAluno.setEnabledAt(0, true);
-                jTabbedPaneAluno.setEnabledAt(1, false);                
                 jTabbedPaneAluno.setSelectedIndex(0);
+                jTabbedPaneAluno.setEnabledAt(1, false);
                 jButtonAlterarAluno.setEnabled(true);
                 jButtonInserirAluno.setEnabled(true);
                 jButtonExcluirAluno.setEnabled(true);
@@ -451,10 +500,11 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                 jButtonConfirmarAluno.setEnabled(false);
                 jButtonCancelarAluno.setEnabled(false);
             }
-            case telaAlterar: {                
+            case telaAlterar: {    
+                jTabbedPaneAluno.setEnabled(true);
                 jTabbedPaneAluno.setEnabledAt(1, true);
-                jTabbedPaneAluno.setEnabledAt(0, false);                
                 jTabbedPaneAluno.setSelectedIndex(1);
+                jTabbedPaneAluno.setEnabledAt(0, false);
                 jButtonAlterarAluno.setEnabled(false);
                 jButtonInserirAluno.setEnabled(false);
                 jButtonExcluirAluno.setEnabled(false);
@@ -465,11 +515,94 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         }
     }
     
+    private int verificarCamposAluno(){
+        int erros = 0;
+        try {
+            if (ANTERIOR == INSERIR || ANTERIOR == ALTERAR) {                
+                Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
+                Matcher m = p.matcher(jTextFieldEmailAluno.getText());
+                boolean emailValido = m.find();
+                if (!(jTextFieldNomeAluno.getText().length() > 40 || "".equals(jTextFieldNomeAluno.getText()))) {
+                    alunoList.get(alunoList.size() - 1).setNome(jTextFieldNomeAluno.getText());
+                    if (!(jTextFieldEnderecoAluno.getText().length() > 40 || ("".equals(jTextFieldEnderecoAluno.getText())))) {
+                        alunoList.get(alunoList.size() - 1).setEndereco(jTextFieldEnderecoAluno.getText());                                                    
+                                if (!(jFormattedTextFieldCpfAluno.getText().replaceAll("[^0123456789]", "").length() != 11)) {
+                                    alunoList.get(alunoList.size() - 1).setCpf(jFormattedTextFieldCpfAluno.getText());
+                                    if (!(jTextFieldEmailAluno.getText().length() > 40 || ("".equals(jTextFieldEmailAluno.getText()))) && emailValido) {
+                                        alunoList.get(alunoList.size() - 1).setEmail(jTextFieldEmailAluno.getText());
+                                        if (!(jTextFieldLoginAluno.getText().length() > 10 || ("".equals(jTextFieldLoginAluno.getText())))) {
+                                            try {
+                                                EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+                                                AlunoJpaController alunoJpaController = new AlunoJpaController(emf);
+                                                Aluno alunoAux = (Aluno) alunoJpaController.findLogin(jTextFieldLoginAluno.getText());                                                
+                                                    if (alunoAux != null) {
+                                                        erros++;
+                                                        jTextFieldLoginAluno.setText("");
+                                                        jTextFieldLoginAluno.grabFocus();
+                                                        JOptionPane.showMessageDialog(null, "Este login já está sendo utilizado.");
+                                                    } else {
+                                                        alunoList.get(alunoList.size() - 1).setLogin(jTextFieldLoginAluno.getText());
+                                                    }                                                                                                
+                                            } catch (Exception e) {
+                                                JOptionPane.showMessageDialog(null, e);
+                                            }
+                                            if ((jPasswordFieldSenhaAluno.getText().length() >= 6 && jPasswordFieldSenhaAluno.getText().length() <= 15)) {
+                                                //precisa criptografar a senha antes de guardar no banco.
+                                                //alunoList.get(alunoList.size() - 1).setSenha(Hashing.sha256().hashString(jPasswordFieldSenhaAluno.getText(), Charsets.UTF_8).toString());
+                                                alunoList.get(alunoList.size() - 1).setSenha(jPasswordFieldSenhaAluno.getText());                                                                                                                                                    
+                                            } else {
+                                                if (!(ANTERIOR == ALTERAR && !"".equals(jPasswordFieldSenhaAluno.getText()))) {
+                                                    if ((ANTERIOR == INSERIR) || (ANTERIOR == ALTERAR && (jPasswordFieldSenhaAluno.getText().length() < 6 || jPasswordFieldSenhaAluno.getText().length() > 15) && !"".equals(jPasswordFieldSenhaAluno.getText())) || (ANTERIOR == ALTERAR)) {
+                                                        erros++;
+                                                        JOptionPane.showMessageDialog(null, "O campo senha deve ter entre 6 e 15 caracteres não pode estar em branco");
+                                                        jPasswordFieldSenhaAluno.setText("");                                                        
+                                                        jPasswordFieldSenhaAluno.grabFocus();
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            erros++;
+                                            JOptionPane.showMessageDialog(null, "O campo login deve ter menos de 10 caracteres e não pode estar em branco");
+                                            jTextFieldLoginAluno.setText("");
+                                            jTextFieldLoginAluno.grabFocus();
+                                        }
+
+                                    } else {
+                                        erros++;
+                                        JOptionPane.showMessageDialog(null, "O campo email deve ter menos de 40 caracteres, não pode estar em branco e precisa ser válido");
+                                        jTextFieldEmailAluno.setText("");
+                                        jTextFieldEmailAluno.grabFocus();
+                                    }
+                                } else {
+                                    erros++;
+                                    JOptionPane.showMessageDialog(null, "O campo cpf deve ter 14 caracteres no formato 123.123.123-12 e não pode estar em branco");
+                                    jFormattedTextFieldCpfAluno.grabFocus();
+                                }                                                    
+                    } else {
+                        erros++;
+                        JOptionPane.showMessageDialog(null, "O campo endereço deve ter menos de 40 caracteres e não pode estar em branco");
+                        jTextFieldEnderecoAluno.setText("");
+                        jTextFieldEnderecoAluno.grabFocus();
+                    }
+                } else {
+                    erros++;
+                    JOptionPane.showMessageDialog(null, "O campo nome deve ter menos de 40 caracteres e não pode estar em branco");
+                    jTextFieldNomeAluno.setText("");
+                    jTextFieldNomeAluno.grabFocus();
+                }                                
+        } 
+        }catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }  
+        return erros;
+    }
+    
     private void controle(int op){
         try {
             switch(op){
                 case INSERIR: {
                     this.ANTERIOR = INSERIR;
+                    limparCamposCadastroAluno();
                     controleTela(telaAlterar);
                     alunoList.add(new Aluno());
                     jTableAluno.updateUI();
@@ -495,7 +628,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                     if (!alunoList.isEmpty() && jTableAluno.getSelectedRow() != -1) {
                     this.ANTERIOR = EXCLUIR;
                     int option = JOptionPane.showConfirmDialog(this, "Verifique com atenção os dados que deseja excluir!\n"
-                            + "Clique em sim se esse for mesmo o funcionário que deseja excluir.\n"
+                            + "Clique em sim se esse for mesmo o aluno que deseja excluir.\n"
                             + "Clique em cancelar para voltar.");
                     if (option == JOptionPane.YES_OPTION) {
                         try {   
@@ -510,7 +643,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                             JOptionPane.showMessageDialog(null, e);
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Cancelado pelo usuário !");
+                        JOptionPane.showMessageDialog(null, "Exclusão cancelada !");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Selecione um aluno !");
@@ -521,25 +654,28 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                     switch (ANTERIOR) {
                         case INSERIR: {
                             alunoList.get(alunoList.size() - 1).incluir();
+                            jTableAluno.updateUI();
+                            jTableAluno.repaint();                    
                             controleTela(telaConsultar);
-                            jTableAluno.repaint();
-                            if (!alunoList.isEmpty()) {
-                                jTableAluno.setRowSelectionInterval(0, 0);
-                            }
-                            jTableAluno.updateUI();                                                        
+                            jTableAluno.setRowSelectionInterval(0, 0);
                             break;
                         }
-                        case ALTERAR: {
-                            alunoList.get(alunoList.size() - 1).alterar();
-                            controleTela(telaConsultar);
-                            jTableAluno.repaint();
-                            if (!alunoList.isEmpty()) {
-                                jTableAluno.setRowSelectionInterval(0, 0);
-                            }
-                            jTableAluno.updateUI();                                                        
+                        case ALTERAR: {                            
+                            alunoList.get(alunoList.size() - 1).alterar();                            
+                            jTableAluno.updateUI();
+                            jTableAluno.repaint();                    
+                            controleTela(telaConsultar);                                                        
+                            jTableAluno.setRowSelectionInterval(0, 0);
                             break;
                         }                       
                     }
+                }
+                case CANCELAR: {
+                    alunoList.remove(alunoList.size() - 1);
+                    jTableAluno.updateUI();
+                    jTableAluno.repaint();                    
+                    controleTela(telaConsultar);
+                    jTableAluno.setRowSelectionInterval(0, 0);
                 }
             }
         } catch (Exception e){
@@ -547,7 +683,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         }
     }
     
-    public static final String DateFormat = "M/d/yy";
+    public static final String DateFormat = "yyyy/M/d";
 
     public static String diaAtual(){
         Calendar cal = Calendar.getInstance();
@@ -557,7 +693,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         // fazer verificação de administrador para liberar os botoes de adicionar, alterar e excluir.
-        jFormattedTextFieldUltimaEntradaAluno.setText(diaAtual());
+        //jFormattedTextFieldUltimaEntradaAluno.setText(diaAtual());
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void jButtonFecharAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharAlunoActionPerformed
@@ -573,20 +709,13 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldProcurarAlunoActionPerformed
 
     private void jButtonCancelarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarAlunoActionPerformed
-        if (ANTERIOR != EXCLUIR) {
-            alunoList.remove(alunoList.size() - 1);
-        }
-        jTableAluno.updateUI();
-        jTableAluno.repaint();
-        jTableAluno.setRowSelectionInterval(0, 0);
-        controleTela(telaConsultar);
+        controle(CANCELAR);               
     }//GEN-LAST:event_jButtonCancelarAlunoActionPerformed
 
     private void jButtonConfirmarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarAlunoActionPerformed
-        //verificações de todos os campos.
-        
-        //se nao houver erro.
-        controle(CONFIRMAR);
+        if(verificarCamposAluno() == 0){
+            controle(CONFIRMAR);
+        }
     }//GEN-LAST:event_jButtonConfirmarAlunoActionPerformed
 
     private void jButtonAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarAlunoActionPerformed
@@ -596,6 +725,18 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private void jButtonExcluirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirAlunoActionPerformed
         controle(EXCLUIR);
     }//GEN-LAST:event_jButtonExcluirAlunoActionPerformed
+
+    private void jFormattedTextFieldDataAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataAlunoMouseClicked
+        jFormattedTextFieldDataAluno.setText("");
+    }//GEN-LAST:event_jFormattedTextFieldDataAlunoMouseClicked
+
+    private void jFormattedTextFieldValidadeAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValidadeAlunoMouseClicked
+        jFormattedTextFieldValidadeAluno.setText("");
+    }//GEN-LAST:event_jFormattedTextFieldValidadeAlunoMouseClicked
+
+    private void jFormattedTextFieldUltimaEntradaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldUltimaEntradaAlunoMouseClicked
+        jFormattedTextFieldUltimaEntradaAluno.setText("");
+    }//GEN-LAST:event_jFormattedTextFieldUltimaEntradaAlunoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

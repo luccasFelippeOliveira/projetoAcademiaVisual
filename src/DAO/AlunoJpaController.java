@@ -355,6 +355,17 @@ public class AlunoJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public Aluno findLogin(String login) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createNamedQuery("Aluno.findByLogin", Aluno.class).setParameter("login", login).getSingleResult();
+        } catch (Exception e) {            
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 
     public int getAlunoCount() {
         EntityManager em = getEntityManager();
