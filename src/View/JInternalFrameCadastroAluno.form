@@ -103,15 +103,15 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="683" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="745" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelProcurarAluno" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jComboBoxProcurarAluno" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxProcurarAluno" min="-2" pref="92" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jTextFieldProcurarAluno" min="-2" pref="160" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonProcurarAluno" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -120,7 +120,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="286" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="288" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -241,11 +241,9 @@
             <Component class="javax.swing.JComboBox" name="jComboBoxProcurarAluno">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
+                  <StringArray count="2">
                     <StringItem index="0" value="Id"/>
                     <StringItem index="1" value="Nome"/>
-                    <StringItem index="2" value="CPF"/>
-                    <StringItem index="3" value="Validade"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -263,6 +261,9 @@
                   <Dimension value="[75, 23]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonProcurarAlunoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -293,35 +294,38 @@
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jFormattedTextFieldUltimaEntradaAluno" min="-2" pref="113" max="-2" attributes="0"/>
-                              <Component id="jTextFieldIdAluno" min="-2" pref="65" max="-2" attributes="0"/>
-                              <Component id="jTextFieldNomeAluno" max="32767" attributes="0"/>
-                              <Component id="jTextFieldEmailAluno" alignment="1" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jTextFieldPesoAluno" min="-2" pref="128" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jLabelAlturaAluno" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextFieldAlturaAluno" min="-2" pref="146" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jTextFieldLoginAluno" min="-2" pref="116" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabelSenhaAluno" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jPasswordFieldSenhaAluno" min="-2" pref="163" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jFormattedTextFieldDataAluno" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jFormattedTextFieldValidadeAluno" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jFormattedTextFieldCpfAluno" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jTextFieldNomeAluno" max="32767" attributes="0"/>
+                          <Component id="jTextFieldEmailAluno" alignment="1" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jTextFieldPesoAluno" min="-2" pref="128" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabelAlturaAluno" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldAlturaAluno" min="-2" pref="146" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jTextFieldEnderecoAluno" min="-2" pref="341" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextFieldDataAluno" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldValidadeAluno" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jFormattedTextFieldCpfAluno" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextFieldEnderecoAluno" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jFormattedTextFieldUltimaEntradaAluno" min="-2" pref="113" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldIdAluno" min="-2" pref="65" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jTextFieldLoginAluno" min="-2" pref="116" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jLabelSenhaAluno" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jPasswordFieldSenhaAluno" min="-2" pref="163" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jCheckBoxSenhaAluno" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="144" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
