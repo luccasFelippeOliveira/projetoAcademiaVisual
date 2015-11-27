@@ -16,6 +16,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -64,7 +65,7 @@ public class Aluno implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id @GeneratedValue
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;
@@ -247,7 +248,18 @@ public class Aluno implements Serializable {
         this.ultimaEntrada = ultimaEntrada;
         changeSupport.firePropertyChange("ultimaEntrada", oldUltimaEntrada, ultimaEntrada);
     }
-
+    @Override
+    public String toString() {
+        StringBuilder st = new StringBuilder();
+        st.append("ID: ").append(getId());
+        st.append("Nome: ").append(getNome());
+        st.append("CPF: ").append(getCpf());
+        st.append("Nascimento: ").append(getDataNascimento());
+        st.append("PESO: ").append(getPeso());
+        st.append("Altura: ").append(getAltura());
+        /*Todo: Acresentar os outros itens*/
+        return st.toString();
+    }
     @Override
     public int hashCode() {
         int hash = 0;
@@ -268,10 +280,6 @@ public class Aluno implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "DataBase.Aluno[ id=" + id + " ]";
-    }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.addPropertyChangeListener(listener);
@@ -347,5 +355,22 @@ public class Aluno implements Serializable {
     public void setTreinosCollection(Collection<Treinos> treinosCollection) {
         this.treinosCollection = treinosCollection;
     }
-    
+    public void cloneFrom(Aluno a){
+        this.altura = a.altura;
+        this.cadastroalunoCollection = a.cadastroalunoCollection;
+        this.changeSupport = a.changeSupport;
+        this.cpf = a.cpf;
+        this.dataNascimento = a.dataNascimento;
+        this.email = a.email;
+        this.endereco = a.endereco;
+        this.evolucaoalunoCollection = a.evolucaoalunoCollection;
+        /*Não clonar id, já que é um GeneratedValue*/
+        this.login = a.login;
+        this.nome = a.nome;
+        this.peso = a.peso;
+        this.senha = a.senha;
+        this.treinosCollection = a.treinosCollection;
+        this.ultimaEntrada = a.ultimaEntrada;
+        this.validade = a.validade;
+    }
 }

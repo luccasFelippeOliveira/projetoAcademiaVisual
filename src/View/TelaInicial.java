@@ -42,172 +42,173 @@ public class TelaInicial extends javax.swing.JFrame {
     private JInternalFrameCadastroTreinador cadastroTreinador = null;
     private JInternalFrameCadastroModalidade cadastroModalidade = null;
     private JInternalFrameCadastroProduto cadastroProduto = null;
+    private JInternalFrameCadastroAluno2 cadastroAluno2 = null;
     
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+        // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+        private void initComponents() {
 
-        jDesktopPaneInicial = new javax.swing.JDesktopPane();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuArquivo = new javax.swing.JMenu();
-        jMenuItemLogout = new javax.swing.JMenuItem();
-        jMenuItemFechar = new javax.swing.JMenuItem();
-        jMenuCadastros = new javax.swing.JMenu();
-        jMenuItemCadastroAluno = new javax.swing.JMenuItem();
-        jMenuItemCadastroTreinador = new javax.swing.JMenuItem();
-        jMenuItemCadastroExercicio = new javax.swing.JMenuItem();
-        jMenuItemCadastroModalidade = new javax.swing.JMenuItem();
-        jMenuItemCadastroProduto = new javax.swing.JMenuItem();
-        jMenuTreinos = new javax.swing.JMenu();
-        jMenuItemAdicionarTreino = new javax.swing.JMenuItem();
-        jMenuProdutos = new javax.swing.JMenu();
-        jMenuItemConsultaProdutos = new javax.swing.JMenuItem();
-        jMenuAluno = new javax.swing.JMenu();
-        jMenuItemConsultaTreino = new javax.swing.JMenuItem();
-        jMenuItemConsultaEvolucao = new javax.swing.JMenuItem();
-        jMenuItemAdicionarModalidade = new javax.swing.JMenuItem();
-        jMenuAjuda = new javax.swing.JMenu();
-        jMenuItemInfo = new javax.swing.JMenuItem();
+                jDesktopPaneInicial = new javax.swing.JDesktopPane();
+                jMenuBar1 = new javax.swing.JMenuBar();
+                jMenuArquivo = new javax.swing.JMenu();
+                jMenuItemLogout = new javax.swing.JMenuItem();
+                jMenuItemFechar = new javax.swing.JMenuItem();
+                jMenuCadastros = new javax.swing.JMenu();
+                jMenuItemCadastroAluno = new javax.swing.JMenuItem();
+                jMenuItemCadastroTreinador = new javax.swing.JMenuItem();
+                jMenuItemCadastroExercicio = new javax.swing.JMenuItem();
+                jMenuItemCadastroModalidade = new javax.swing.JMenuItem();
+                jMenuItemCadastroProduto = new javax.swing.JMenuItem();
+                jMenuTreinos = new javax.swing.JMenu();
+                jMenuItemAdicionarTreino = new javax.swing.JMenuItem();
+                jMenuProdutos = new javax.swing.JMenu();
+                jMenuItemConsultaProdutos = new javax.swing.JMenuItem();
+                jMenuAluno = new javax.swing.JMenu();
+                jMenuItemConsultaTreino = new javax.swing.JMenuItem();
+                jMenuItemConsultaEvolucao = new javax.swing.JMenuItem();
+                jMenuItemAdicionarModalidade = new javax.swing.JMenuItem();
+                jMenuAjuda = new javax.swing.JMenu();
+                jMenuItemInfo = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("projetoAcademiaVisual");
-        setName("telaInicial"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(800, 600));
-        setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
+                setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+                setTitle("projetoAcademiaVisual");
+                setName("telaInicial"); // NOI18N
+                setPreferredSize(new java.awt.Dimension(800, 600));
+                setResizable(false);
+                addWindowListener(new java.awt.event.WindowAdapter() {
+                        public void windowOpened(java.awt.event.WindowEvent evt) {
+                                formWindowOpened(evt);
+                        }
+                });
 
-        javax.swing.GroupLayout jDesktopPaneInicialLayout = new javax.swing.GroupLayout(jDesktopPaneInicial);
-        jDesktopPaneInicial.setLayout(jDesktopPaneInicialLayout);
-        jDesktopPaneInicialLayout.setHorizontalGroup(
-            jDesktopPaneInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 488, Short.MAX_VALUE)
-        );
-        jDesktopPaneInicialLayout.setVerticalGroup(
-            jDesktopPaneInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 311, Short.MAX_VALUE)
-        );
+                javax.swing.GroupLayout jDesktopPaneInicialLayout = new javax.swing.GroupLayout(jDesktopPaneInicial);
+                jDesktopPaneInicial.setLayout(jDesktopPaneInicialLayout);
+                jDesktopPaneInicialLayout.setHorizontalGroup(
+                        jDesktopPaneInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 488, Short.MAX_VALUE)
+                );
+                jDesktopPaneInicialLayout.setVerticalGroup(
+                        jDesktopPaneInicialLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 311, Short.MAX_VALUE)
+                );
 
-        jMenuArquivo.setText("Arquivo");
-        jMenuArquivo.setName("arquivoMenu"); // NOI18N
+                jMenuArquivo.setText("Arquivo");
+                jMenuArquivo.setName("arquivoMenu"); // NOI18N
 
-        jMenuItemLogout.setText("Log out");
-        jMenuItemLogout.setName("logoutMenu"); // NOI18N
-        jMenuItemLogout.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItemLogoutMouseClicked(evt);
-            }
-        });
-        jMenuItemLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemLogoutActionPerformed(evt);
-            }
-        });
-        jMenuArquivo.add(jMenuItemLogout);
+                jMenuItemLogout.setText("Log out");
+                jMenuItemLogout.setName("logoutMenu"); // NOI18N
+                jMenuItemLogout.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                jMenuItemLogoutMouseClicked(evt);
+                        }
+                });
+                jMenuItemLogout.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jMenuItemLogoutActionPerformed(evt);
+                        }
+                });
+                jMenuArquivo.add(jMenuItemLogout);
 
-        jMenuItemFechar.setText("Fechar");
-        jMenuItemFechar.setName("sairMenu"); // NOI18N
-        jMenuItemFechar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItemFecharMouseClicked(evt);
-            }
-        });
-        jMenuItemFechar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemFecharActionPerformed(evt);
-            }
-        });
-        jMenuArquivo.add(jMenuItemFechar);
+                jMenuItemFechar.setText("Fechar");
+                jMenuItemFechar.setName("sairMenu"); // NOI18N
+                jMenuItemFechar.addMouseListener(new java.awt.event.MouseAdapter() {
+                        public void mouseClicked(java.awt.event.MouseEvent evt) {
+                                jMenuItemFecharMouseClicked(evt);
+                        }
+                });
+                jMenuItemFechar.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jMenuItemFecharActionPerformed(evt);
+                        }
+                });
+                jMenuArquivo.add(jMenuItemFechar);
 
-        jMenuBar1.add(jMenuArquivo);
+                jMenuBar1.add(jMenuArquivo);
 
-        jMenuCadastros.setText("Cadastros");
-        jMenuCadastros.setName("cadastroMenu"); // NOI18N
+                jMenuCadastros.setText("Cadastros");
+                jMenuCadastros.setName("cadastroMenu"); // NOI18N
 
-        jMenuItemCadastroAluno.setText("Cadastro Aluno");
-        jMenuItemCadastroAluno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadastroAlunoActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(jMenuItemCadastroAluno);
+                jMenuItemCadastroAluno.setText("Cadastro Aluno");
+                jMenuItemCadastroAluno.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jMenuItemCadastroAlunoActionPerformed(evt);
+                        }
+                });
+                jMenuCadastros.add(jMenuItemCadastroAluno);
 
-        jMenuItemCadastroTreinador.setText("Cadastro Treinador");
-        jMenuItemCadastroTreinador.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadastroTreinadorActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(jMenuItemCadastroTreinador);
+                jMenuItemCadastroTreinador.setText("Cadastro Treinador");
+                jMenuItemCadastroTreinador.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jMenuItemCadastroTreinadorActionPerformed(evt);
+                        }
+                });
+                jMenuCadastros.add(jMenuItemCadastroTreinador);
 
-        jMenuItemCadastroExercicio.setText("Cadastro Exercicio");
-        jMenuCadastros.add(jMenuItemCadastroExercicio);
+                jMenuItemCadastroExercicio.setText("Cadastro Exercicio");
+                jMenuCadastros.add(jMenuItemCadastroExercicio);
 
-        jMenuItemCadastroModalidade.setText("Cadastro Modalidade");
-        jMenuCadastros.add(jMenuItemCadastroModalidade);
+                jMenuItemCadastroModalidade.setText("Cadastro Modalidade");
+                jMenuCadastros.add(jMenuItemCadastroModalidade);
 
-        jMenuItemCadastroProduto.setText("Cadastro Produto");
-        jMenuCadastros.add(jMenuItemCadastroProduto);
+                jMenuItemCadastroProduto.setText("Cadastro Produto");
+                jMenuCadastros.add(jMenuItemCadastroProduto);
 
-        jMenuBar1.add(jMenuCadastros);
+                jMenuBar1.add(jMenuCadastros);
 
-        jMenuTreinos.setText("Treinos");
-        jMenuTreinos.setName("treinosMenu"); // NOI18N
+                jMenuTreinos.setText("Treinos");
+                jMenuTreinos.setName("treinosMenu"); // NOI18N
 
-        jMenuItemAdicionarTreino.setText("Adicionar Treino");
-        jMenuTreinos.add(jMenuItemAdicionarTreino);
+                jMenuItemAdicionarTreino.setText("Adicionar Treino");
+                jMenuTreinos.add(jMenuItemAdicionarTreino);
 
-        jMenuBar1.add(jMenuTreinos);
+                jMenuBar1.add(jMenuTreinos);
 
-        jMenuProdutos.setText("Produtos");
+                jMenuProdutos.setText("Produtos");
 
-        jMenuItemConsultaProdutos.setText("Consulta Produtos");
-        jMenuProdutos.add(jMenuItemConsultaProdutos);
+                jMenuItemConsultaProdutos.setText("Consulta Produtos");
+                jMenuProdutos.add(jMenuItemConsultaProdutos);
 
-        jMenuBar1.add(jMenuProdutos);
+                jMenuBar1.add(jMenuProdutos);
 
-        jMenuAluno.setText("Aluno");
+                jMenuAluno.setText("Aluno");
 
-        jMenuItemConsultaTreino.setText("Consulta Treino");
-        jMenuAluno.add(jMenuItemConsultaTreino);
+                jMenuItemConsultaTreino.setText("Consulta Treino");
+                jMenuAluno.add(jMenuItemConsultaTreino);
 
-        jMenuItemConsultaEvolucao.setText("Grafico Evolucao");
-        jMenuAluno.add(jMenuItemConsultaEvolucao);
+                jMenuItemConsultaEvolucao.setText("Grafico Evolucao");
+                jMenuAluno.add(jMenuItemConsultaEvolucao);
 
-        jMenuItemAdicionarModalidade.setText("Adicionar Modalidade");
-        jMenuAluno.add(jMenuItemAdicionarModalidade);
+                jMenuItemAdicionarModalidade.setText("Adicionar Modalidade");
+                jMenuAluno.add(jMenuItemAdicionarModalidade);
 
-        jMenuBar1.add(jMenuAluno);
+                jMenuBar1.add(jMenuAluno);
 
-        jMenuAjuda.setText("Ajuda");
+                jMenuAjuda.setText("Ajuda");
 
-        jMenuItemInfo.setText("Info");
-        jMenuItemInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemInfoActionPerformed(evt);
-            }
-        });
-        jMenuAjuda.add(jMenuItemInfo);
+                jMenuItemInfo.setText("Info");
+                jMenuItemInfo.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                jMenuItemInfoActionPerformed(evt);
+                        }
+                });
+                jMenuAjuda.add(jMenuItemInfo);
 
-        jMenuBar1.add(jMenuAjuda);
+                jMenuBar1.add(jMenuAjuda);
 
-        setJMenuBar(jMenuBar1);
+                setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPaneInicial)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPaneInicial)
-        );
+                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                getContentPane().setLayout(layout);
+                layout.setHorizontalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jDesktopPaneInicial)
+                );
+                layout.setVerticalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jDesktopPaneInicial)
+                );
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+                pack();
+        }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemLogoutMouseClicked
         dispose();
@@ -246,22 +247,22 @@ public class TelaInicial extends javax.swing.JFrame {
         cadastroTreinador.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroTreinadorActionPerformed
 
-    private void jMenuItemCadastroAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroAlunoActionPerformed
-        if((cadastroAluno == null) || (cadastroAluno.isClosed())){
-            cadastroAluno = new JInternalFrameCadastroAluno();
-            jDesktopPaneInicial.add(cadastroAluno);
-        }
-        try{
-            cadastroAluno.setMaximum(rootPaneCheckingEnabled);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-        cadastroAluno.setVisible(true);
-    }//GEN-LAST:event_jMenuItemCadastroAlunoActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
                         
     }//GEN-LAST:event_formWindowOpened
+
+    private void jMenuItemCadastroAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroAlunoActionPerformed
+        if((cadastroAluno2 == null) || (cadastroAluno2.isClosed())) {
+            cadastroAluno2 = new JInternalFrameCadastroAluno2();
+            jDesktopPaneInicial.add(cadastroAluno2);
+        }
+        try {
+            cadastroAluno2.setMaximum(rootPaneCheckingEnabled);
+        }catch(PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        cadastroAluno2.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroAlunoActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -300,27 +301,27 @@ public class TelaInicial extends javax.swing.JFrame {
     //Para o sistema de permissão
     Autenticacao.Permissao permissao;
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPaneInicial;
-    private javax.swing.JMenu jMenuAjuda;
-    private javax.swing.JMenu jMenuAluno;
-    private javax.swing.JMenu jMenuArquivo;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu jMenuCadastros;
-    private javax.swing.JMenuItem jMenuItemAdicionarModalidade;
-    private javax.swing.JMenuItem jMenuItemAdicionarTreino;
-    private javax.swing.JMenuItem jMenuItemCadastroAluno;
-    private javax.swing.JMenuItem jMenuItemCadastroExercicio;
-    private javax.swing.JMenuItem jMenuItemCadastroModalidade;
-    private javax.swing.JMenuItem jMenuItemCadastroProduto;
-    private javax.swing.JMenuItem jMenuItemCadastroTreinador;
-    private javax.swing.JMenuItem jMenuItemConsultaEvolucao;
-    private javax.swing.JMenuItem jMenuItemConsultaProdutos;
-    private javax.swing.JMenuItem jMenuItemConsultaTreino;
-    private javax.swing.JMenuItem jMenuItemFechar;
-    private javax.swing.JMenuItem jMenuItemInfo;
-    private javax.swing.JMenuItem jMenuItemLogout;
-    private javax.swing.JMenu jMenuProdutos;
-    private javax.swing.JMenu jMenuTreinos;
-    // End of variables declaration//GEN-END:variables
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JDesktopPane jDesktopPaneInicial;
+        private javax.swing.JMenu jMenuAjuda;
+        private javax.swing.JMenu jMenuAluno;
+        private javax.swing.JMenu jMenuArquivo;
+        private javax.swing.JMenuBar jMenuBar1;
+        private javax.swing.JMenu jMenuCadastros;
+        private javax.swing.JMenuItem jMenuItemAdicionarModalidade;
+        private javax.swing.JMenuItem jMenuItemAdicionarTreino;
+        private javax.swing.JMenuItem jMenuItemCadastroAluno;
+        private javax.swing.JMenuItem jMenuItemCadastroExercicio;
+        private javax.swing.JMenuItem jMenuItemCadastroModalidade;
+        private javax.swing.JMenuItem jMenuItemCadastroProduto;
+        private javax.swing.JMenuItem jMenuItemCadastroTreinador;
+        private javax.swing.JMenuItem jMenuItemConsultaEvolucao;
+        private javax.swing.JMenuItem jMenuItemConsultaProdutos;
+        private javax.swing.JMenuItem jMenuItemConsultaTreino;
+        private javax.swing.JMenuItem jMenuItemFechar;
+        private javax.swing.JMenuItem jMenuItemInfo;
+        private javax.swing.JMenuItem jMenuItemLogout;
+        private javax.swing.JMenu jMenuProdutos;
+        private javax.swing.JMenu jMenuTreinos;
+        // End of variables declaration//GEN-END:variables
 }

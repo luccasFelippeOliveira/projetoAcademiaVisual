@@ -7,32 +7,28 @@ package View;
 
 import DAO.AlunoJpaController;
 import DataBase.Aluno;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author afnsoo
+ * @author Luccas
  */
-public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
+public class JInternalFrameCadastroAluno2 extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form JInternalFrameCadastroAluno
+     * Creates new form JInternalFrameCadastroAluno2
      */
-    public JInternalFrameCadastroAluno() {
-        initComponents();
-        jTabbedPaneAluno.setEnabled(true);
-        jTabbedPaneAluno.setEnabledAt(1, false);
-        jButtonCancelarAluno.setEnabled(false);
-        jButtonConfirmarAluno.setEnabled(false);
-        primeiraVez = true;
+    public JInternalFrameCadastroAluno2() {
+	initComponents();
+	abaConsulta();
+	System.out.println("AlunoList Class : " + alunoList.getClass().getName());
+	System.out.println("Size: " + alunoList.size());
     }
 
     /**
@@ -43,10 +39,9 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        AcademiaVisualPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("AcademiaVisualPU").createEntityManager();
-        alunoQuery = java.beans.Beans.isDesignTime() ? null : AcademiaVisualPUEntityManager.createQuery("SELECT a FROM Aluno a");
+        entityManagerAluno = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("AcademiaVisualPU").createEntityManager();
+        alunoQuery = java.beans.Beans.isDesignTime() ? null : entityManagerAluno.createQuery("SELECT a FROM Aluno a");
         alunoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : alunoQuery.getResultList();
-        alunoBind = new DataBase.Aluno();
         jTabbedPaneAluno = new javax.swing.JTabbedPane();
         jPanelConsultaAluno = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -88,65 +83,33 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         jButtonCancelarAluno = new javax.swing.JButton();
         jButtonConfirmarAluno = new javax.swing.JButton();
 
-        setTitle("Cadastro Aluno");
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
-            }
-        });
-
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunoList, jTableAluno);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${endereco}"));
         columnBinding.setColumnName("Endereco");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataNascimento}"));
-        columnBinding.setColumnName("DataNascimento");
+        columnBinding.setColumnName("Data Nascimento");
         columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${altura}"));
         columnBinding.setColumnName("Altura");
         columnBinding.setColumnClass(Float.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${peso}"));
         columnBinding.setColumnName("Peso");
         columnBinding.setColumnClass(Float.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${validade}"));
         columnBinding.setColumnName("Validade");
         columnBinding.setColumnClass(java.util.Date.class);
-        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(jTableAluno);
 
         jLabelProcurarAluno.setText("Opção De Busca");
-
-        jTextFieldProcurarAluno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldProcurarAlunoActionPerformed(evt);
-            }
-        });
 
         jComboBoxProcurarAluno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Nome" }));
 
@@ -164,7 +127,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         jPanelConsultaAluno.setLayout(jPanelConsultaAlunoLayout);
         jPanelConsultaAlunoLayout.setHorizontalGroup(
             jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
             .addGroup(jPanelConsultaAlunoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelProcurarAluno)
@@ -179,7 +142,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         jPanelConsultaAlunoLayout.setVerticalGroup(
             jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConsultaAlunoLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelProcurarAluno)
@@ -211,39 +174,11 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
 
         jLabelValidadeAluno.setText("Validade:");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunoBind, org.jdesktop.beansbinding.ELProperty.create("${nome}"), jTextFieldNomeAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunoBind, org.jdesktop.beansbinding.ELProperty.create("${peso}"), jTextFieldPesoAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.altura}"), jTextFieldAlturaAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.endereco}"), jTextFieldEnderecoAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.login}"), jTextFieldLoginAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.email}"), jTextFieldEmailAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.senha}"), jPasswordFieldSenhaAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
         jLabelIdAluno.setText("ID:");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunoBind, org.jdesktop.beansbinding.ELProperty.create("${id}"), jTextFieldIdAluno, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
 
         jCheckBoxSenhaAluno.setText("Trocar Senha P.A.");
 
         jFormattedTextFieldDataAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/M/d"))));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunoBind, org.jdesktop.beansbinding.ELProperty.create("${dataNascimento}"), jFormattedTextFieldDataAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        bindingGroup.addBinding(binding);
-
         jFormattedTextFieldDataAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jFormattedTextFieldDataAlunoMouseClicked(evt);
@@ -251,10 +186,6 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         });
 
         jFormattedTextFieldValidadeAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/M/d"))));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.validade}"), jFormattedTextFieldValidadeAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        bindingGroup.addBinding(binding);
-
         jFormattedTextFieldValidadeAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jFormattedTextFieldValidadeAlunoMouseClicked(evt);
@@ -262,10 +193,6 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         });
 
         jFormattedTextFieldUltimaEntradaAluno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/M/d"))));
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jTableAluno, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.ultimaEntrada}"), jFormattedTextFieldUltimaEntradaAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        bindingGroup.addBinding(binding);
-
         jFormattedTextFieldUltimaEntradaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jFormattedTextFieldUltimaEntradaAlunoMouseClicked(evt);
@@ -279,9 +206,6 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunoBind, org.jdesktop.beansbinding.ELProperty.create("${cpf}"), jFormattedTextFieldCpfAluno, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout jPanelAlterarAlunoLayout = new javax.swing.GroupLayout(jPanelAlterarAluno);
         jPanelAlterarAluno.setLayout(jPanelAlterarAlunoLayout);
@@ -377,7 +301,7 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedTextFieldUltimaEntradaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPaneAluno.addTab("Alterar", jPanelAlterarAluno);
@@ -464,340 +388,301 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //controle botoes CRUD.
-    private int ANTERIOR = 0;
-    private final int INSERIR = 1;
-    private final int ALTERAR = 2;
-    private final int EXCLUIR = 3;
-    private final int CONFIRMAR = 4;
-    private final int CANCELAR = 5;
+    //Bind automático não funiona como o esperado. Os métodos abaixo circulam este problema.
+    /**
+     * Popula os textField da aba Alterar.
+     *
+     * @param a Fonte dos dados para o textField, caso seja null os campos serão esvaziados.
+     */
+    private void popularCamposAlterar(Aluno a) {
+	if (a == null) {
+	    jTextFieldAlturaAluno.setText("");
+	    jTextFieldEmailAluno.setText("");
+	    jTextFieldEnderecoAluno.setText("");
+	    jTextFieldIdAluno.setText("");
+	    jTextFieldLoginAluno.setText("");
+	    jTextFieldNomeAluno.setText("");
+	    jTextFieldPesoAluno.setText("");
+	    jFormattedTextFieldCpfAluno.setValue(null);
+	    jFormattedTextFieldDataAluno.setValue(null);
+	    jFormattedTextFieldUltimaEntradaAluno.setValue(null);
+	    jFormattedTextFieldValidadeAluno.setValue(null);
+	    jPasswordFieldSenhaAluno.setText("");
+	} else {
+	    jTextFieldAlturaAluno.setText(Float.toString(a.getAltura()));
+	    jTextFieldEmailAluno.setText(a.getEmail());
+	    jTextFieldEnderecoAluno.setText(a.getEndereco());
+	    jTextFieldIdAluno.setText(Integer.toString(a.getId()));
+	    jTextFieldLoginAluno.setText(a.getLogin());
+	    jTextFieldNomeAluno.setText(a.getNome());
+	    jTextFieldPesoAluno.setText(Float.toString(a.getPeso()));
+	    jFormattedTextFieldCpfAluno.setValue(a.getCpf());
+	    jFormattedTextFieldDataAluno.setValue(a.getDataNascimento());
+	    jFormattedTextFieldUltimaEntradaAluno.setValue(a.getUltimaEntrada());
+	    jFormattedTextFieldValidadeAluno.setValue(a.getValidade());
+	    jPasswordFieldSenhaAluno.setText(a.getSenha());
+	}
 
-    //controle alternancia entre tela consulta e alterar.
-    private final int telaConsultar = 1;
-    private final int telaAlterar = 2;
-
-    private boolean primeiraVez;
-
-    public static final String DateFormat = "yyyy/M/d";
-
-    public static String dataAtual() {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat format = new SimpleDateFormat(DateFormat);
-        return format.format(cal.getTime());
     }
 
-    private void limparCamposCadastroAluno() {
-        jTextFieldAlturaAluno.setText("");
-        jTextFieldEmailAluno.setText("");
-        jTextFieldEnderecoAluno.setText("");
-        jTextFieldIdAluno.setText("");
-        jTextFieldLoginAluno.setText("");
-        jTextFieldNomeAluno.setText("");
-        jTextFieldPesoAluno.setText("");
-        jTextFieldProcurarAluno.setText("");
-        jFormattedTextFieldCpfAluno.setText("");
-        jFormattedTextFieldDataAluno.setText("");
-        jFormattedTextFieldUltimaEntradaAluno.setText("");
-        jFormattedTextFieldValidadeAluno.setText("");
-        jCheckBoxSenhaAluno.setSelected(false);
+    /**
+     * Após a edição do objeto pega dados da aba Alterar e coloca no objeto.
+     *
+     * @param a Objeto a ser populado.
+     */
+    private void popularObjeto(Aluno a) {
+	//TODO: Garantir que @param não é nulo
+        /*O campo ID é gerado pelo banco de dados*/
+	a.setAltura(Float.parseFloat(jTextFieldAlturaAluno.getText()));
+	a.setCpf((String) jFormattedTextFieldCpfAluno.getValue());
+	a.setDataNascimento((Date) jFormattedTextFieldDataAluno.getValue());
+	a.setEmail(jTextFieldEmailAluno.getText());
+	a.setEndereco(jTextFieldEnderecoAluno.getText());
+	//a.setId(Integer.parseInt(jTextFieldIdAluno.getText()));//E se for NULL?
+	a.setLogin(jTextFieldLoginAluno.getText());
+	a.setNome(jTextFieldNomeAluno.getText());
+	a.setPeso(Float.parseFloat(jTextFieldPesoAluno.getText()));
+	a.setSenha(new String(jPasswordFieldSenhaAluno.getPassword()));
+	a.setUltimaEntrada((Date) jFormattedTextFieldUltimaEntradaAluno.getValue());
+	a.setValidade((Date) jFormattedTextFieldValidadeAluno.getValue());
+
     }
 
-    private void controleTela(int opTela) {
-        switch (opTela) {
-            case telaConsultar: {
-                jTabbedPaneAluno.setEnabled(true);
-                jTabbedPaneAluno.setEnabledAt(0, true);
-                jTabbedPaneAluno.setSelectedIndex(0);
-                jTabbedPaneAluno.setEnabledAt(1, false);
-                jButtonAlterarAluno.setEnabled(true);
-                jButtonInserirAluno.setEnabled(true);
-                jButtonExcluirAluno.setEnabled(true);
-                jButtonFecharAluno.setEnabled(true);
-                jButtonConfirmarAluno.setEnabled(false);
-                jButtonCancelarAluno.setEnabled(false);
-            }
-            case telaAlterar: {
-                jTabbedPaneAluno.setEnabled(true);
-                jTabbedPaneAluno.setEnabledAt(1, true);
-                jTabbedPaneAluno.setSelectedIndex(1);
-                jTabbedPaneAluno.setEnabledAt(0, false);
-                jButtonAlterarAluno.setEnabled(false);
-                jButtonInserirAluno.setEnabled(false);
-                jButtonExcluirAluno.setEnabled(false);
-                jButtonFecharAluno.setEnabled(false);
-                jButtonConfirmarAluno.setEnabled(true);
-                jButtonCancelarAluno.setEnabled(true);
-            }
-        }
+    /**
+     * Entra na Aba de Consulta
+     */
+    private void abaConsulta() {
+	jTabbedPaneAluno.setSelectedIndex(0);
+	jTabbedPaneAluno.setEnabledAt(0, true);
+	jTabbedPaneAluno.setEnabledAt(1, false);
+	jButtonConfirmarAluno.setEnabled(false);
+	jButtonCancelarAluno.setEnabled(false);
+	jButtonInserirAluno.setEnabled(true);
+	jButtonAlterarAluno.setEnabled(true);
+	jButtonExcluirAluno.setEnabled(true);
     }
 
-    private int verificarCamposAluno() {
-        int erros = 0;
-        try {
-            if (ANTERIOR == INSERIR || ANTERIOR == ALTERAR) {
-                Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
-                Matcher m = p.matcher(jTextFieldEmailAluno.getText());
-                boolean emailValido = m.find();
-                if (!(jTextFieldNomeAluno.getText().length() > 40 || "".equals(jTextFieldNomeAluno.getText()))) {
-                    alunoList.get(alunoList.size() - 1).setNome(jTextFieldNomeAluno.getText());
-                    if (!(jTextFieldEnderecoAluno.getText().length() > 40 || ("".equals(jTextFieldEnderecoAluno.getText())))) {
-                        alunoList.get(alunoList.size() - 1).setEndereco(jTextFieldEnderecoAluno.getText());
-                        if (!(jFormattedTextFieldCpfAluno.getText().replaceAll("[^0123456789]", "").length() != 11)) {
-                            alunoList.get(alunoList.size() - 1).setCpf(jFormattedTextFieldCpfAluno.getText());
-                            if (!(jTextFieldEmailAluno.getText().length() > 40 || ("".equals(jTextFieldEmailAluno.getText()))) && emailValido) {
-                                alunoList.get(alunoList.size() - 1).setEmail(jTextFieldEmailAluno.getText());
-                                if (!(jTextFieldLoginAluno.getText().length() > 10 || ("".equals(jTextFieldLoginAluno.getText())))) {
-                                    try {
-                                        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
-                                        AlunoJpaController alunoJpaController = new AlunoJpaController(emf);
-                                        Aluno alunoAux = (Aluno) alunoJpaController.findLogin(jTextFieldLoginAluno.getText());
-                                        if (alunoAux != null) {
-                                            erros++;
-                                            jTextFieldLoginAluno.setText("");
-                                            jTextFieldLoginAluno.grabFocus();
-                                            JOptionPane.showMessageDialog(null, "Este login já está sendo utilizado.");
-                                        } else {
-                                            alunoList.get(alunoList.size() - 1).setLogin(jTextFieldLoginAluno.getText());
-                                        }
-                                    } catch (Exception e) {
-                                        JOptionPane.showMessageDialog(null, e);
-                                    }
-                                    if ((jPasswordFieldSenhaAluno.getText().length() >= 6 && jPasswordFieldSenhaAluno.getText().length() <= 15)) {
-                                        //precisa criptografar a senha antes de guardar no banco.
-                                        //alunoList.get(alunoList.size() - 1).setSenha(Hashing.sha256().hashString(jPasswordFieldSenhaAluno.getText(), Charsets.UTF_8).toString());
-                                        alunoList.get(alunoList.size() - 1).setSenha(jPasswordFieldSenhaAluno.getText());
-                                    } else {
-                                        if (!(ANTERIOR == ALTERAR && !"".equals(jPasswordFieldSenhaAluno.getText()))) {
-                                            if ((ANTERIOR == INSERIR) || (ANTERIOR == ALTERAR && (jPasswordFieldSenhaAluno.getText().length() < 6 || jPasswordFieldSenhaAluno.getText().length() > 15) && !"".equals(jPasswordFieldSenhaAluno.getText())) || (ANTERIOR == ALTERAR)) {
-                                                erros++;
-                                                JOptionPane.showMessageDialog(null, "O campo senha deve ter entre 6 e 15 caracteres não pode estar em branco");
-                                                jPasswordFieldSenhaAluno.setText("");
-                                                jPasswordFieldSenhaAluno.grabFocus();
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    erros++;
-                                    JOptionPane.showMessageDialog(null, "O campo login deve ter menos de 10 caracteres e não pode estar em branco");
-                                    jTextFieldLoginAluno.setText("");
-                                    jTextFieldLoginAluno.grabFocus();
-                                }
+    /**
+     * Entra na Aba de Alterar
+     */
+    private void abaAlterar() {
+	jTabbedPaneAluno.setSelectedIndex(1);
+	jTabbedPaneAluno.setEnabledAt(1, true);
+	jTabbedPaneAluno.setEnabledAt(0, false);
+	jButtonInserirAluno.setEnabled(false);
+	jButtonAlterarAluno.setEnabled(false);
+	jButtonExcluirAluno.setEnabled(false);
+	jButtonConfirmarAluno.setEnabled(true);
+	jButtonCancelarAluno.setEnabled(true);
 
-                            } else {
-                                erros++;
-                                JOptionPane.showMessageDialog(null, "O campo email deve ter menos de 40 caracteres, não pode estar em branco e precisa ser válido");
-                                jTextFieldEmailAluno.setText("");
-                                jTextFieldEmailAluno.grabFocus();
-                            }
-                        } else {
-                            erros++;
-                            JOptionPane.showMessageDialog(null, "O campo cpf deve ter 14 caracteres no formato 123.123.123-12 e não pode estar em branco");
-                            jFormattedTextFieldCpfAluno.grabFocus();
-                        }
-                    } else {
-                        erros++;
-                        JOptionPane.showMessageDialog(null, "O campo endereço deve ter menos de 40 caracteres e não pode estar em branco");
-                        jTextFieldEnderecoAluno.setText("");
-                        jTextFieldEnderecoAluno.grabFocus();
-                    }
-                } else {
-                    erros++;
-                    JOptionPane.showMessageDialog(null, "O campo nome deve ter menos de 40 caracteres e não pode estar em branco");
-                    jTextFieldNomeAluno.setText("");
-                    jTextFieldNomeAluno.grabFocus();
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return erros;
-    }
-    
-    private void controle(int op) {
-        try {
-            switch (op) {
-                case INSERIR: {
-                    this.ANTERIOR = INSERIR;
-                    controleTela(telaAlterar);
-                    limparCamposCadastroAluno();
-                    //alunoBind = new Aluno();
-                    jTableAluno.updateUI();
-                    jTableAluno.repaint();
-                    jTableAluno.setRowSelectionInterval(jTableAluno.getRowCount() - 1, jTableAluno.getRowCount() - 1);
-                    //jFormattedTextFieldUltimaEntradaAluno.setText(dataAtual());
-                    break;
-                }
-                case ALTERAR: {
-                    if (!alunoList.isEmpty() && jTableAluno.getSelectedRow() != -1) {
-                        this.ANTERIOR = ALTERAR;
-                        controleTela(telaAlterar);
-                        Aluno a = alunoList.get(jTableAluno.getSelectedRow());
-                        alunoList.add(a);
-                        jTableAluno.updateUI();
-                        jTableAluno.repaint();
-                        jTableAluno.setRowSelectionInterval(jTableAluno.getRowCount() - 1, jTableAluno.getRowCount() - 1);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Selecione um aluno !");
-                    }
-                    break;
-                }
-                case EXCLUIR: {
-                    if (!alunoList.isEmpty() && jTableAluno.getSelectedRow() != -1) {
-                        this.ANTERIOR = EXCLUIR;
-                        int option = JOptionPane.showConfirmDialog(this, "Verifique com atenção os dados que deseja excluir!\n"
-                                + "Clique em sim se esse for mesmo o aluno que deseja excluir.\n"
-                                + "Clique em cancelar para voltar.");
-                        if (option == JOptionPane.YES_OPTION) {
-                            try {
-                                /*
-                                 EXCLUIR O USUARIO DE TODOS AS TABELAS QUE UTILIZAM O MESMO !
-                                 */
-                                alunoList.get(jTableAluno.getSelectedRow()).excluir();
-                                alunoList.remove(jTableAluno.getSelectedRow());
-                                jTableAluno.updateUI();
-                                jTableAluno.repaint();
-                            } catch (Exception e) {
-                                JOptionPane.showMessageDialog(null, e);
-                            }
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Exclusão cancelada !");
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Selecione um aluno !");
-                    }
-                    break;
-                }
-                case CONFIRMAR: {
-                    switch (ANTERIOR) {
-                        case INSERIR: {
-                            //alunoList.get(alunoList.size() - 1).incluir();                                                
-                            //controleTela(telaConsultar);
-                            primeiraVez = false;
-                            //alunoBind.incluir();
-                            alunoList.add(alunoBind);
-                            controleTela(telaConsultar);
-                            jTableAluno.updateUI();
-                            jTableAluno.repaint();
-                            jTableAluno.setRowSelectionInterval(0, 0);
-                            break;
-                        }
-                        case ALTERAR: {
-                            alunoList.get(alunoList.size() - 1).alterar();
-                            controleTela(telaConsultar);
-                            jTableAluno.updateUI();
-                            jTableAluno.repaint();
-                            jTableAluno.setRowSelectionInterval(0, 0);
-                            break;
-                        }
-                    }
-                }
-                case CANCELAR: {
-                    alunoList.remove(alunoList.size() - 1);
-                    controleTela(telaConsultar);
-                    jTableAluno.updateUI();
-                    jTableAluno.repaint();
-                    jTableAluno.setRowSelectionInterval(0, 0);
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
     }
 
-    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-        // fazer verificação de administrador para liberar os botoes de adicionar, alterar e excluir.
-        //jFormattedTextFieldUltimaEntradaAluno.setText(dataAtual());
-    }//GEN-LAST:event_formInternalFrameOpened
+    /**
+     * Valida os campos de acordo com as normas:
+     * <ul>
+     * <li> EMAIL: válido, não nulo e menor que 40;
+     * <li> NOME: não nulo e menor que 40;
+     * <li> CPF: Estar no formato nnn.nnn.nnn-nn -> n = número qualquer TODO: Validação!
+     * <li> LOGIN: serm menor que 40 e único(É realizado consulta no banco de dados);
+     * <li> PASSWORD: deve ser maior que 6, menor que 15 e não nulo;
+     * <li> ENDEREÇO: Campo não dever ser nulo e menor que 40 caracteres.
+     * </ul>
+     *
+     * @return <b>true</b> caso passe na validação, <b>false</b> caso contrário.
+     */
+    private boolean validacaoDeCampos() {
+	boolean valido = true;
+	String msgErro = "";
+	String campo;
 
-    private void jButtonFecharAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharAlunoActionPerformed
-        dispose();
-    }//GEN-LAST:event_jButtonFecharAlunoActionPerformed
+	//Checa o campo EMAIL:
+	Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
+	Matcher m = p.matcher(jTextFieldEmailAluno.getText());
+	campo = jTextFieldEmailAluno.getText();
+	if ((!m.find()) || ("".equals(campo)) || (campo.length() > 40)) {
+	    valido = false;
+	    msgErro += "Email inválido. O campo deve ser válido, não nulo e menor que 40 caracteres\n";
+	    jTextFieldEmailAluno.setText(""); //Limpa o campo de email
+	}
 
-    private void jButtonInserirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirAlunoActionPerformed
-        controle(INSERIR);
-    }//GEN-LAST:event_jButtonInserirAlunoActionPerformed
+	//Checa o campo Nome
+	campo = jTextFieldNomeAluno.getText();
+	if (("".equals(campo)) || (campo.length() > 40)) {
+	    valido = false;
+	    msgErro += "Nome inválido. O campo deve não deve ser nulo e deve ser menor que 40 caracteres\n";
+	    jTextFieldNomeAluno.setText("");// Limpa o campo de nome
+	}
 
-    private void jTextFieldProcurarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarAlunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldProcurarAlunoActionPerformed
+	//Checa o campo CPF
+	campo = jFormattedTextFieldCpfAluno.getText();
+	if (campo.replaceAll("[^0123456789]", "").length() != 11) {
+	    valido = false;
+	    msgErro += "CPF inválido. O campo deve ter apenas números e deve ser na forma 123.123.123-99\n";
+	    jFormattedTextFieldCpfAluno.setValue(null);; //Limpa campo CPF
+	}
 
-    private void jButtonCancelarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarAlunoActionPerformed
-        controle(CANCELAR);
-    }//GEN-LAST:event_jButtonCancelarAlunoActionPerformed
+	//Checa o campo login
+	campo = jTextFieldLoginAluno.getText();
+	if ((campo.length() < 10) && !("".equals(campo))) {
+		    //Campo possivelmente válido
+	    //Checar unicidade
+	    //INFO: Código Legado modificado.
+	    if ((flagAnterior == INSERIR) || (!campo.equals(alunoAlterar.getLogin()))) {
+		try {
+		    EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+		    AlunoJpaController alunoJpaController = new AlunoJpaController(emf);
+		    Aluno resultado = (Aluno) alunoJpaController.findLogin(campo);
+		    if (resultado != null) {
+			//Encontrou um login identico
+			valido = false;
+			msgErro += "Login inválido. O campo deve ser único\n";
+			jTextFieldLoginAluno.setText("");
+		    }
+		} catch (Exception e) {
+		    //TODO: Definir melhor qual tipo de exceção é lançada
+		    e.printStackTrace();
+		}
+	    }
+	} else {
+	    valido = false;
+	    msgErro += "Login inválido. O campo não deve ser nulo e deve ser menor que 10 caracteres\n";
+	    jTextFieldNomeAluno.setText("");
+	}
 
-    private void jButtonConfirmarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarAlunoActionPerformed
-        if (verificarCamposAluno() == 0) {
-            controle(CONFIRMAR);
-        }
-    }//GEN-LAST:event_jButtonConfirmarAlunoActionPerformed
+	//Checa o campo password
+	campo = String.valueOf(jPasswordFieldSenhaAluno.getPassword());
+	if ((campo.length() < 6) || (campo.length() > 15)) {
+	    valido = false;
+	    msgErro += "Senha inválida. O campo deve ter pelo menos 6 caracteres, mas não mais que 15\n";
+	    jPasswordFieldSenhaAluno.setText("");
+	}
 
-    private void jButtonAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarAlunoActionPerformed
-        controle(ALTERAR);
-    }//GEN-LAST:event_jButtonAlterarAlunoActionPerformed
+	//Checa o campo endereço
+	campo = jTextFieldEnderecoAluno.getText();
+	if (("".equals(campo)) || (campo.length() > 40)) {
+	    valido = false;
+	    msgErro += "Endereço inválido. O campo deve não deve ser nulo e deve ser menor que 40 caracteres\n";
+	    jTextFieldEnderecoAluno.setText("");
+	}
+	if (!valido) {
+	    JOptionPane.showMessageDialog(null, msgErro, "Campos Errados!", JOptionPane.ERROR_MESSAGE);
+	}
+	return valido;
+    }
+    private int flagAnterior; //Define qual botão foi clicado
+    private Aluno aluno; //Endereça objetos criados
 
-    private void jButtonExcluirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirAlunoActionPerformed
-        controle(EXCLUIR);
-    }//GEN-LAST:event_jButtonExcluirAlunoActionPerformed
+    private void jButtonProcurarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProcurarAlunoActionPerformed
+
+    }//GEN-LAST:event_jButtonProcurarAlunoActionPerformed
 
     private void jFormattedTextFieldDataAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDataAlunoMouseClicked
-        jFormattedTextFieldDataAluno.setText("");
+	jFormattedTextFieldDataAluno.setText("");
     }//GEN-LAST:event_jFormattedTextFieldDataAlunoMouseClicked
 
     private void jFormattedTextFieldValidadeAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldValidadeAlunoMouseClicked
-        jFormattedTextFieldValidadeAluno.setText("");
+	jFormattedTextFieldValidadeAluno.setText("");
     }//GEN-LAST:event_jFormattedTextFieldValidadeAlunoMouseClicked
 
     private void jFormattedTextFieldUltimaEntradaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jFormattedTextFieldUltimaEntradaAlunoMouseClicked
-        jFormattedTextFieldUltimaEntradaAluno.setText("");
+	jFormattedTextFieldUltimaEntradaAluno.setText("");
+
     }//GEN-LAST:event_jFormattedTextFieldUltimaEntradaAlunoMouseClicked
 
-    private void jButtonProcurarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProcurarAlunoActionPerformed
-        String[] sql = {"", "SELECT a FROM Aluno a WHERE a.nome LIKE :nome ",
-            "SELECT a FROM Aluno a WHERE a.cpf = :cpf ",
-            "SELECT a FROM Aluno a WHERE a.validade = :validade "};
-        try {
-            Query query = null;
-            if (jTextFieldProcurarAluno.getText().length() > 0) {
-                if (jComboBoxProcurarAluno.getSelectedIndex() == 0) {
-                    query = AcademiaVisualPUEntityManager.createNamedQuery("Aluno.findById");
-                    query.setParameter("id", Long.valueOf(jTextFieldProcurarAluno.getText()));
-                }
-                if (jComboBoxProcurarAluno.getSelectedIndex() == 1) {
-                    query = AcademiaVisualPUEntityManager.createQuery(sql[1]);
-                    query.setParameter("nome", '%' + jTextFieldProcurarAluno.getText() + '%');
-                }
-                /*  busca por cpf ...
-                 if (jComboBoxProcurarAluno.getSelectedIndex() == 2) {
-                 query = AcademiaVisualPUEntityManager.createQuery(sql[2]);
-                 query.setParameter("cpf", '%' + jTextFieldProcurarAluno.getText() + '%');
-                 }
-                 busca por validade ...
-                 if (jComboBoxProcurarAluno.getSelectedIndex() == 3) {
-                 query = AcademiaVisualPUEntityManager.createQuery(sql[3]);
-                 query.setParameter("validade", '%' + jTextFieldProcurarAluno.getText() + '%');
-                 }
-                
-                 dando error por serem formatted de um tipo especifico como date.... penso eu
-                
-                 */
-            } else {
-                query = alunoQuery;
-            }
-            alunoList.clear();
-            alunoList.addAll(query.getResultList());
-            jTableAluno.updateUI();
-            jTableAluno.repaint();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e);
-        }
-    }//GEN-LAST:event_jButtonProcurarAlunoActionPerformed
+    private void jButtonInserirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirAlunoActionPerformed
+	flagAnterior = INSERIR;
+	popularCamposAlterar(null);
+	abaAlterar();
+
+    }//GEN-LAST:event_jButtonInserirAlunoActionPerformed
+
+    private void jButtonAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarAlunoActionPerformed
+	flagAnterior = ALTERAR;
+	alunoAlterar = alunoList.get(jTableAluno.getSelectedRow());
+	popularCamposAlterar(alunoAlterar);
+	abaAlterar();
+    }//GEN-LAST:event_jButtonAlterarAlunoActionPerformed
+
+    private void jButtonExcluirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirAlunoActionPerformed
+	if (!alunoList.isEmpty() && jTableAluno.getSelectedRow() != -1) {
+	    int option = JOptionPane.showConfirmDialog(this, "Verifique com atenção os dados que deseja excluir!\n"
+		    + "Clique em sim se esse for mesmo o aluno que deseja excluir.\n"
+		    + "Clique em cancelar para voltar.");
+	    if (option == JOptionPane.YES_OPTION) {
+		try {
+		    /*
+		     EXCLUIR O USUARIO DE TODOS AS TABELAS QUE UTILIZAM O MESMO !
+		     Acho que não é necessário -- Luccas.
+		     */
+		    alunoList.get(jTableAluno.getSelectedRow()).excluir();
+		    alunoList.remove(jTableAluno.getSelectedRow());
+		    jTableAluno.updateUI();
+		    jTableAluno.repaint();
+		} catch (Exception e) {
+		    JOptionPane.showMessageDialog(null, e);
+		}
+	    } else {
+		JOptionPane.showMessageDialog(null, "Exclusão cancelada !");
+	    }
+	} else {
+	    JOptionPane.showMessageDialog(null, "Selecione um aluno !");
+	}
+    }//GEN-LAST:event_jButtonExcluirAlunoActionPerformed
+
+    private void jButtonFecharAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharAlunoActionPerformed
+	dispose();
+    }//GEN-LAST:event_jButtonFecharAlunoActionPerformed
+
+    private void jButtonCancelarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarAlunoActionPerformed
+	abaConsulta();
+    }//GEN-LAST:event_jButtonCancelarAlunoActionPerformed
+
+    private void jButtonConfirmarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarAlunoActionPerformed
+	boolean atualizacaoFeita = false; /*Indica que a atualização/inserção foi feita com sucesso,
+	 mantendo a aba de alteração focada.
+	 */
+
+	if (flagAnterior == INSERIR) {
+	    //Verifica se os campos estão corretos antes de modificá-los.
+	    if (validacaoDeCampos()) {
+		aluno = new Aluno(); //Cria um aluno vazio
+		popularObjeto(aluno); //Popula o objeto
+		//Insere o objeto no banco de dados
+		aluno.incluir();
+		/*Coisas do bind: Para adicionar elemento por ultimo na tabela inserir na penultima posição
+		 tipo: list.size() - 1 -> Não faz sentido, mas é assim que o bind funciona...
+		 */
+		alunoList.add(alunoList.size() - 1, aluno);
+		jTableAluno.repaint();
+		atualizacaoFeita = true;
+	    }
+	}
+	if (flagAnterior == ALTERAR) {
+	    //Verifica se os campos estão corretos para atualizá-los
+	    if (validacaoDeCampos()) {
+		popularObjeto(alunoAlterar);
+		//altera o aluno no banco de dados
+		alunoAlterar.alterar();
+		jTableAluno.repaint();
+		atualizacaoFeita = true;
+	    }
+	}
+	if (atualizacaoFeita) {
+	    abaConsulta();
+	}
 
 
+    }//GEN-LAST:event_jButtonConfirmarAlunoActionPerformed
+
+    //Flags para identificar que botão foi clicado anteriormente.
+    private final int INSERIR = 1;
+    private final int ALTERAR = 2;
+    //Aluno para ser alterado
+    private Aluno alunoAlterar;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager AcademiaVisualPUEntityManager;
-    private DataBase.Aluno alunoBind;
     private java.util.List<DataBase.Aluno> alunoList;
     private javax.persistence.Query alunoQuery;
+    private javax.persistence.EntityManager entityManagerAluno;
     private javax.swing.JButton jButtonAlterarAluno;
     private javax.swing.JButton jButtonCancelarAluno;
     private javax.swing.JButton jButtonConfirmarAluno;

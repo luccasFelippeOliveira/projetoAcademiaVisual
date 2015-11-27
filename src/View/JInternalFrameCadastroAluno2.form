@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.persistence.EntityManager" name="AcademiaVisualPUEntityManager">
+    <Component class="javax.persistence.EntityManager" name="entityManagerAluno">
       <Properties>
         <Property name="persistenceUnit" type="java.lang.String" value="AcademiaVisualPU"/>
       </Properties>
@@ -11,7 +11,7 @@
       <Properties>
         <Property name="query" type="java.lang.String" value="SELECT a FROM Aluno a"/>
         <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
-          <ComponentRef name="AcademiaVisualPUEntityManager"/>
+          <ComponentRef name="entityManagerAluno"/>
         </Property>
       </Properties>
     </Component>
@@ -25,18 +25,10 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DataBase.Aluno&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="DataBase.Aluno" name="alunoBind">
-    </Component>
   </NonVisualComponents>
-  <Properties>
-    <Property name="title" type="java.lang.String" value="Cadastro Aluno"/>
-  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
-  <Events>
-    <EventHandler event="internalFrameOpened" listener="javax.swing.event.InternalFrameListener" parameters="javax.swing.event.InternalFrameEvent" handler="formInternalFrameOpened"/>
-  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -105,7 +97,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="745" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="683" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabelProcurarAluno" min="-2" max="-2" attributes="0"/>
@@ -122,7 +114,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="288" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="244" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -145,45 +137,6 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="jTableAluno">
                   <Properties>
-                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
-                    </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
@@ -191,39 +144,25 @@
                   <BindingProperties>
                     <BindingProperty name="elements" source="alunoList" target="jTableAluno" targetPath="elements" updateStrategy="0" immediately="true">
                       <Subbinding sourcePath="${id}">
-                        <BindingParameter name="NAME" value="Id"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${nome}">
-                        <BindingParameter name="NAME" value="Nome"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${endereco}">
-                        <BindingParameter name="NAME" value="Endereco"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${dataNascimento}">
-                        <BindingParameter name="NAME" value="DataNascimento"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${altura}">
-                        <BindingParameter name="NAME" value="Altura"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Float.class"/>
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${peso}">
-                        <BindingParameter name="NAME" value="Peso"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Float.class"/>
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${validade}">
-                        <BindingParameter name="NAME" value="Validade"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Date.class"/>
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                     </BindingProperty>
                   </BindingProperties>
@@ -236,9 +175,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldProcurarAluno">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldProcurarAlunoActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxProcurarAluno">
               <Properties>
@@ -284,20 +220,20 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabelEnderecoAluno" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelEnderecoAluno" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelCpfAluno" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelNomeAluno" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelDataNascimentoAluno" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelPesoAluno" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabelLoginAluno" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEmailAluno" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelValidadeAluno" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelIdAluno" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelEmailAluno" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelValidadeAluno" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelIdAluno" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextFieldNomeAluno" max="32767" attributes="0"/>
+                          <Component id="jTextFieldNomeAluno" alignment="0" max="32767" attributes="0"/>
                           <Component id="jTextFieldEmailAluno" alignment="1" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jTextFieldPesoAluno" min="-2" pref="128" max="-2" attributes="0"/>
@@ -309,11 +245,11 @@
                           <Component id="jFormattedTextFieldDataAluno" alignment="0" max="32767" attributes="0"/>
                           <Component id="jFormattedTextFieldValidadeAluno" alignment="0" max="32767" attributes="0"/>
                           <Component id="jFormattedTextFieldCpfAluno" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEnderecoAluno" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
+                          <Component id="jTextFieldEnderecoAluno" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jFormattedTextFieldUltimaEntradaAluno" min="-2" pref="113" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldIdAluno" min="-2" pref="65" max="-2" attributes="0"/>
+                                  <Component id="jFormattedTextFieldUltimaEntradaAluno" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldIdAluno" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jTextFieldLoginAluno" min="-2" pref="116" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -389,7 +325,7 @@
                           <Component id="jFormattedTextFieldUltimaEntradaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="53" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -446,53 +382,18 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldNomeAluno">
-              <BindingProperties>
-                <BindingProperty name="text" source="alunoBind" sourcePath="${nome}" target="jTextFieldNomeAluno" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldPesoAluno">
-              <BindingProperties>
-                <BindingProperty name="text" source="alunoBind" sourcePath="${peso}" target="jTextFieldPesoAluno" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldAlturaAluno">
-              <BindingProperties>
-                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.altura}" target="jTextFieldAlturaAluno" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldEnderecoAluno">
-              <BindingProperties>
-                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.endereco}" target="jTextFieldEnderecoAluno" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldLoginAluno">
-              <BindingProperties>
-                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.login}" target="jTextFieldLoginAluno" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldEmailAluno">
-              <BindingProperties>
-                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.email}" target="jTextFieldEmailAluno" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordFieldSenhaAluno">
-              <BindingProperties>
-                <BindingProperty name="text" source="jTableAluno" sourcePath="${selectedElement.senha}" target="jPasswordFieldSenhaAluno" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelIdAluno">
               <Properties>
@@ -500,11 +401,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFieldIdAluno">
-              <BindingProperties>
-                <BindingProperty name="text" source="alunoBind" sourcePath="${id}" target="jTextFieldIdAluno" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="jCheckBoxSenhaAluno">
               <Properties>
@@ -517,9 +413,6 @@
                   <Format format="yyyy/M/d" subtype="-1" type="1"/>
                 </Property>
               </Properties>
-              <BindingProperties>
-                <BindingProperty name="value" source="alunoBind" sourcePath="${dataNascimento}" target="jFormattedTextFieldDataAluno" targetPath="value" updateStrategy="0" immediately="false"/>
-              </BindingProperties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jFormattedTextFieldDataAlunoMouseClicked"/>
               </Events>
@@ -530,9 +423,6 @@
                   <Format format="yyyy/M/d" subtype="-1" type="1"/>
                 </Property>
               </Properties>
-              <BindingProperties>
-                <BindingProperty name="value" source="jTableAluno" sourcePath="${selectedElement.validade}" target="jFormattedTextFieldValidadeAluno" targetPath="value" updateStrategy="0" immediately="false"/>
-              </BindingProperties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jFormattedTextFieldValidadeAlunoMouseClicked"/>
               </Events>
@@ -543,9 +433,6 @@
                   <Format format="yyyy/M/d" subtype="-1" type="1"/>
                 </Property>
               </Properties>
-              <BindingProperties>
-                <BindingProperty name="value" source="jTableAluno" sourcePath="${selectedElement.ultimaEntrada}" target="jFormattedTextFieldUltimaEntradaAluno" targetPath="value" updateStrategy="0" immediately="false"/>
-              </BindingProperties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jFormattedTextFieldUltimaEntradaAlunoMouseClicked"/>
               </Events>
@@ -561,9 +448,6 @@
                   <Format format="###.###.###-##" subtype="-1" type="5"/>
                 </Property>
               </Properties>
-              <BindingProperties>
-                <BindingProperty name="value" source="alunoBind" sourcePath="${cpf}" target="jFormattedTextFieldCpfAluno" targetPath="value" updateStrategy="0" immediately="false"/>
-              </BindingProperties>
             </Component>
           </SubComponents>
         </Container>
