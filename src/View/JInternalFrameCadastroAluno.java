@@ -618,14 +618,13 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
         try {
             switch(op){
                 case INSERIR: {
-                    this.ANTERIOR = INSERIR;
-                    limparCamposCadastroAluno();                    
+                    this.ANTERIOR = INSERIR;                                        
                     controleTela(telaAlterar);
                     alunoList.add(new Aluno());
                     jTableAluno.updateUI();
                     jTableAluno.repaint();
                     jTableAluno.setRowSelectionInterval(jTableAluno.getRowCount() - 1, jTableAluno.getRowCount() - 1);
-                    //jFormattedTextFieldUltimaEntradaAluno.setText(dataAtual());
+                    jFormattedTextFieldUltimaEntradaAluno.setText(dataAtual());
                     break;                   
                 }
                 case ALTERAR: {                    
@@ -672,17 +671,17 @@ public class JInternalFrameCadastroAluno extends javax.swing.JInternalFrame {
                     switch (ANTERIOR) {
                         case INSERIR: {
                             alunoList.get(alunoList.size() - 1).incluir();                                                
-                            //controleTela(telaConsultar);
-                            jTabbedPaneAluno.setEnabled(true);
-                            jTabbedPaneAluno.setEnabledAt(0, true);
-                            jTabbedPaneAluno.setSelectedIndex(0);
-                            jTabbedPaneAluno.setEnabledAt(1, false);
-                            jButtonAlterarAluno.setEnabled(true);
-                            jButtonInserirAluno.setEnabled(true);
-                            jButtonExcluirAluno.setEnabled(true);
-                            jButtonFecharAluno.setEnabled(true);
-                            jButtonConfirmarAluno.setEnabled(false);
-                            jButtonCancelarAluno.setEnabled(false);
+                            controleTela(telaConsultar);                            
+//                            jTabbedPaneAluno.setEnabled(true);
+//                            jTabbedPaneAluno.setEnabledAt(0, true);
+//                            jTabbedPaneAluno.setSelectedIndex(0);
+//                            jTabbedPaneAluno.setEnabledAt(1, false);
+//                            jButtonAlterarAluno.setEnabled(true);
+//                            jButtonInserirAluno.setEnabled(true);
+//                            jButtonExcluirAluno.setEnabled(true);
+//                            jButtonFecharAluno.setEnabled(true);
+//                            jButtonConfirmarAluno.setEnabled(false);
+//                            jButtonCancelarAluno.setEnabled(false);
                             jTableAluno.updateUI();
                             jTableAluno.repaint();
                             jTableAluno.setRowSelectionInterval(0, 0);
