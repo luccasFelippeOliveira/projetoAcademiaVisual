@@ -42,6 +42,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private JInternalFrameCadastroTreinador cadastroTreinador = null;
     private JInternalFrameCadastroModalidade cadastroModalidade = null;
     private JInternalFrameCadastroProduto cadastroProduto = null;
+    private JInternalFrameCadastroAluno2 cadastroAluno2 = null;
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -246,22 +247,22 @@ public class TelaInicial extends javax.swing.JFrame {
         cadastroTreinador.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroTreinadorActionPerformed
 
-    private void jMenuItemCadastroAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroAlunoActionPerformed
-        if((cadastroAluno == null) || (cadastroAluno.isClosed())){
-            cadastroAluno = new JInternalFrameCadastroAluno();
-            jDesktopPaneInicial.add(cadastroAluno);
-        }
-        try{
-            cadastroAluno.setMaximum(rootPaneCheckingEnabled);
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(rootPane, e);
-        }
-        cadastroAluno.setVisible(true);
-    }//GEN-LAST:event_jMenuItemCadastroAlunoActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
                         
     }//GEN-LAST:event_formWindowOpened
+
+    private void jMenuItemCadastroAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroAlunoActionPerformed
+        if((cadastroAluno2 == null) || (cadastroAluno2.isClosed())) {
+            cadastroAluno2 = new JInternalFrameCadastroAluno2();
+            jDesktopPaneInicial.add(cadastroAluno2);
+        }
+        try {
+            cadastroAluno2.setMaximum(rootPaneCheckingEnabled);
+        }catch(PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        cadastroAluno2.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroAlunoActionPerformed
 
 //    /**
 //     * @param args the command line arguments
