@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -35,7 +36,7 @@ public class Exercicios implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "exercicioId")
     private Collection<Treinos> treinosCollection;
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id @GeneratedValue
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;

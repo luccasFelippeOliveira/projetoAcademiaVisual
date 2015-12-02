@@ -301,6 +301,17 @@ public class ModalidadesJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public Modalidades findModalidadeByNome(String nome) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createNamedQuery("Modalidades.findByNome", Modalidades.class).setParameter("nome", nome).getSingleResult();
+        } catch (Exception e) {            
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 
     public int getModalidadesCount() {
         EntityManager em = getEntityManager();

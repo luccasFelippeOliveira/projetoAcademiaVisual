@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,7 +34,7 @@ public class Ultimodiatreinoaluno implements Serializable {
     @Basic(optional = false)
     @Column(name = "ultimoDia", nullable = false)
     private int ultimoDia;
-    @Id
+    @Id @GeneratedValue
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;

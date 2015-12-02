@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -31,7 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Produtos.findByDesconto", query = "SELECT p FROM Produtos p WHERE p.desconto = :desconto")})
 public class Produtos implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id @GeneratedValue
     @Basic(optional = false)
     @Column(name = "id", nullable = false)
     private Integer id;

@@ -147,6 +147,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadastros.add(jMenuItemCadastroExercicio);
 
         jMenuItemCadastroModalidade.setText("Cadastro Modalidade");
+        jMenuItemCadastroModalidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroModalidadeActionPerformed(evt);
+            }
+        });
         jMenuCadastros.add(jMenuItemCadastroModalidade);
 
         jMenuItemCadastroProduto.setText("Cadastro Produto");
@@ -263,6 +268,19 @@ public class TelaInicial extends javax.swing.JFrame {
         }
         cadastroAluno2.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroAlunoActionPerformed
+
+    private void jMenuItemCadastroModalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroModalidadeActionPerformed
+        if((cadastroAluno2 == null) || (cadastroAluno2.isClosed())) {
+            cadastroModalidade = new JInternalFrameCadastroModalidade();
+            jDesktopPaneInicial.add(cadastroModalidade);
+        }
+        try {
+            cadastroModalidade.setMaximum(rootPaneCheckingEnabled);
+        }catch(PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        cadastroModalidade.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroModalidadeActionPerformed
 
 //    /**
 //     * @param args the command line arguments
