@@ -5,6 +5,15 @@
  */
 package View;
 
+import DAO.ModalidadesJpaController;
+import DAO.ProdutosJpaController;
+import DataBase.Modalidades;
+import DataBase.Produtos;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author afnsoo
@@ -16,6 +25,9 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
      */
     public JInternalFrameCadastroProduto() {
         initComponents();
+        abaConsulta();
+        System.out.println("produtosList1 Class : " + produtosList1.getClass().getName());
+        System.out.println("Size: " + produtosList1.size());
     }
 
     /**
@@ -26,71 +38,100 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jButtonExcluirAluno = new javax.swing.JButton();
-        jButtonFecharAluno = new javax.swing.JButton();
-        jTabbedPaneAluno = new javax.swing.JTabbedPane();
+        AcademiaVisualPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("AcademiaVisualPU").createEntityManager();
+        produtosQuery = java.beans.Beans.isDesignTime() ? null : AcademiaVisualPUEntityManager.createQuery("SELECT p FROM Produtos p");
+        produtosList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtosQuery.getResultList();
+        modalidadesQuery = java.beans.Beans.isDesignTime() ? null : AcademiaVisualPUEntityManager.createQuery("SELECT m FROM Modalidades m");
+        modalidadesList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : modalidadesQuery.getResultList();
+        produtosQuery1 = java.beans.Beans.isDesignTime() ? null : AcademiaVisualPUEntityManager.createQuery("SELECT p FROM Produtos p");
+        produtosList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : produtosQuery1.getResultList();
+        jButtonExcluirProduto = new javax.swing.JButton();
+        jButtonFecharProduto = new javax.swing.JButton();
+        jTabbedPaneProduto = new javax.swing.JTabbedPane();
         jPanelConsultaAluno = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableAluno = new javax.swing.JTable();
-        jLabelProcurarAluno = new javax.swing.JLabel();
-        jTextFieldProcurarAluno = new javax.swing.JTextField();
-        jComboBoxProcurarAluno = new javax.swing.JComboBox();
-        jButtonProcurarAluno = new javax.swing.JButton();
+        jTableProduto = new javax.swing.JTable();
+        jLabelProcurarProduto = new javax.swing.JLabel();
+        jTextFieldProcurarProduto = new javax.swing.JTextField();
+        jComboBoxProcurarProduto = new javax.swing.JComboBox();
+        jButtonProcurarProduto = new javax.swing.JButton();
         jPanelAlterarAluno = new javax.swing.JPanel();
-        jLabelNomeAluno = new javax.swing.JLabel();
-        jLabelCpfAluno = new javax.swing.JLabel();
-        jLabelDataNascimentoAluno = new javax.swing.JLabel();
-        jLabelPesoAluno = new javax.swing.JLabel();
-        jLabelAlturaAluno = new javax.swing.JLabel();
-        jLabelEnderecoAluno = new javax.swing.JLabel();
-        jLabelLoginAluno = new javax.swing.JLabel();
-        jLabelSenhaAluno = new javax.swing.JLabel();
-        jLabelEmailAluno = new javax.swing.JLabel();
-        jLabelValidadeAluno = new javax.swing.JLabel();
-        jTextFieldNomeAluno = new javax.swing.JTextField();
-        jTextFieldCpfAluno = new javax.swing.JTextField();
-        jTextFieldDataNascimentoAluno = new javax.swing.JTextField();
-        jTextFieldPesoAluno = new javax.swing.JTextField();
-        jTextFieldAlturaAluno = new javax.swing.JTextField();
-        jTextFieldEnderecoAluno = new javax.swing.JTextField();
-        jTextFieldLoginAluno = new javax.swing.JTextField();
-        jTextFieldEmailAluno = new javax.swing.JTextField();
-        jTextFieldValidadeAluno = new javax.swing.JTextField();
-        jButtonBuscarDataAluno = new javax.swing.JButton();
-        jPasswordFieldSenhaAluno = new javax.swing.JPasswordField();
-        jButtonCancelarAluno = new javax.swing.JButton();
-        jButtonConfirmarAluno = new javax.swing.JButton();
-        jButtonInserirAluno = new javax.swing.JButton();
-        jButtonAlterarAluno = new javax.swing.JButton();
+        jLabelIdProduto = new javax.swing.JLabel();
+        jLabelNomeProduto = new javax.swing.JLabel();
+        jLabelPrecoProduto = new javax.swing.JLabel();
+        jLabelDescricaoProduto = new javax.swing.JLabel();
+        jLabelDescontoProduto = new javax.swing.JLabel();
+        jTextFieldIdProduto = new javax.swing.JTextField();
+        jTextFieldNomeProduto = new javax.swing.JTextField();
+        jTextFieldPrecoProduto = new javax.swing.JTextField();
+        jTextFieldDescontoProduto = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaDescricaoProduto = new javax.swing.JTextArea();
+        jButtonCancelarProduto = new javax.swing.JButton();
+        jButtonConfirmarProduto = new javax.swing.JButton();
+        jButtonInserirProduto = new javax.swing.JButton();
+        jButtonAlterarProduto = new javax.swing.JButton();
 
         setTitle("Cadastro Produto");
 
-        jButtonExcluirAluno.setText("Excluir");
-
-        jButtonFecharAluno.setText("Fechar");
-        jButtonFecharAluno.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExcluirProduto.setText("Excluir");
+        jButtonExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharAlunoActionPerformed(evt);
+                jButtonExcluirProdutoActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setViewportView(jTableAluno);
-
-        jLabelProcurarAluno.setText("Opção De Busca");
-
-        jTextFieldProcurarAluno.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFecharProduto.setText("Fechar");
+        jButtonFecharProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldProcurarAlunoActionPerformed(evt);
+                jButtonFecharProdutoActionPerformed(evt);
             }
         });
 
-        jComboBoxProcurarAluno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Nome", "CPF", "Validade" }));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, produtosList1, jTableProduto);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
+        columnBinding.setColumnName("Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${preco}"));
+        columnBinding.setColumnName("Preco");
+        columnBinding.setColumnClass(Float.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descricao}"));
+        columnBinding.setColumnName("Descricao");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${desconto}"));
+        columnBinding.setColumnName("Desconto");
+        columnBinding.setColumnClass(Float.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(jTableProduto);
 
-        jButtonProcurarAluno.setText("Buscar");
-        jButtonProcurarAluno.setMaximumSize(new java.awt.Dimension(75, 23));
-        jButtonProcurarAluno.setMinimumSize(new java.awt.Dimension(75, 23));
-        jButtonProcurarAluno.setPreferredSize(new java.awt.Dimension(75, 23));
+        jLabelProcurarProduto.setText("Opção De Busca");
+
+        jTextFieldProcurarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldProcurarProdutoActionPerformed(evt);
+            }
+        });
+
+        jComboBoxProcurarProduto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Nome" }));
+
+        jButtonProcurarProduto.setText("Buscar");
+        jButtonProcurarProduto.setMaximumSize(new java.awt.Dimension(75, 23));
+        jButtonProcurarProduto.setMinimumSize(new java.awt.Dimension(75, 23));
+        jButtonProcurarProduto.setPreferredSize(new java.awt.Dimension(75, 23));
+        jButtonProcurarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProcurarProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelConsultaAlunoLayout = new javax.swing.GroupLayout(jPanelConsultaAluno);
         jPanelConsultaAluno.setLayout(jPanelConsultaAlunoLayout);
@@ -99,13 +140,13 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
             .addGroup(jPanelConsultaAlunoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelProcurarAluno)
+                .addComponent(jLabelProcurarProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBoxProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxProcurarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldProcurarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonProcurarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelConsultaAlunoLayout.setVerticalGroup(
@@ -114,36 +155,30 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelProcurarAluno)
-                    .addComponent(jTextFieldProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelProcurarProduto)
+                    .addComponent(jTextFieldProcurarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonProcurarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxProcurarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jTabbedPaneAluno.addTab("Consulta", jPanelConsultaAluno);
+        jTabbedPaneProduto.addTab("Consulta", jPanelConsultaAluno);
 
-        jLabelNomeAluno.setText("Nome:");
+        jLabelIdProduto.setText("ID:");
 
-        jLabelCpfAluno.setText("CPF:");
+        jLabelNomeProduto.setText("Nome:");
 
-        jLabelDataNascimentoAluno.setText("Data Nascimento:");
+        jLabelPrecoProduto.setText("Preco:");
 
-        jLabelPesoAluno.setText("Peso:");
+        jLabelDescricaoProduto.setText("Descricao:");
 
-        jLabelAlturaAluno.setText("Altura:");
+        jLabelDescontoProduto.setText("Desconto(%):");
 
-        jLabelEnderecoAluno.setText("Endereco:");
+        jTextFieldIdProduto.setEditable(false);
 
-        jLabelLoginAluno.setText("Login:");
-
-        jLabelSenhaAluno.setText("Senha:");
-
-        jLabelEmailAluno.setText("Email:");
-
-        jLabelValidadeAluno.setText("Validade:");
-
-        jButtonBuscarDataAluno.setText("...");
+        jTextAreaDescricaoProduto.setColumns(20);
+        jTextAreaDescricaoProduto.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaDescricaoProduto);
 
         javax.swing.GroupLayout jPanelAlterarAlunoLayout = new javax.swing.GroupLayout(jPanelAlterarAluno);
         jPanelAlterarAluno.setLayout(jPanelAlterarAlunoLayout);
@@ -152,185 +187,404 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
             .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelSenhaAluno)
-                    .addComponent(jLabelLoginAluno)
-                    .addComponent(jLabelEnderecoAluno)
-                    .addComponent(jLabelAlturaAluno)
-                    .addComponent(jLabelPesoAluno)
-                    .addComponent(jLabelDataNascimentoAluno)
-                    .addComponent(jLabelCpfAluno)
-                    .addComponent(jLabelEmailAluno)
-                    .addComponent(jLabelValidadeAluno)
-                    .addComponent(jLabelNomeAluno))
+                    .addComponent(jLabelDescontoProduto)
+                    .addComponent(jLabelDescricaoProduto)
+                    .addComponent(jLabelPrecoProduto)
+                    .addComponent(jLabelNomeProduto)
+                    .addComponent(jLabelIdProduto))
                 .addGap(97, 97, 97)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addComponent(jTextFieldNomeAluno)
-                    .addComponent(jTextFieldCpfAluno)
-                    .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBuscarDataAluno)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextFieldIdProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                    .addComponent(jTextFieldNomeProduto)
+                    .addComponent(jTextFieldPrecoProduto, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldDescontoProduto)
+                    .addComponent(jScrollPane2))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanelAlterarAlunoLayout.setVerticalGroup(
             jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomeAluno)
-                    .addComponent(jTextFieldNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelIdProduto)
+                    .addComponent(jTextFieldIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCpfAluno)
-                    .addComponent(jTextFieldCpfAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNomeProduto)
+                    .addComponent(jTextFieldNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDataNascimentoAluno)
-                    .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelPrecoProduto)
+                    .addComponent(jTextFieldPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelDescricaoProduto)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPesoAluno)
-                    .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAlturaAluno)
-                    .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEnderecoAluno)
-                    .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelLoginAluno)
-                    .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelSenhaAluno)
-                    .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEmailAluno)
-                    .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelValidadeAluno)
-                    .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBuscarDataAluno))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextFieldDescontoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDescontoProduto))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
-        jTabbedPaneAluno.addTab("Alterar", jPanelAlterarAluno);
+        jTabbedPaneProduto.addTab("Alterar", jPanelAlterarAluno);
 
-        jButtonCancelarAluno.setText("Cancelar");
-
-        jButtonConfirmarAluno.setText("Confirmar");
-
-        jButtonInserirAluno.setText("Inserir");
-        jButtonInserirAluno.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelarProduto.setText("Cancelar");
+        jButtonCancelarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInserirAlunoActionPerformed(evt);
+                jButtonCancelarProdutoActionPerformed(evt);
             }
         });
 
-        jButtonAlterarAluno.setText("Alterar");
+        jButtonConfirmarProduto.setText("Confirmar");
+        jButtonConfirmarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarProdutoActionPerformed(evt);
+            }
+        });
+
+        jButtonInserirProduto.setText("Inserir");
+        jButtonInserirProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInserirProdutoActionPerformed(evt);
+            }
+        });
+
+        jButtonAlterarProduto.setText("Alterar");
+        jButtonAlterarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneAluno)
+            .addComponent(jTabbedPaneProduto)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonInserirAluno)
+                .addComponent(jButtonInserirProduto)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonAlterarAluno)
+                .addComponent(jButtonAlterarProduto)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonExcluirAluno)
+                .addComponent(jButtonExcluirProduto)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonConfirmarAluno)
+                .addComponent(jButtonConfirmarProduto)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonCancelarAluno)
+                .addComponent(jButtonCancelarProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonFecharAluno)
+                .addComponent(jButtonFecharProduto)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPaneAluno)
+                .addComponent(jTabbedPaneProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonInserirAluno)
-                    .addComponent(jButtonAlterarAluno)
-                    .addComponent(jButtonExcluirAluno)
-                    .addComponent(jButtonFecharAluno)
-                    .addComponent(jButtonCancelarAluno)
-                    .addComponent(jButtonConfirmarAluno))
+                    .addComponent(jButtonInserirProduto)
+                    .addComponent(jButtonAlterarProduto)
+                    .addComponent(jButtonExcluirProduto)
+                    .addComponent(jButtonFecharProduto)
+                    .addComponent(jButtonCancelarProduto)
+                    .addComponent(jButtonConfirmarProduto))
                 .addContainerGap())
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonFecharAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharAlunoActionPerformed
+     //Bind automático não funiona como o esperado. Os métodos abaixo circulam este problema.
+    /**
+     * Popula os textField da aba Alterar.
+     *
+     * @param a Fonte dos dados para o textField, caso seja null os campos serão
+     * esvaziados.
+     */
+    private void popularCamposAlterar(Produtos p) {
+        if (p == null) {
+            jTextAreaDescricaoProduto.setText("");
+            jTextFieldIdProduto.setText("");
+            jTextFieldNomeProduto.setText("");           
+            jTextFieldPrecoProduto.setText("");
+            jTextFieldDescontoProduto.setText("");
+        } else {
+            jTextAreaDescricaoProduto.setText(p.getDescricao());
+            jTextFieldIdProduto.setText(Integer.toString(p.getId()));
+            jTextFieldNomeProduto.setText(p.getNome());           
+            jTextFieldPrecoProduto.setText(Float.toString(p.getPreco()));
+            jTextFieldDescontoProduto.setText(Float.toString(p.getDesconto()));            
+        }
+    }
+
+    /**
+     * Após a edição do objeto pega dados da aba Alterar e coloca no objeto.
+     *
+     * @param a Objeto a ser populado.
+     */
+    private void popularObjeto(Produtos p) {
+        //TODO: Garantir que @param não é nulo
+        /*O campo ID é gerado pelo banco de dados*/
+        p.setNome(jTextFieldNomeProduto.getText());        
+        p.setPreco(Float.parseFloat(jTextFieldPrecoProduto.getText()));        
+        p.setDescricao(jTextAreaDescricaoProduto.getText());
+        p.setDesconto(Float.parseFloat(jTextFieldDescontoProduto.getText()));        
+    }
+
+    /**
+     * Entra na Aba de Consulta
+     */
+    private void abaConsulta() {
+        jTabbedPaneProduto.setSelectedIndex(0);
+        jTabbedPaneProduto.setEnabledAt(0, true);
+        jTabbedPaneProduto.setEnabledAt(1, false);
+        jButtonConfirmarProduto.setEnabled(false);
+        jButtonCancelarProduto.setEnabled(false);
+        jButtonInserirProduto.setEnabled(true);
+        jButtonAlterarProduto.setEnabled(true);
+        jButtonExcluirProduto.setEnabled(true);
+    }
+
+    /**
+     * Entra na Aba de Alterar
+     */
+    private void abaAlterar() {
+        jTabbedPaneProduto.setSelectedIndex(1);
+        jTabbedPaneProduto.setEnabledAt(1, true);
+        jTabbedPaneProduto.setEnabledAt(0, false);
+        jButtonInserirProduto.setEnabled(false);
+        jButtonAlterarProduto.setEnabled(false);
+        jButtonExcluirProduto.setEnabled(false);
+        jButtonConfirmarProduto.setEnabled(true);
+        jButtonCancelarProduto.setEnabled(true);
+
+    }
+
+    /**
+     * Valida os campos de acordo com as normas:
+     * <ul>
+     * <li> 
+     * </ul>
+     *
+     * @return <b>true</b> caso passe na validação, <b>false</b> caso contrário.
+     */
+    private boolean validacaoDeCampos() {
+        boolean valido = true;
+        String msgErro = "";
+        String campo;      
+
+        //Checa o campo Preco
+        campo = jTextFieldPrecoProduto.getText();
+        if (("".equals(campo)) || (Float.parseFloat(campo) <= 0)) {
+            valido = false;
+            msgErro += "Preco Invalido. Deve ser maior que zero\n";
+            jTextFieldPrecoProduto.setText(""); //Limpa campo preco 
+        }
+
+        //Checa o campo Desconto
+        campo = jTextFieldDescontoProduto.getText();
+        if (("".equals(campo)) || (Float.parseFloat(campo) > 100) || (Float.parseFloat(campo) < 0)) {
+            valido = false;
+            msgErro += "Desconto Invalido. Nao pode ser menor que zero ou maior que cem\n";
+            jTextFieldDescontoProduto.setText(""); //Limpa campo desconto
+        }
+
+        //Checa o campo nome
+        campo = jTextFieldNomeProduto.getText();
+        if ((campo.length() < 40) && !("".equals(campo))) {
+	    //Campo possivelmente válido
+            //Checar unicidade
+            //INFO: Código Legado modificado.
+            if ((flagAnterior == INSERIR) || (!campo.equals(produtosAlterar.getNome()))) {
+                try {
+                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+                    ProdutosJpaController produtoJpaController = new ProdutosJpaController(emf);
+                    Produtos resultado = (Produtos) produtoJpaController.findProdutoByNome(campo);
+                    if (resultado != null) {
+                        //Encontrou um nome identico
+                        valido = false;
+                        msgErro += "Nome inválido. O campo deve ser único\n";
+                        jTextFieldNomeProduto.setText("");
+                    }
+                } catch (Exception e) {
+                    //TODO: Definir melhor qual tipo de exceção é lançada
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            valido = false;
+            msgErro += "Nome inválido. O campo não deve ser nulo e deve ser menor que 40 caracteres\n";
+            jTextFieldNomeProduto.setText(""); //limpa o campo nome
+        }
+
+        //Checa o campo descricao
+        campo = jTextAreaDescricaoProduto.getText();
+        if (("".equals(campo))) {
+            valido = false;
+            msgErro += "Descricao invalida. Entre com a descricao do produto\n";
+            jTextAreaDescricaoProduto.setText("");
+        }
+       
+        if (!valido) {
+            JOptionPane.showMessageDialog(null, msgErro, "Campos Invalidos!", JOptionPane.ERROR_MESSAGE);
+        }
+        return valido;
+    }
+    private int flagAnterior; //Define qual botão foi clicado
+    private Produtos produto; //Endereça objetos criados
+    
+    private void jButtonFecharProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharProdutoActionPerformed
         dispose();
-    }//GEN-LAST:event_jButtonFecharAlunoActionPerformed
+    }//GEN-LAST:event_jButtonFecharProdutoActionPerformed
 
-    private void jTextFieldProcurarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarAlunoActionPerformed
+    private void jTextFieldProcurarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarProdutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldProcurarAlunoActionPerformed
+    }//GEN-LAST:event_jTextFieldProcurarProdutoActionPerformed
 
-    private void jButtonInserirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirAlunoActionPerformed
-        jTabbedPaneAluno.setSelectedIndex(1);
-        jTabbedPaneAluno.setEnabledAt(0, false);
-        jButtonFecharAluno.setEnabled(false);
-        jButtonConfirmarAluno.setEnabled(true);
-        jButtonCancelarAluno.setEnabled(true);
-    }//GEN-LAST:event_jButtonInserirAlunoActionPerformed
+    private void jButtonInserirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirProdutoActionPerformed
+        flagAnterior = INSERIR;
+        popularCamposAlterar(null);        
+        abaAlterar();
+    }//GEN-LAST:event_jButtonInserirProdutoActionPerformed
 
+    private void jButtonAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarProdutoActionPerformed
+        flagAnterior = ALTERAR;
+        produtosAlterar = produtosList1.get(jTableProduto.getSelectedRow());
+        popularCamposAlterar(produtosAlterar);
+        abaAlterar();
+    }//GEN-LAST:event_jButtonAlterarProdutoActionPerformed
 
+    private void jButtonExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirProdutoActionPerformed
+        if (!produtosList1.isEmpty() && jTableProduto.getSelectedRow() != -1) {
+            int option = JOptionPane.showConfirmDialog(this, "Verifique com atenção os dados que deseja excluir!\n"
+                    + "Clique em sim se esse for mesmo a modalidade que deseja excluir.\n"
+                    + "Clique em cancelar para voltar.");
+            if (option == JOptionPane.YES_OPTION) {
+                try {
+                    /*
+                     EXCLUIR O USUARIO DE TODOS AS TABELAS QUE UTILIZAM O MESMO !
+                     Acho que não é necessário -- Luccas.
+                     */
+                    produtosList1.get(jTableProduto.getSelectedRow()).excluir();
+                    produtosList1.remove(jTableProduto.getSelectedRow());
+                    jTableProduto.updateUI();
+                    jTableProduto.repaint();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Exclusão cancelada !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma produto !");
+        }
+    }//GEN-LAST:event_jButtonExcluirProdutoActionPerformed
+
+    private void jButtonConfirmarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarProdutoActionPerformed
+        boolean atualizacaoFeita = false; /*Indica que a atualização/inserção foi feita com sucesso,
+         mantendo a aba de alteração focada.
+         */
+        if (flagAnterior == INSERIR) {
+            //Verifica se os campos estão corretos antes de modificá-los.
+            if (validacaoDeCampos()) {
+                produto = new Produtos(); //Cria um aluno vazio
+                popularObjeto(produto); //Popula o objeto
+                //Insere o objeto no banco de dados
+                produto.incluir();
+                /*Coisas do bind: Para adicionar elemento por ultimo na tabela inserir na penultima posição
+                 tipo: list.size() - 1 -> Não faz sentido, mas é assim que o bind funciona...
+                 */
+                produtosList1.add(produtosList1.size() - 1, produto);
+                jTableProduto.repaint();
+                atualizacaoFeita = true;
+            }
+        }
+        if (flagAnterior == ALTERAR) {
+            //Verifica se os campos estão corretos para atualizá-los
+            if (validacaoDeCampos()) {
+                popularObjeto(produtosAlterar);
+                //altera o aluno no banco de dados
+                produtosAlterar.alterar();
+                jTableProduto.repaint();
+                atualizacaoFeita = true;
+            }
+        }
+        if (atualizacaoFeita) {
+            abaConsulta();
+        }
+    }//GEN-LAST:event_jButtonConfirmarProdutoActionPerformed
+
+    private void jButtonCancelarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarProdutoActionPerformed
+        abaConsulta();
+    }//GEN-LAST:event_jButtonCancelarProdutoActionPerformed
+
+    private void jButtonProcurarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProcurarProdutoActionPerformed
+        String[] sql = {"", "SELECT p FROM Produtos p WHERE p.nome LIKE :nome "};
+        try {
+            Query query = null;
+            if (jTextFieldProcurarProduto.getText().length() > 0) {
+                if (jComboBoxProcurarProduto.getSelectedIndex() == 0) {
+                    query = AcademiaVisualPUEntityManager.createNamedQuery("Produtos.findById");
+                    query.setParameter("id", Long.valueOf(jTextFieldProcurarProduto.getText()));
+                }
+                if (jComboBoxProcurarProduto.getSelectedIndex() == 1) {
+                    query = AcademiaVisualPUEntityManager.createQuery(sql[1]);
+                    query.setParameter("nome", '%' + jTextFieldProcurarProduto.getText() + '%');
+                }
+            } else {
+                query = produtosQuery1;
+            }
+            produtosList1.clear();
+            produtosList1.addAll(query.getResultList());
+            jTableProduto.updateUI();
+            jTableProduto.repaint();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+    }//GEN-LAST:event_jButtonProcurarProdutoActionPerformed
+
+    //Flags para identificar que botão foi clicado anteriormente.
+    private final int INSERIR = 1;
+    private final int ALTERAR = 2;
+    //Aluno para ser alterado
+    private Produtos produtosAlterar;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAlterarAluno;
-    private javax.swing.JButton jButtonBuscarDataAluno;
-    private javax.swing.JButton jButtonCancelarAluno;
-    private javax.swing.JButton jButtonConfirmarAluno;
-    private javax.swing.JButton jButtonExcluirAluno;
-    private javax.swing.JButton jButtonFecharAluno;
-    private javax.swing.JButton jButtonInserirAluno;
-    private javax.swing.JButton jButtonProcurarAluno;
-    private javax.swing.JComboBox jComboBoxProcurarAluno;
-    private javax.swing.JLabel jLabelAlturaAluno;
-    private javax.swing.JLabel jLabelCpfAluno;
-    private javax.swing.JLabel jLabelDataNascimentoAluno;
-    private javax.swing.JLabel jLabelEmailAluno;
-    private javax.swing.JLabel jLabelEnderecoAluno;
-    private javax.swing.JLabel jLabelLoginAluno;
-    private javax.swing.JLabel jLabelNomeAluno;
-    private javax.swing.JLabel jLabelPesoAluno;
-    private javax.swing.JLabel jLabelProcurarAluno;
-    private javax.swing.JLabel jLabelSenhaAluno;
-    private javax.swing.JLabel jLabelValidadeAluno;
+    private javax.persistence.EntityManager AcademiaVisualPUEntityManager;
+    private javax.swing.JButton jButtonAlterarProduto;
+    private javax.swing.JButton jButtonCancelarProduto;
+    private javax.swing.JButton jButtonConfirmarProduto;
+    private javax.swing.JButton jButtonExcluirProduto;
+    private javax.swing.JButton jButtonFecharProduto;
+    private javax.swing.JButton jButtonInserirProduto;
+    private javax.swing.JButton jButtonProcurarProduto;
+    private javax.swing.JComboBox jComboBoxProcurarProduto;
+    private javax.swing.JLabel jLabelDescontoProduto;
+    private javax.swing.JLabel jLabelDescricaoProduto;
+    private javax.swing.JLabel jLabelIdProduto;
+    private javax.swing.JLabel jLabelNomeProduto;
+    private javax.swing.JLabel jLabelPrecoProduto;
+    private javax.swing.JLabel jLabelProcurarProduto;
     private javax.swing.JPanel jPanelAlterarAluno;
     private javax.swing.JPanel jPanelConsultaAluno;
-    private javax.swing.JPasswordField jPasswordFieldSenhaAluno;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPaneAluno;
-    private javax.swing.JTable jTableAluno;
-    private javax.swing.JTextField jTextFieldAlturaAluno;
-    private javax.swing.JTextField jTextFieldCpfAluno;
-    private javax.swing.JTextField jTextFieldDataNascimentoAluno;
-    private javax.swing.JTextField jTextFieldEmailAluno;
-    private javax.swing.JTextField jTextFieldEnderecoAluno;
-    private javax.swing.JTextField jTextFieldLoginAluno;
-    private javax.swing.JTextField jTextFieldNomeAluno;
-    private javax.swing.JTextField jTextFieldPesoAluno;
-    private javax.swing.JTextField jTextFieldProcurarAluno;
-    private javax.swing.JTextField jTextFieldValidadeAluno;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPaneProduto;
+    private javax.swing.JTable jTableProduto;
+    private javax.swing.JTextArea jTextAreaDescricaoProduto;
+    private javax.swing.JTextField jTextFieldDescontoProduto;
+    private javax.swing.JTextField jTextFieldIdProduto;
+    private javax.swing.JTextField jTextFieldNomeProduto;
+    private javax.swing.JTextField jTextFieldPrecoProduto;
+    private javax.swing.JTextField jTextFieldProcurarProduto;
+    private java.util.List<DataBase.Modalidades> modalidadesList;
+    private javax.persistence.Query modalidadesQuery;
+    private java.util.List<DataBase.Produtos> produtosList;
+    private java.util.List<DataBase.Produtos> produtosList1;
+    private javax.persistence.Query produtosQuery;
+    private javax.persistence.Query produtosQuery1;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

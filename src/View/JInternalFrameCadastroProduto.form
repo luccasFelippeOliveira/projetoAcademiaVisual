@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.persistence.EntityManager" name="AcademiaVisualPUEntityManager">
+      <Properties>
+        <Property name="persistenceUnit" type="java.lang.String" value="AcademiaVisualPU"/>
+      </Properties>
+    </Component>
+    <Component class="javax.persistence.Query" name="produtosQuery">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT p FROM Produtos p"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="AcademiaVisualPUEntityManager"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="java.util.List" name="produtosList">
+      <Properties>
+        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
+          <ComponentRef name="produtosQuery"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DataBase.Produtos&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.persistence.Query" name="modalidadesQuery">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT m FROM Modalidades m"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="AcademiaVisualPUEntityManager"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="java.util.List" name="modalidadesList">
+      <Properties>
+        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
+          <ComponentRef name="modalidadesQuery"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DataBase.Modalidades&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.persistence.Query" name="produtosQuery1">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT p FROM Produtos p"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="AcademiaVisualPUEntityManager"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="java.util.List" name="produtosList1">
+      <Properties>
+        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
+          <ComponentRef name="produtosQuery1"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DataBase.Produtos&gt;"/>
+      </AuxValues>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Cadastro Produto"/>
   </Properties>
@@ -22,20 +83,20 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPaneAluno" alignment="0" max="32767" attributes="0"/>
+          <Component id="jTabbedPaneProduto" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonInserirAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonInserirProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonAlterarAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonAlterarProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonExcluirAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonExcluirProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonConfirmarAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonConfirmarProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonCancelarAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonCancelarProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButtonFecharAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonFecharProduto" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -43,15 +104,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPaneAluno" max="32767" attributes="0"/>
+              <Component id="jTabbedPaneProduto" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonInserirAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonAlterarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonExcluirAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonFecharAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonCancelarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonConfirmarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonInserirProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonAlterarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonExcluirProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonFecharProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonCancelarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonConfirmarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -59,20 +120,23 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButtonExcluirAluno">
+    <Component class="javax.swing.JButton" name="jButtonExcluirProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirProdutoActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonFecharAluno">
+    <Component class="javax.swing.JButton" name="jButtonFecharProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFecharAlunoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFecharProdutoActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPaneAluno">
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPaneProduto">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -91,13 +155,13 @@
                   <Component id="jScrollPane1" alignment="0" pref="593" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelProcurarAluno" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelProcurarProduto" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jComboBoxProcurarAluno" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxProcurarProduto" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextFieldProcurarAluno" min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="jTextFieldProcurarProduto" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonProcurarAluno" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonProcurarProduto" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -108,10 +172,10 @@
                       <Component id="jScrollPane1" pref="227" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelProcurarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldProcurarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonProcurarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxProcurarProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -126,38 +190,92 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTableAluno">
+                <Component class="javax.swing.JTable" name="jTableProduto">
                   <Properties>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="elements" source="produtosList1" target="jTableProduto" targetPath="elements" updateStrategy="0" immediately="true">
+                      <Subbinding sourcePath="${id}">
+                        <BindingParameter name="NAME" value="Id"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${nome}">
+                        <BindingParameter name="NAME" value="Nome"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${preco}">
+                        <BindingParameter name="NAME" value="Preco"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Float.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${descricao}">
+                        <BindingParameter name="NAME" value="Descricao"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${desconto}">
+                        <BindingParameter name="NAME" value="Desconto"/>
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Float.class"/>
+                      </Subbinding>
+                    </BindingProperty>
+                  </BindingProperties>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabelProcurarAluno">
+            <Component class="javax.swing.JLabel" name="jLabelProcurarProduto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Op&#xe7;&#xe3;o De Busca"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldProcurarAluno">
+            <Component class="javax.swing.JTextField" name="jTextFieldProcurarProduto">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldProcurarAlunoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldProcurarProdutoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBoxProcurarAluno">
+            <Component class="javax.swing.JComboBox" name="jComboBoxProcurarProduto">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
+                  <StringArray count="2">
                     <StringItem index="0" value="Id"/>
                     <StringItem index="1" value="Nome"/>
-                    <StringItem index="2" value="CPF"/>
-                    <StringItem index="3" value="Validade"/>
                   </StringArray>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonProcurarAluno">
+            <Component class="javax.swing.JButton" name="jButtonProcurarProduto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -170,6 +288,9 @@
                   <Dimension value="[75, 23]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonProcurarProdutoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -188,33 +309,21 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelSenhaAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelLoginAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEnderecoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAlturaAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelPesoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelDataNascimentoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelCpfAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEmailAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelValidadeAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelNomeAluno" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelDescontoProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelDescricaoProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelPrecoProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelNomeProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelIdProduto" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jPasswordFieldSenhaAluno" alignment="0" pref="321" max="32767" attributes="0"/>
-                          <Component id="jTextFieldNomeAluno" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextFieldCpfAluno" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextFieldDataNascimentoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldPesoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldAlturaAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEnderecoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldLoginAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEmailAluno" alignment="1" pref="321" max="32767" attributes="0"/>
-                          <Component id="jTextFieldValidadeAluno" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jTextFieldIdProduto" alignment="0" pref="321" max="32767" attributes="0"/>
+                          <Component id="jTextFieldNomeProduto" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextFieldPrecoProduto" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jTextFieldDescontoProduto" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonBuscarDataAluno" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="89" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -223,162 +332,121 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelNomeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldNomeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelIdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldIdProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelCpfAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldCpfAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelNomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldNomeProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelDataNascimentoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldDataNascimentoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelPrecoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldPrecoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelDescricaoProduto" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelPesoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldPesoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldDescontoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelDescontoProduto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelAlturaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldAlturaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelEnderecoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldEnderecoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelLoginAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldLoginAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelSenhaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPasswordFieldSenhaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelEmailAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldEmailAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelValidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldValidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonBuscarDataAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="85" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabelNomeAluno">
+            <Component class="javax.swing.JLabel" name="jLabelIdProduto">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="ID:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelNomeProduto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nome:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelCpfAluno">
+            <Component class="javax.swing.JLabel" name="jLabelPrecoProduto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CPF:"/>
+                <Property name="text" type="java.lang.String" value="Preco:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelDataNascimentoAluno">
+            <Component class="javax.swing.JLabel" name="jLabelDescricaoProduto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Data Nascimento:"/>
+                <Property name="text" type="java.lang.String" value="Descricao:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelPesoAluno">
+            <Component class="javax.swing.JLabel" name="jLabelDescontoProduto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Peso:"/>
+                <Property name="text" type="java.lang.String" value="Desconto(%):"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelAlturaAluno">
+            <Component class="javax.swing.JTextField" name="jTextFieldIdProduto">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Altura:"/>
+                <Property name="editable" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelEnderecoAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Endereco:"/>
-              </Properties>
+            <Component class="javax.swing.JTextField" name="jTextFieldNomeProduto">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelLoginAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Login:"/>
-              </Properties>
+            <Component class="javax.swing.JTextField" name="jTextFieldPrecoProduto">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelSenhaAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Senha:"/>
-              </Properties>
+            <Component class="javax.swing.JTextField" name="jTextFieldDescontoProduto">
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelEmailAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Email:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelValidadeAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Validade:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldNomeAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldCpfAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldDataNascimentoAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldPesoAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldAlturaAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldEnderecoAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldLoginAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldEmailAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldValidadeAluno">
-            </Component>
-            <Component class="javax.swing.JButton" name="jButtonBuscarDataAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordFieldSenhaAluno">
-            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextAreaDescricaoProduto">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonCancelarAluno">
+    <Component class="javax.swing.JButton" name="jButtonCancelarProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarProdutoActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonConfirmarAluno">
+    <Component class="javax.swing.JButton" name="jButtonConfirmarProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConfirmarProdutoActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonInserirAluno">
+    <Component class="javax.swing.JButton" name="jButtonInserirProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inserir"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInserirAlunoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInserirProdutoActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonAlterarAluno">
+    <Component class="javax.swing.JButton" name="jButtonAlterarProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAlterarProdutoActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

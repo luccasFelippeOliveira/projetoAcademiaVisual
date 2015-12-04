@@ -127,6 +127,17 @@ public class ProdutosJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public Produtos findProdutoByNome(String nome) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createNamedQuery("Produtos.findByNome", Produtos.class).setParameter("nome", nome).getSingleResult();
+        } catch (Exception e) {            
+            return null;
+        } finally {
+            em.close();
+        }
+    }
 
     public int getProdutosCount() {
         EntityManager em = getEntityManager();

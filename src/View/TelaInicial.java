@@ -155,6 +155,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadastros.add(jMenuItemCadastroModalidade);
 
         jMenuItemCadastroProduto.setText("Cadastro Produto");
+        jMenuItemCadastroProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroProdutoActionPerformed(evt);
+            }
+        });
         jMenuCadastros.add(jMenuItemCadastroProduto);
 
         jMenuBar1.add(jMenuCadastros);
@@ -270,7 +275,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemCadastroAlunoActionPerformed
 
     private void jMenuItemCadastroModalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroModalidadeActionPerformed
-        if((cadastroAluno2 == null) || (cadastroAluno2.isClosed())) {
+        if((cadastroModalidade == null) || (cadastroModalidade.isClosed())) {
             cadastroModalidade = new JInternalFrameCadastroModalidade();
             jDesktopPaneInicial.add(cadastroModalidade);
         }
@@ -281,6 +286,19 @@ public class TelaInicial extends javax.swing.JFrame {
         }
         cadastroModalidade.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroModalidadeActionPerformed
+
+    private void jMenuItemCadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroProdutoActionPerformed
+        if((cadastroProduto == null) || (cadastroProduto.isClosed())) {
+            cadastroProduto = new JInternalFrameCadastroProduto();
+            jDesktopPaneInicial.add(cadastroProduto);
+        }
+        try {
+            cadastroProduto.setMaximum(rootPaneCheckingEnabled);
+        }catch(PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        cadastroProduto.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroProdutoActionPerformed
 
 //    /**
 //     * @param args the command line arguments

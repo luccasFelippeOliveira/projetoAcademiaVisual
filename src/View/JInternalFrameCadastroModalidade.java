@@ -382,14 +382,12 @@ public class JInternalFrameCadastroModalidade extends javax.swing.JInternalFrame
     /**
      * Valida os campos de acordo com as normas:
      * <ul>
-     * <li> EMAIL: válido, não nulo e menor que 40;
-     * <li> NOME: não nulo e menor que 40;
-     * <li> CPF: Estar no formato nnn.nnn.nnn-nn -> n = número qualquer TODO:
-     * Validação!
-     * <li> LOGIN: serm menor que 40 e único(É realizado consulta no banco de
-     * dados);
-     * <li> PASSWORD: deve ser maior que 6, menor que 15 e não nulo;
-     * <li> ENDEREÇO: Campo não dever ser nulo e menor que 40 caracteres.
+     * <li> 
+     * <li> 
+     * <li> 
+     * <li> 
+     * <li> 
+     * <li> 
      * </ul>
      *
      * @return <b>true</b> caso passe na validação, <b>false</b> caso contrário.
@@ -552,14 +550,12 @@ public class JInternalFrameCadastroModalidade extends javax.swing.JInternalFrame
     }//GEN-LAST:event_jButtonCancelarModalidadeActionPerformed
 
     private void jButtonProcurarModalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProcurarModalidadeActionPerformed
-        String[] sql = {"", "SELECT a FROM Aluno a WHERE a.nome LIKE :nome ",
-            "SELECT a FROM Aluno a WHERE a.cpf = :cpf ",
-            "SELECT a FROM Aluno a WHERE a.validade = :validade "};
+        String[] sql = {"", "SELECT m FROM Modalidades m WHERE m.nome LIKE :nome "};
         try {
             Query query = null;
             if (jTextFieldProcurarModalidade.getText().length() > 0) {
                 if (jComboBoxProcurarModalidade.getSelectedIndex() == 0) {
-                    query = AcademiaVisualPUEntityManager.createNamedQuery("Aluno.findById");
+                    query = AcademiaVisualPUEntityManager.createNamedQuery("Modalidades.findById");
                     query.setParameter("id", Long.valueOf(jTextFieldProcurarModalidade.getText()));
                 }
                 if (jComboBoxProcurarModalidade.getSelectedIndex() == 1) {
