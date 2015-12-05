@@ -194,4 +194,15 @@ public class TreinadorJpaController implements Serializable {
         }
     }
     
+        public Treinador findLogin(String login) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createNamedQuery("Treinador.findByLogin", Treinador.class).setParameter("login", login).getSingleResult();
+        } catch (Exception e) {            
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+    
 }

@@ -5,6 +5,16 @@
  */
 package View;
 
+import DAO.TreinadorJpaController;
+import DataBase.Treinador;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author afnsoo
@@ -16,7 +26,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
      */
     public JInternalFrameCadastroTreinador() {
         initComponents();
-        jTabbedPaneTreinador.setEnabledAt(1, false);
+        abaConsulta();
         
     }
 
@@ -30,13 +40,9 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        AcademiaVisualPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("AcademiaVisualPU").createEntityManager();
-        treinadorQuery = java.beans.Beans.isDesignTime() ? null : AcademiaVisualPUEntityManager.createQuery("SELECT t FROM Treinador t");
+        entityManagerTreinador = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("AcademiaVisualPU").createEntityManager();
+        treinadorQuery = java.beans.Beans.isDesignTime() ? null : entityManagerTreinador.createQuery("SELECT t FROM Treinador t");
         treinadorList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : treinadorQuery.getResultList();
-        treinadorQuery1 = java.beans.Beans.isDesignTime() ? null : AcademiaVisualPUEntityManager.createQuery("SELECT t FROM Treinador t");
-        treinadorList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : treinadorQuery1.getResultList();
-        treinadorQuery2 = java.beans.Beans.isDesignTime() ? null : AcademiaVisualPUEntityManager.createQuery("SELECT t FROM Treinador t");
-        treinadorList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : treinadorQuery2.getResultList();
         jButtonExcluirTreinador = new javax.swing.JButton();
         jButtonFecharTreinador = new javax.swing.JButton();
         jTabbedPaneTreinador = new javax.swing.JTabbedPane();
@@ -56,14 +62,14 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         jLabelSenhaTreinador = new javax.swing.JLabel();
         jLabelEmailTreinador = new javax.swing.JLabel();
         jTextFieldNomeTreinador = new javax.swing.JTextField();
-        jTextFieldCpfTreinador = new javax.swing.JTextField();
-        jTextFieldDataNascimentoTreinador = new javax.swing.JTextField();
         jTextFieldEnderecoTreinador = new javax.swing.JTextField();
         jTextFieldLoginTreinador = new javax.swing.JTextField();
         jTextFieldEmailTreinador = new javax.swing.JTextField();
         jPasswordFieldSenhaTreinador = new javax.swing.JPasswordField();
         jLabelAdministradorTreinador = new javax.swing.JLabel();
         jCheckBoxAdministradorTreinador = new javax.swing.JCheckBox();
+        jFormattedTextFieldCpfTreinador = new javax.swing.JFormattedTextField();
+        jFormattedTextFieldDataTreinador = new javax.swing.JFormattedTextField();
         jButtonCancelarTreinador = new javax.swing.JButton();
         jButtonConfirmarTreinador = new javax.swing.JButton();
         jButtonInserirTreinador = new javax.swing.JButton();
@@ -72,6 +78,11 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         setTitle("Cadastro Treinador");
 
         jButtonExcluirTreinador.setText("Excluir");
+        jButtonExcluirTreinador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirTreinadorActionPerformed(evt);
+            }
+        });
 
         jButtonFecharTreinador.setText("Fechar");
         jButtonFecharTreinador.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +91,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
             }
         });
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, treinadorList2, jTableTreinador);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, treinadorList, jTableTreinador);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
@@ -89,25 +100,13 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
-        columnBinding.setColumnName("CPF");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataNascimento}"));
         columnBinding.setColumnName("Data Nascimento");
         columnBinding.setColumnClass(java.util.Date.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${email}"));
-        columnBinding.setColumnName("E-Mail");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${endereco}"));
-        columnBinding.setColumnName("Endereço");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${login}"));
-        columnBinding.setColumnName("Login");
-        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${administrador}"));
+        columnBinding.setColumnName("Administrador");
+        columnBinding.setColumnClass(Integer.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
@@ -177,6 +176,14 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
 
         jCheckBoxAdministradorTreinador.setText("Administrador");
 
+        try {
+            jFormattedTextFieldCpfTreinador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jFormattedTextFieldDataTreinador.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy/M/dd"))));
+
         javax.swing.GroupLayout jPanelAlterarTreinadorLayout = new javax.swing.GroupLayout(jPanelAlterarTreinador);
         jPanelAlterarTreinador.setLayout(jPanelAlterarTreinadorLayout);
         jPanelAlterarTreinadorLayout.setHorizontalGroup(
@@ -191,18 +198,16 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
                             .addComponent(jLabelNomeTreinador)
                             .addComponent(jLabelAdministradorTreinador))
                         .addGap(97, 97, 97)
-                        .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jCheckBoxAdministradorTreinador)
-                            .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jPasswordFieldSenhaTreinador)
-                                    .addComponent(jTextFieldEnderecoTreinador, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextFieldLoginTreinador, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextFieldEmailTreinador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldNomeTreinador, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldCpfTreinador)
-                                    .addComponent(jTextFieldDataNascimentoTreinador, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPasswordFieldSenhaTreinador)
+                                .addComponent(jTextFieldEnderecoTreinador, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextFieldLoginTreinador, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextFieldEmailTreinador, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
+                            .addComponent(jTextFieldNomeTreinador, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                            .addComponent(jFormattedTextFieldCpfTreinador)
+                            .addComponent(jFormattedTextFieldDataTreinador)))
                     .addComponent(jLabelSenhaTreinador)
                     .addComponent(jLabelLoginTreinador)
                     .addComponent(jLabelEnderecoTreinador)
@@ -219,11 +224,11 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCpfTreinador)
-                    .addComponent(jTextFieldCpfTreinador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldCpfTreinador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDataNascimentoTreinador)
-                    .addComponent(jTextFieldDataNascimentoTreinador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldDataTreinador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelEnderecoTreinador)
@@ -244,14 +249,24 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
                 .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAdministradorTreinador)
                     .addComponent(jCheckBoxAdministradorTreinador))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         jTabbedPaneTreinador.addTab("Alterar", jPanelAlterarTreinador);
 
         jButtonCancelarTreinador.setText("Cancelar");
+        jButtonCancelarTreinador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarTreinadorActionPerformed(evt);
+            }
+        });
 
         jButtonConfirmarTreinador.setText("Confirmar");
+        jButtonConfirmarTreinador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarTreinadorActionPerformed(evt);
+            }
+        });
 
         jButtonInserirTreinador.setText("Inserir");
         jButtonInserirTreinador.addActionListener(new java.awt.event.ActionListener() {
@@ -261,6 +276,11 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         });
 
         jButtonAlterarTreinador.setText("Alterar");
+        jButtonAlterarTreinador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarTreinadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -302,25 +322,297 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+	//Bind automático não funiona como o esperado. Os métodos abaixo circulam este problema.
+    /**
+     * Popula os textField da aba Alterar.
+     *
+     * @param t Fonte dos dados para o textField, caso seja null os campos serão
+     * esvaziados.
+     */
+    private void popularCamposAlterar(Treinador t) {
+        if (t == null) {
+            jTextFieldEmailTreinador.setText("");
+            jTextFieldEnderecoTreinador.setText("");
+            jTextFieldLoginTreinador.setText("");
+            jTextFieldNomeTreinador.setText("");
+            jPasswordFieldSenhaTreinador.setText("");
+	    jFormattedTextFieldCpfTreinador.setValue(null);
+	    jCheckBoxAdministradorTreinador.setSelected(false);
+            jFormattedTextFieldDataTreinador.setValue(null);
+        } else {
+	    boolean b;
+	    b = t.getAdministrador() != 0; /*valor diferente de zero = true. contrário = false.*/
+            jTextFieldEmailTreinador.setText(t.getEmail());
+            jTextFieldEnderecoTreinador.setText(t.getEndereco());
+            jTextFieldLoginTreinador.setText(t.getLogin());
+            jTextFieldNomeTreinador.setText(t.getNome());
+            jPasswordFieldSenhaTreinador.setText(t.getSenha());
+	    jFormattedTextFieldCpfTreinador.setValue(t.getCpf());
+	    jCheckBoxAdministradorTreinador.setSelected(b);
+            jFormattedTextFieldDataTreinador.setValue(t.getDataNascimento());
+        }
+    }
+        /**
+     * Após a edição do objeto pega dados da aba Alterar e coloca no objeto.
+     *
+     * @param t Objeto a ser populado.
+     */
+    private void popularObjeto(Treinador t) {
+        //TODO: Garantir que @param não é nulo
+        /*O campo ID é gerado pelo banco de dados*/
+        t.setNome(jTextFieldNomeTreinador.getText());
+	t.setCpf((String) jFormattedTextFieldCpfTreinador.getText());
+	t.setEndereco(jTextFieldEnderecoTreinador.getText());
+	t.setLogin(jTextFieldLoginTreinador.getText());
+	t.setSenha(new String(jPasswordFieldSenhaTreinador.getPassword()));
+	t.setEmail(jTextFieldEmailTreinador.getText());
+	t.setDataNascimento((Date) jFormattedTextFieldDataTreinador.getValue());
+	/*Seta se o treinador sendo cadastrado é adiminstrador*/
+	
+
+    }
+    
+    /**
+     * Entra na Aba de Consulta
+     */
+    private void abaConsulta() {
+        jTabbedPaneTreinador.setSelectedIndex(0);
+        jTabbedPaneTreinador.setEnabledAt(0, true);
+        jTabbedPaneTreinador.setEnabledAt(1, false);
+        jButtonConfirmarTreinador.setEnabled(false);
+        jButtonCancelarTreinador.setEnabled(false);
+        jButtonInserirTreinador.setEnabled(true);
+        jButtonAlterarTreinador.setEnabled(true);
+        jButtonExcluirTreinador.setEnabled(true);
+    }
+
+    /**
+     * Entra na Aba de Alterar
+     */
+    private void abaAlterar() {
+        jTabbedPaneTreinador.setSelectedIndex(1);
+        jTabbedPaneTreinador.setEnabledAt(1, true);
+        jTabbedPaneTreinador.setEnabledAt(0, false);
+        jButtonInserirTreinador.setEnabled(false);
+        jButtonAlterarTreinador.setEnabled(false);
+        jButtonExcluirTreinador.setEnabled(false);
+        jButtonConfirmarTreinador.setEnabled(true);
+        jButtonCancelarTreinador.setEnabled(true);
+
+    }
+    /**
+     * Valida os campos com as seguintes normas:
+     * <ul>
+     *  <li> Nome: não nulo e menor que 40 caracteres;
+     *  <li> CPF: não nulo, válido, e com 11 caracteres - no formato ###.###.###-##;
+     *  <li> LOGIN: Ser menor que 10 caracteres, não nulo e único - é realizada consulta no banco de dados;
+     *  <li> Password: maior que 6 e menor que 15 caracteres, não sendo nulo;
+     *  <li> Email: não nulo e válido, menor que 40 caracteres;
+     *  <li> Endereço: não nulo e menor que 40 caracteres.
+     * </ul>
+     * 
+     * @return true caso os campos estejam corretos, false caso contrário.
+     */
+    private boolean validacaoDeCampos() {
+        boolean valido = true;
+        String msgErro = "";
+        String campo;
+
+        //Checa o campo EMAIL:
+        Pattern p = Pattern.compile("^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$");
+        Matcher m = p.matcher(jTextFieldEmailTreinador.getText());
+        campo = jTextFieldEmailTreinador.getText();
+        if ((!m.find()) || ("".equals(campo)) || (campo.length() > 40)) {
+            valido = false;
+            msgErro += "Email inválido. O campo deve ser válido, não nulo e menor que 40 caracteres\n";
+            jTextFieldEmailTreinador.setText(""); //Limpa o campo de email
+        }
+        
+        //Checa o campo Nome
+        campo = jTextFieldNomeTreinador.getText();
+        if (("".equals(campo)) || (campo.length() > 40)) {
+            valido = false;
+            msgErro += "Nome inválido. O campo deve não deve ser nulo e deve ser menor que 40 caracteres\n";
+            jTextFieldNomeTreinador.setText("");// Limpa o campo de nome
+        }
+        
+        //Checa o campo CPF
+        campo = jFormattedTextFieldCpfTreinador.getText();
+        if (campo.replaceAll("[^0123456789]", "").length() != 11) {
+            valido = false;
+            msgErro += "CPF inválido. O campo deve ter apenas números e deve ser na forma 123.123.123-99\n";
+            jFormattedTextFieldCpfTreinador.setValue(null);; //Limpa campo CPF
+        }
+        
+        //Checa o campo login
+        campo = jTextFieldLoginTreinador.getText();
+        if ((campo.length() < 10) && !("".equals(campo))) {
+		    //Campo possivelmente válido
+            //Checar unicidade
+            //INFO: Código Legado modificado.
+            if ((flagAnterior == INSERIR) || (!campo.equals(treinadorAlterar.getLogin()))) {
+                try {
+                    EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+                    TreinadorJpaController treinadorJpaController = new TreinadorJpaController(emf);
+                    Treinador resultado = (Treinador) treinadorJpaController.findLogin(campo);
+                    if (resultado != null) {
+                        //Encontrou um login identico
+                        valido = false;
+                        msgErro += "Login inválido. O campo deve ser único\n";
+                        jTextFieldLoginTreinador.setText("");
+                    }
+                } catch (Exception e) {
+                    //TODO: Definir melhor qual tipo de exceção é lançada
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            valido = false;
+            msgErro += "Login inválido. O campo não deve ser nulo e deve ser menor que 10 caracteres\n";
+            jTextFieldNomeTreinador.setText("");
+        }
+        
+        //Checa o campo password
+        campo = String.valueOf(jPasswordFieldSenhaTreinador.getPassword());
+        if ((campo.length() < 6) || (campo.length() > 15)) {
+            valido = false;
+            msgErro += "Senha inválida. O campo deve ter pelo menos 6 caracteres, mas não mais que 15\n";
+            jPasswordFieldSenhaTreinador.setText("");
+        }
+        
+        //Checa o campo endereço
+        campo = jTextFieldEnderecoTreinador.getText();
+        if (("".equals(campo)) || (campo.length() > 40)) {
+            valido = false;
+            msgErro += "Endereço inválido. O campo deve não deve ser nulo e deve ser menor que 40 caracteres\n";
+            jTextFieldEnderecoTreinador.setText("");
+        }
+        
+        if (!valido) {
+            JOptionPane.showMessageDialog(null, msgErro, "Campos Errados!", JOptionPane.ERROR_MESSAGE);
+        }
+        return valido;
+    }
+
     private void jButtonFecharTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharTreinadorActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonFecharTreinadorActionPerformed
 
     private void jTextFieldProcurarTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarTreinadorActionPerformed
-        // TODO add your handling code here:
+        String[] sql = {"", "SELECT t FROM Treinador t WHERE t.nome LIKE :nome ",
+            "SELECT t FROM Treinador t WHERE t.cpf = :cpf "};
+        try {
+            Query query = null;
+            if (jTextFieldProcurarTreinador.getText().length() > 0) {
+                if (jComboBoxProcurarTreinador.getSelectedIndex() == 0) {
+                    query = entityManagerTreinador.createNamedQuery("Aluno.findById");
+                    query.setParameter("id", Long.valueOf(jTextFieldProcurarTreinador.getText()));
+                }
+                if (jComboBoxProcurarTreinador.getSelectedIndex() == 1) {
+                    query = entityManagerTreinador.createQuery(sql[1]);
+                    query.setParameter("nome", '%' + jTextFieldProcurarTreinador.getText() + '%');
+                }
+            } else {
+                query = treinadorQuery;
+            }
+            treinadorList.clear();
+            treinadorList.addAll(query.getResultList());
+            jTableTreinador.updateUI();
+            jTableTreinador.repaint();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
     }//GEN-LAST:event_jTextFieldProcurarTreinadorActionPerformed
 
     private void jButtonInserirTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirTreinadorActionPerformed
-        jTabbedPaneTreinador.setSelectedIndex(1);
-        jTabbedPaneTreinador.setEnabledAt(0, false);
-        jButtonFecharTreinador.setEnabled(false);
-        jButtonConfirmarTreinador.setEnabled(true);
-        jButtonCancelarTreinador.setEnabled(true);
+        flagAnterior = INSERIR;
+        popularCamposAlterar(null);
+        abaAlterar();
     }//GEN-LAST:event_jButtonInserirTreinadorActionPerformed
 
+    private void jButtonAlterarTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarTreinadorActionPerformed
+        flagAnterior = ALTERAR;
+        treinadorAlterar = treinadorList.get(jTableTreinador.getSelectedRow());
+        popularCamposAlterar(treinadorAlterar);
+        abaAlterar();
+    }//GEN-LAST:event_jButtonAlterarTreinadorActionPerformed
 
+    private void jButtonExcluirTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirTreinadorActionPerformed
+        if (!treinadorList.isEmpty() && jTableTreinador.getSelectedRow() != -1) {
+            int option = JOptionPane.showConfirmDialog(this, "Verifique com atenção os dados que deseja excluir!\n"
+                    + "Clique em sim se esse for mesmo o aluno que deseja excluir.\n"
+                    + "Clique em cancelar para voltar.");
+            if (option == JOptionPane.YES_OPTION) {
+                try {
+                    /*
+                     EXCLUIR O USUARIO DE TODOS AS TABELAS QUE UTILIZAM O MESMO !
+                     Acho que não é necessário -- Luccas.
+                     */
+                    treinadorList.get(jTableTreinador.getSelectedRow()).excluir();
+                    treinadorList.remove(jTableTreinador.getSelectedRow());
+                    jTableTreinador.updateUI();
+                    jTableTreinador.repaint();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Exclusão cancelada !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um treinador !");
+        }
+    }//GEN-LAST:event_jButtonExcluirTreinadorActionPerformed
+
+    private void jButtonConfirmarTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarTreinadorActionPerformed
+        boolean atualizacaoFeita = false; /*Indica que a atualização/inserção foi feita com sucesso,
+         mantendo a aba de alteração focada.
+         */
+
+        if (flagAnterior == INSERIR) {
+            //Verifica se os campos estão corretos antes de modificá-los.
+            if (validacaoDeCampos()) {
+                treinador = new Treinador(); //Cria um aluno vazio
+                popularObjeto(treinador); //Popula o objeto
+                //Insere o objeto no banco de dados
+                treinador.incluir();
+                /*Coisas do bind: Para adicionar elemento por ultimo na tabela inserir na penultima posição
+                 tipo: list.size() - 1 -> Não faz sentido, mas é assim que o bind funciona...
+                 */
+                //TODO: Consertar o bug que dá quando são feitas as primeiras inserções.(primeira e segunda apenas TRATAR ESSES CASOS).
+                treinadorList.add(treinadorList.size() - 1, treinador);
+                jTableTreinador.repaint();
+                atualizacaoFeita = true;
+            }
+        }
+        if (flagAnterior == ALTERAR) {
+            //Verifica se os campos estão corretos para atualizá-los
+            if (validacaoDeCampos()) {
+                popularObjeto(treinadorAlterar);
+                //altera o aluno no banco de dados
+                treinadorAlterar.alterar();
+                jTableTreinador.repaint();
+                atualizacaoFeita = true;
+            }
+        }
+        if (atualizacaoFeita) {
+            abaConsulta();
+        }
+
+    }//GEN-LAST:event_jButtonConfirmarTreinadorActionPerformed
+
+    private void jButtonCancelarTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarTreinadorActionPerformed
+        abaConsulta();
+    }//GEN-LAST:event_jButtonCancelarTreinadorActionPerformed
+
+    private int flagAnterior; //Define qual botão foi clicado
+    private Treinador treinador; //Endereça objetos criados
+     //Flags para identificar que botão foi clicado anteriormente.
+    private final int INSERIR = 1;
+    private final int ALTERAR = 2;
+    //Aluno para ser alterado
+    private Treinador treinadorAlterar;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.persistence.EntityManager AcademiaVisualPUEntityManager;
+    private javax.persistence.EntityManager entityManagerTreinador;
     private javax.swing.JButton jButtonAlterarTreinador;
     private javax.swing.JButton jButtonCancelarTreinador;
     private javax.swing.JButton jButtonConfirmarTreinador;
@@ -330,6 +622,8 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
     private javax.swing.JButton jButtonProcurarTreinador;
     private javax.swing.JCheckBox jCheckBoxAdministradorTreinador;
     private javax.swing.JComboBox jComboBoxProcurarTreinador;
+    private javax.swing.JFormattedTextField jFormattedTextFieldCpfTreinador;
+    private javax.swing.JFormattedTextField jFormattedTextFieldDataTreinador;
     private javax.swing.JLabel jLabelAdministradorTreinador;
     private javax.swing.JLabel jLabelCpfTreinador;
     private javax.swing.JLabel jLabelDataNascimentoTreinador;
@@ -345,19 +639,13 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
     private javax.swing.JScrollPane jScrollPaneTreinador;
     private javax.swing.JTabbedPane jTabbedPaneTreinador;
     private javax.swing.JTable jTableTreinador;
-    private javax.swing.JTextField jTextFieldCpfTreinador;
-    private javax.swing.JTextField jTextFieldDataNascimentoTreinador;
     private javax.swing.JTextField jTextFieldEmailTreinador;
     private javax.swing.JTextField jTextFieldEnderecoTreinador;
     private javax.swing.JTextField jTextFieldLoginTreinador;
     private javax.swing.JTextField jTextFieldNomeTreinador;
     private javax.swing.JTextField jTextFieldProcurarTreinador;
     private java.util.List<DataBase.Treinador> treinadorList;
-    private java.util.List<DataBase.Treinador> treinadorList1;
-    private java.util.List<DataBase.Treinador> treinadorList2;
     private javax.persistence.Query treinadorQuery;
-    private javax.persistence.Query treinadorQuery1;
-    private javax.persistence.Query treinadorQuery2;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
