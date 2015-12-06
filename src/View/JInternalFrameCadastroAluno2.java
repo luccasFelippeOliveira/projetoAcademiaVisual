@@ -32,12 +32,7 @@ public class JInternalFrameCadastroAluno2 extends javax.swing.JInternalFrame {
      * Creates new form JInternalFrameCadastroAluno2
      */
     public JInternalFrameCadastroAluno2() {
-        initComponents();         
-        if(TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)){
-            jButtonInserirAluno.setEnabled(false);
-            jButtonAlterarAluno.setEnabled(false);
-            jButtonExcluirAluno.setEnabled(false);            
-        }
+        initComponents();        
         abaConsulta();
         System.out.println("AlunoList Class : " + alunoList.getClass().getName());
         System.out.println("Size: " + alunoList.size());
@@ -98,6 +93,23 @@ public class JInternalFrameCadastroAluno2 extends javax.swing.JInternalFrame {
         jButtonConfirmarAluno = new javax.swing.JButton();
 
         setTitle("Cadastro Aluno");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunoList, jTableAluno);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
@@ -545,7 +557,7 @@ public class JInternalFrameCadastroAluno2 extends javax.swing.JInternalFrame {
         //Checa o campo login
         campo = jTextFieldLoginAluno.getText();
         if ((campo.length() < 10) && !("".equals(campo))) {
-		    //Campo possivelmente válido
+            //Campo possivelmente válido
             //Checar unicidade
             //INFO: Código Legado modificado.
             if ((flagAnterior == INSERIR) || (!campo.equals(alunoAlterar.getLogin()))) {
@@ -642,10 +654,14 @@ public class JInternalFrameCadastroAluno2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonInserirAlunoActionPerformed
 
     private void jButtonAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarAlunoActionPerformed
-        flagAnterior = ALTERAR;
-        alunoAlterar = alunoList.get(jTableAluno.getSelectedRow());
-        popularCamposAlterar(alunoAlterar);
-        abaAlterar();
+        if (!alunoList.isEmpty() && jTableAluno.getSelectedRow() != -1) {
+            flagAnterior = ALTERAR;
+            alunoAlterar = alunoList.get(jTableAluno.getSelectedRow());
+            popularCamposAlterar(alunoAlterar);
+            abaAlterar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Exclusão cancelada !");
+        }
     }//GEN-LAST:event_jButtonAlterarAlunoActionPerformed
 
     private void jButtonExcluirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirAlunoActionPerformed
@@ -718,6 +734,18 @@ public class JInternalFrameCadastroAluno2 extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jButtonConfirmarAlunoActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        try {
+            if (TelaInicial.verificarAdministrador()) {
+                jButtonInserirAluno.setEnabled(false);
+                jButtonAlterarAluno.setEnabled(false);
+                jButtonExcluirAluno.setEnabled(false);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
 
     //Flags para identificar que botão foi clicado anteriormente.
     private final int INSERIR = 1;

@@ -25,12 +25,7 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
      * Creates new form JInternalFrameCadastroProduto
      */
     public JInternalFrameCadastroProduto() {
-        initComponents();
-        if(TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)){
-            jButtonInserirProduto.setEnabled(false);
-            jButtonAlterarProduto.setEnabled(false);
-            jButtonExcluirProduto.setEnabled(false);            
-        }
+        initComponents();        
         abaConsulta();
         System.out.println("produtosList1 Class : " + produtosList1.getClass().getName());
         System.out.println("Size: " + produtosList1.size());
@@ -81,6 +76,23 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
         jButtonAlterarProduto = new javax.swing.JButton();
 
         setTitle("Cadastro Produto");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jButtonExcluirProduto.setText("Excluir");
         jButtonExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
@@ -303,7 +315,7 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-     //Bind automático não funiona como o esperado. Os métodos abaixo circulam este problema.
+    //Bind automático não funiona como o esperado. Os métodos abaixo circulam este problema.
     /**
      * Popula os textField da aba Alterar.
      *
@@ -314,15 +326,15 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
         if (p == null) {
             jTextAreaDescricaoProduto.setText("");
             jTextFieldIdProduto.setText("");
-            jTextFieldNomeProduto.setText("");           
+            jTextFieldNomeProduto.setText("");
             jTextFieldPrecoProduto.setText("");
             jTextFieldDescontoProduto.setText("");
         } else {
             jTextAreaDescricaoProduto.setText(p.getDescricao());
             jTextFieldIdProduto.setText(Integer.toString(p.getId()));
-            jTextFieldNomeProduto.setText(p.getNome());           
+            jTextFieldNomeProduto.setText(p.getNome());
             jTextFieldPrecoProduto.setText(Float.toString(p.getPreco()));
-            jTextFieldDescontoProduto.setText(Float.toString(p.getDesconto()));            
+            jTextFieldDescontoProduto.setText(Float.toString(p.getDesconto()));
         }
     }
 
@@ -334,10 +346,10 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
     private void popularObjeto(Produtos p) {
         //TODO: Garantir que @param não é nulo
         /*O campo ID é gerado pelo banco de dados*/
-        p.setNome(jTextFieldNomeProduto.getText());        
-        p.setPreco(Float.parseFloat(jTextFieldPrecoProduto.getText()));        
+        p.setNome(jTextFieldNomeProduto.getText());
+        p.setPreco(Float.parseFloat(jTextFieldPrecoProduto.getText()));
         p.setDescricao(jTextAreaDescricaoProduto.getText());
-        p.setDesconto(Float.parseFloat(jTextFieldDescontoProduto.getText()));        
+        p.setDesconto(Float.parseFloat(jTextFieldDescontoProduto.getText()));
     }
 
     /**
@@ -372,7 +384,7 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
     /**
      * Valida os campos de acordo com as normas:
      * <ul>
-     * <li> 
+     * <li>
      * </ul>
      *
      * @return <b>true</b> caso passe na validação, <b>false</b> caso contrário.
@@ -380,7 +392,7 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
     private boolean validacaoDeCampos() {
         boolean valido = true;
         String msgErro = "";
-        String campo;      
+        String campo;
 
         //Checa o campo Preco
         campo = jTextFieldPrecoProduto.getText();
@@ -401,7 +413,7 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
         //Checa o campo nome
         campo = jTextFieldNomeProduto.getText();
         if ((campo.length() < 40) && !("".equals(campo))) {
-	    //Campo possivelmente válido
+            //Campo possivelmente válido
             //Checar unicidade
             //INFO: Código Legado modificado.
             if ((flagAnterior == INSERIR) || (!campo.equals(produtosAlterar.getNome()))) {
@@ -433,7 +445,7 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
             msgErro += "Descricao invalida. Entre com a descricao do produto\n";
             jTextAreaDescricaoProduto.setText("");
         }
-       
+
         if (!valido) {
             JOptionPane.showMessageDialog(null, msgErro, "Campos Invalidos!", JOptionPane.ERROR_MESSAGE);
         }
@@ -441,7 +453,7 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
     }
     private int flagAnterior; //Define qual botão foi clicado
     private Produtos produto; //Endereça objetos criados
-    
+
     private void jButtonFecharProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharProdutoActionPerformed
         dispose();
     }//GEN-LAST:event_jButtonFecharProdutoActionPerformed
@@ -452,15 +464,19 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
 
     private void jButtonInserirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirProdutoActionPerformed
         flagAnterior = INSERIR;
-        popularCamposAlterar(null);        
+        popularCamposAlterar(null);
         abaAlterar();
     }//GEN-LAST:event_jButtonInserirProdutoActionPerformed
 
     private void jButtonAlterarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarProdutoActionPerformed
-        flagAnterior = ALTERAR;
-        produtosAlterar = produtosList1.get(jTableProduto.getSelectedRow());
-        popularCamposAlterar(produtosAlterar);
-        abaAlterar();
+        if (!produtosList1.isEmpty() && jTableProduto.getSelectedRow() != -1) {
+            flagAnterior = ALTERAR;
+            produtosAlterar = produtosList1.get(jTableProduto.getSelectedRow());
+            popularCamposAlterar(produtosAlterar);
+            abaAlterar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione uma produto !");
+        }
     }//GEN-LAST:event_jButtonAlterarProdutoActionPerformed
 
     private void jButtonExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirProdutoActionPerformed
@@ -493,6 +509,7 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
         boolean atualizacaoFeita = false; /*Indica que a atualização/inserção foi feita com sucesso,
          mantendo a aba de alteração focada.
          */
+
         if (flagAnterior == INSERIR) {
             //Verifica se os campos estão corretos antes de modificá-los.
             if (validacaoDeCampos()) {
@@ -551,6 +568,14 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, e);
         }
     }//GEN-LAST:event_jButtonProcurarProdutoActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        if (TelaInicial.verificarAdministrador()) {
+            jButtonInserirProduto.setEnabled(false);
+            jButtonAlterarProduto.setEnabled(false);
+            jButtonExcluirProduto.setEnabled(false);
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
 
     //Flags para identificar que botão foi clicado anteriormente.
     private final int INSERIR = 1;

@@ -17,12 +17,7 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
      * Creates new form JInternalFrameCadastroExercicio
      */
     public JInternalFrameCadastroExercicio() {
-        initComponents();
-        if(TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)){
-            jButtonInserirExercicio.setEnabled(false);
-            jButtonAlterarExercicio.setEnabled(false);
-            jButtonExcluirExercicio.setEnabled(false);            
-        }
+        initComponents();        
     }
 
     /**
@@ -70,6 +65,24 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
         jButtonConfirmarExercicio = new javax.swing.JButton();
         jButtonInserirExercicio = new javax.swing.JButton();
         jButtonAlterarExercicio = new javax.swing.JButton();
+
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jButtonExcluirExercicio.setText("Excluir");
 
@@ -298,6 +311,14 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
         jButtonConfirmarExercicio.setEnabled(true);
         jButtonCancelarExercicio.setEnabled(true);
     }//GEN-LAST:event_jButtonInserirExercicioActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        if(TelaInicial.verificarAdministrador()){
+            jButtonInserirExercicio.setEnabled(false);
+            jButtonAlterarExercicio.setEnabled(false);
+            jButtonExcluirExercicio.setEnabled(false);            
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

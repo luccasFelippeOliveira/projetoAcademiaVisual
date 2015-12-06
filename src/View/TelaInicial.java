@@ -35,13 +35,17 @@ public class TelaInicial extends javax.swing.JFrame {
                 EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
                 TreinadorJpaController treinadorJpaController = new TreinadorJpaController(emf);
                 Treinador treinadorLogin = (Treinador) treinadorJpaController.findTreinador(FormPrincipal.TREINADORID);
-                if (treinadorLogin != null) this.setTitle("projetoAcademiaVisual  Usuario: " + treinadorLogin.getNome());
+                if (treinadorLogin != null) {
+                    this.setTitle("projetoAcademiaVisual  Usuario: " + treinadorLogin.getNome());
+                }
             } else {
                 if (FormPrincipal.ALUNOID != 0) {
                     EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
                     AlunoJpaController alunoJpaController = new AlunoJpaController(emf);
                     Aluno alunoLogin = (Aluno) alunoJpaController.findAluno(FormPrincipal.ALUNOID);
-                    if (alunoLogin != null) this.setTitle("projetoAcademiaVisual  Usuario: " + alunoLogin.getNome());
+                    if (alunoLogin != null) {
+                        this.setTitle("projetoAcademiaVisual  Usuario: " + alunoLogin.getNome());
+                    }
                 }
             }
         } catch (Exception e) {
@@ -366,18 +370,20 @@ public class TelaInicial extends javax.swing.JFrame {
     Autenticacao.Permissao permissao;
 
     //funcao para verificacao de treinador administrador
-    public static boolean verificarAdministrador(int treinadorId) {
-        boolean administrador = true;
+    public static boolean verificarAdministrador() {
+        boolean administrador = true;        
         try {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
             TreinadorJpaController treinadorJpaController = new TreinadorJpaController(emf);
-            Treinador treinadorLogin = (Treinador) treinadorJpaController.findTreinador(treinadorId);
-            if (treinadorLogin.getAdministrador() == 1) {
-                administrador = false;
+            Treinador treinadorLogin = (Treinador) treinadorJpaController.findTreinador(FormPrincipal.TREINADORID);
+            if (treinadorLogin != null) {
+                if (treinadorLogin.getAdministrador() == 1) {
+                    administrador = false;
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-        }
+        }        
         return administrador;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

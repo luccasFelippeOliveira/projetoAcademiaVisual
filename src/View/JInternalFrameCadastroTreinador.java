@@ -28,12 +28,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
      * Creates new form JInternalFrameCadastroTreinador
      */
     public JInternalFrameCadastroTreinador() {
-        initComponents();
-        if (TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)) {
-            jButtonInserirTreinador.setEnabled(false);
-            jButtonAlterarTreinador.setEnabled(false);
-            jButtonExcluirTreinador.setEnabled(false);
-        }
+        initComponents();        
         abaConsulta();
 
     }
@@ -84,6 +79,23 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         jButtonAlterarTreinador = new javax.swing.JButton();
 
         setTitle("Cadastro Treinador");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jButtonExcluirTreinador.setText("Excluir");
         jButtonExcluirTreinador.addActionListener(new java.awt.event.ActionListener() {
@@ -208,11 +220,10 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
                         .addGap(97, 97, 97)
                         .addGroup(jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jCheckBoxAdministradorTreinador)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlterarTreinadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jPasswordFieldSenhaTreinador)
-                                .addComponent(jTextFieldEnderecoTreinador, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextFieldLoginTreinador, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextFieldEmailTreinador, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE))
+                            .addComponent(jPasswordFieldSenhaTreinador)
+                            .addComponent(jTextFieldEnderecoTreinador, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldLoginTreinador, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextFieldEmailTreinador, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                             .addComponent(jTextFieldNomeTreinador, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                             .addComponent(jFormattedTextFieldCpfTreinador)
                             .addComponent(jFormattedTextFieldDataTreinador)))
@@ -547,10 +558,14 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
     }//GEN-LAST:event_jButtonInserirTreinadorActionPerformed
 
     private void jButtonAlterarTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarTreinadorActionPerformed
-        flagAnterior = ALTERAR;
-        treinadorAlterar = treinadorList.get(jTableTreinador.getSelectedRow());
-        popularCamposAlterar(treinadorAlterar);
-        abaAlterar();
+        if (!treinadorList.isEmpty() && jTableTreinador.getSelectedRow() != -1) {
+            flagAnterior = ALTERAR;
+            treinadorAlterar = treinadorList.get(jTableTreinador.getSelectedRow());
+            popularCamposAlterar(treinadorAlterar);
+            abaAlterar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um treinador !");
+        }
     }//GEN-LAST:event_jButtonAlterarTreinadorActionPerformed
 
     private void jButtonExcluirTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirTreinadorActionPerformed
@@ -619,6 +634,14 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
     private void jButtonCancelarTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarTreinadorActionPerformed
         abaConsulta();
     }//GEN-LAST:event_jButtonCancelarTreinadorActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        if (TelaInicial.verificarAdministrador()) {
+            jButtonInserirTreinador.setEnabled(false);
+            jButtonAlterarTreinador.setEnabled(false);
+            jButtonExcluirTreinador.setEnabled(false);
+        }
+    }//GEN-LAST:event_formInternalFrameOpened
 
     private int flagAnterior; //Define qual botão foi clicado
     private Treinador treinador; //Endereça objetos criados
