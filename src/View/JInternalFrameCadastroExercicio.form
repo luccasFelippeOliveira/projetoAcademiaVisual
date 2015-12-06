@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -22,17 +22,17 @@
           <Component id="jTabbedPaneAluno" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonInserirAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonInserirExercicio" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonAlterarAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonAlterarExercicio" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonExcluirAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonExcluirExercicio" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonConfirmarAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonConfirmarExercicio" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonCancelarAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonCancelarExercicio" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButtonFecharAluno" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonFecharExercicio" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -43,12 +43,12 @@
               <Component id="jTabbedPaneAluno" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonInserirAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonAlterarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonExcluirAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonFecharAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonCancelarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonConfirmarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonInserirExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonAlterarExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonExcluirExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonFecharExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonCancelarExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonConfirmarExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -56,17 +56,17 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButtonExcluirAluno">
+    <Component class="javax.swing.JButton" name="jButtonExcluirExercicio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonFecharAluno">
+    <Component class="javax.swing.JButton" name="jButtonFecharExercicio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFecharAlunoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFecharExercicioActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JTabbedPane" name="jTabbedPaneAluno">
@@ -354,25 +354,25 @@
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonCancelarAluno">
+    <Component class="javax.swing.JButton" name="jButtonCancelarExercicio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonConfirmarAluno">
+    <Component class="javax.swing.JButton" name="jButtonConfirmarExercicio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonInserirAluno">
+    <Component class="javax.swing.JButton" name="jButtonInserirExercicio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inserir"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInserirAlunoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInserirExercicioActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonAlterarAluno">
+    <Component class="javax.swing.JButton" name="jButtonAlterarExercicio">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>

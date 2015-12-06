@@ -274,12 +274,10 @@
                               <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jCheckBoxAdministradorTreinador" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jPasswordFieldSenhaTreinador" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldEnderecoTreinador" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldLoginTreinador" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldEmailTreinador" alignment="0" pref="321" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jPasswordFieldSenhaTreinador" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldEnderecoTreinador" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldLoginTreinador" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldEmailTreinador" alignment="0" pref="321" max="32767" attributes="0"/>
                                   <Component id="jTextFieldNomeTreinador" alignment="0" pref="321" max="32767" attributes="0"/>
                                   <Component id="jFormattedTextFieldCpfTreinador" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jFormattedTextFieldDataTreinador" alignment="0" max="32767" attributes="0"/>

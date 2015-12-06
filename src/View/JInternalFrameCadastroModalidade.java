@@ -7,6 +7,7 @@ package View;
 
 import DAO.ModalidadesJpaController;
 import DataBase.Modalidades;
+import academiavisual.FormPrincipal;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +27,11 @@ public class JInternalFrameCadastroModalidade extends javax.swing.JInternalFrame
      */
     public JInternalFrameCadastroModalidade() {
         initComponents();
+        if(TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)){
+            jButtonInserirModalidade.setEnabled(false);
+            jButtonAlterarModalidade.setEnabled(false);
+            jButtonExcluirModalidade.setEnabled(false);            
+        }
         abaConsulta();
         System.out.println("ModalidadeList Class : " + modalidadesList1.getClass().getName());
         System.out.println("Size: " + modalidadesList1.size());

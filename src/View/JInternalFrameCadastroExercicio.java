@@ -5,6 +5,8 @@
  */
 package View;
 
+import academiavisual.FormPrincipal;
+
 /**
  *
  * @author afnsoo
@@ -16,6 +18,11 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
      */
     public JInternalFrameCadastroExercicio() {
         initComponents();
+        if(TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)){
+            jButtonInserirExercicio.setEnabled(false);
+            jButtonAlterarExercicio.setEnabled(false);
+            jButtonExcluirExercicio.setEnabled(false);            
+        }
     }
 
     /**
@@ -27,8 +34,8 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonExcluirAluno = new javax.swing.JButton();
-        jButtonFecharAluno = new javax.swing.JButton();
+        jButtonExcluirExercicio = new javax.swing.JButton();
+        jButtonFecharExercicio = new javax.swing.JButton();
         jTabbedPaneAluno = new javax.swing.JTabbedPane();
         jPanelConsultaAluno = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -59,17 +66,17 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
         jTextFieldValidadeAluno = new javax.swing.JTextField();
         jButtonBuscarDataAluno = new javax.swing.JButton();
         jPasswordFieldSenhaAluno = new javax.swing.JPasswordField();
-        jButtonCancelarAluno = new javax.swing.JButton();
-        jButtonConfirmarAluno = new javax.swing.JButton();
-        jButtonInserirAluno = new javax.swing.JButton();
-        jButtonAlterarAluno = new javax.swing.JButton();
+        jButtonCancelarExercicio = new javax.swing.JButton();
+        jButtonConfirmarExercicio = new javax.swing.JButton();
+        jButtonInserirExercicio = new javax.swing.JButton();
+        jButtonAlterarExercicio = new javax.swing.JButton();
 
-        jButtonExcluirAluno.setText("Excluir");
+        jButtonExcluirExercicio.setText("Excluir");
 
-        jButtonFecharAluno.setText("Fechar");
-        jButtonFecharAluno.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFecharExercicio.setText("Fechar");
+        jButtonFecharExercicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharAlunoActionPerformed(evt);
+                jButtonFecharExercicioActionPerformed(evt);
             }
         });
 
@@ -225,18 +232,18 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
 
         jTabbedPaneAluno.addTab("Alterar", jPanelAlterarAluno);
 
-        jButtonCancelarAluno.setText("Cancelar");
+        jButtonCancelarExercicio.setText("Cancelar");
 
-        jButtonConfirmarAluno.setText("Confirmar");
+        jButtonConfirmarExercicio.setText("Confirmar");
 
-        jButtonInserirAluno.setText("Inserir");
-        jButtonInserirAluno.addActionListener(new java.awt.event.ActionListener() {
+        jButtonInserirExercicio.setText("Inserir");
+        jButtonInserirExercicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInserirAlunoActionPerformed(evt);
+                jButtonInserirExercicioActionPerformed(evt);
             }
         });
 
-        jButtonAlterarAluno.setText("Alterar");
+        jButtonAlterarExercicio.setText("Alterar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,17 +252,17 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
             .addComponent(jTabbedPaneAluno)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonInserirAluno)
+                .addComponent(jButtonInserirExercicio)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonAlterarAluno)
+                .addComponent(jButtonAlterarExercicio)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonExcluirAluno)
+                .addComponent(jButtonExcluirExercicio)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonConfirmarAluno)
+                .addComponent(jButtonConfirmarExercicio)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonCancelarAluno)
+                .addComponent(jButtonCancelarExercicio)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonFecharAluno)
+                .addComponent(jButtonFecharExercicio)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -264,43 +271,43 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
                 .addComponent(jTabbedPaneAluno)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonInserirAluno)
-                    .addComponent(jButtonAlterarAluno)
-                    .addComponent(jButtonExcluirAluno)
-                    .addComponent(jButtonFecharAluno)
-                    .addComponent(jButtonCancelarAluno)
-                    .addComponent(jButtonConfirmarAluno))
+                    .addComponent(jButtonInserirExercicio)
+                    .addComponent(jButtonAlterarExercicio)
+                    .addComponent(jButtonExcluirExercicio)
+                    .addComponent(jButtonFecharExercicio)
+                    .addComponent(jButtonCancelarExercicio)
+                    .addComponent(jButtonConfirmarExercicio))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonFecharAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharAlunoActionPerformed
+    private void jButtonFecharExercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharExercicioActionPerformed
         dispose();
-    }//GEN-LAST:event_jButtonFecharAlunoActionPerformed
+    }//GEN-LAST:event_jButtonFecharExercicioActionPerformed
 
     private void jTextFieldProcurarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarAlunoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldProcurarAlunoActionPerformed
 
-    private void jButtonInserirAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirAlunoActionPerformed
+    private void jButtonInserirExercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirExercicioActionPerformed
         jTabbedPaneAluno.setSelectedIndex(1);
         jTabbedPaneAluno.setEnabledAt(0, false);
-        jButtonFecharAluno.setEnabled(false);
-        jButtonConfirmarAluno.setEnabled(true);
-        jButtonCancelarAluno.setEnabled(true);
-    }//GEN-LAST:event_jButtonInserirAlunoActionPerformed
+        jButtonFecharExercicio.setEnabled(false);
+        jButtonConfirmarExercicio.setEnabled(true);
+        jButtonCancelarExercicio.setEnabled(true);
+    }//GEN-LAST:event_jButtonInserirExercicioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAlterarAluno;
+    private javax.swing.JButton jButtonAlterarExercicio;
     private javax.swing.JButton jButtonBuscarDataAluno;
-    private javax.swing.JButton jButtonCancelarAluno;
-    private javax.swing.JButton jButtonConfirmarAluno;
-    private javax.swing.JButton jButtonExcluirAluno;
-    private javax.swing.JButton jButtonFecharAluno;
-    private javax.swing.JButton jButtonInserirAluno;
+    private javax.swing.JButton jButtonCancelarExercicio;
+    private javax.swing.JButton jButtonConfirmarExercicio;
+    private javax.swing.JButton jButtonExcluirExercicio;
+    private javax.swing.JButton jButtonFecharExercicio;
+    private javax.swing.JButton jButtonInserirExercicio;
     private javax.swing.JButton jButtonProcurarAluno;
     private javax.swing.JComboBox jComboBoxProcurarAluno;
     private javax.swing.JLabel jLabelAlturaAluno;

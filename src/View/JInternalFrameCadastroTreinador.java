@@ -7,6 +7,9 @@ package View;
 
 import DAO.TreinadorJpaController;
 import DataBase.Treinador;
+import academiavisual.FormPrincipal;
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,8 +29,13 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
      */
     public JInternalFrameCadastroTreinador() {
         initComponents();
+        if (TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)) {
+            jButtonInserirTreinador.setEnabled(false);
+            jButtonAlterarTreinador.setEnabled(false);
+            jButtonExcluirTreinador.setEnabled(false);
+        }
         abaConsulta();
-        
+
     }
 
     /**
@@ -322,7 +330,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	//Bind automático não funiona como o esperado. Os métodos abaixo circulam este problema.
+    //Bind automático não funiona como o esperado. Os métodos abaixo circulam este problema.
     /**
      * Popula os textField da aba Alterar.
      *
@@ -336,23 +344,25 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
             jTextFieldLoginTreinador.setText("");
             jTextFieldNomeTreinador.setText("");
             jPasswordFieldSenhaTreinador.setText("");
-	    jFormattedTextFieldCpfTreinador.setValue(null);
-	    jCheckBoxAdministradorTreinador.setSelected(false);
+            jFormattedTextFieldCpfTreinador.setValue(null);
+            jCheckBoxAdministradorTreinador.setSelected(false);
             jFormattedTextFieldDataTreinador.setValue(null);
         } else {
-	    boolean b;
-	    b = t.getAdministrador() != 0; /*valor diferente de zero = true. contrário = false.*/
+            boolean b;
+            b = t.getAdministrador() != 0; /*valor diferente de zero = true. contrário = false.*/
+
             jTextFieldEmailTreinador.setText(t.getEmail());
             jTextFieldEnderecoTreinador.setText(t.getEndereco());
             jTextFieldLoginTreinador.setText(t.getLogin());
             jTextFieldNomeTreinador.setText(t.getNome());
             jPasswordFieldSenhaTreinador.setText(t.getSenha());
-	    jFormattedTextFieldCpfTreinador.setValue(t.getCpf());
-	    jCheckBoxAdministradorTreinador.setSelected(b);
+            jFormattedTextFieldCpfTreinador.setValue(t.getCpf());
+            jCheckBoxAdministradorTreinador.setSelected(b);
             jFormattedTextFieldDataTreinador.setValue(t.getDataNascimento());
         }
     }
-        /**
+
+    /**
      * Após a edição do objeto pega dados da aba Alterar e coloca no objeto.
      *
      * @param t Objeto a ser populado.
@@ -361,17 +371,20 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         //TODO: Garantir que @param não é nulo
         /*O campo ID é gerado pelo banco de dados*/
         t.setNome(jTextFieldNomeTreinador.getText());
-	t.setCpf((String) jFormattedTextFieldCpfTreinador.getText());
-	t.setEndereco(jTextFieldEnderecoTreinador.getText());
-	t.setLogin(jTextFieldLoginTreinador.getText());
-	t.setSenha(new String(jPasswordFieldSenhaTreinador.getPassword()));
-	t.setEmail(jTextFieldEmailTreinador.getText());
-	t.setDataNascimento((Date) jFormattedTextFieldDataTreinador.getValue());
-	/*Seta se o treinador sendo cadastrado é adiminstrador*/
-	
-
+        t.setCpf((String) jFormattedTextFieldCpfTreinador.getText());
+        t.setEndereco(jTextFieldEnderecoTreinador.getText());
+        t.setLogin(jTextFieldLoginTreinador.getText());
+        t.setSenha(Hashing.sha256().hashString(jPasswordFieldSenhaTreinador.getText(), Charsets.UTF_8).toString());
+        t.setEmail(jTextFieldEmailTreinador.getText());
+        t.setDataNascimento((Date) jFormattedTextFieldDataTreinador.getValue());
+        /*Seta se o treinador sendo cadastrado é adiminstrador*/
+        if (jCheckBoxAdministradorTreinador.isSelected()) {
+            t.setAdministrador(1);
+        } else {
+            t.setAdministrador(0);
+        }
     }
-    
+
     /**
      * Entra na Aba de Consulta
      */
@@ -400,17 +413,20 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
         jButtonCancelarTreinador.setEnabled(true);
 
     }
+
     /**
      * Valida os campos com as seguintes normas:
      * <ul>
-     *  <li> Nome: não nulo e menor que 40 caracteres;
-     *  <li> CPF: não nulo, válido, e com 11 caracteres - no formato ###.###.###-##;
-     *  <li> LOGIN: Ser menor que 10 caracteres, não nulo e único - é realizada consulta no banco de dados;
-     *  <li> Password: maior que 6 e menor que 15 caracteres, não sendo nulo;
-     *  <li> Email: não nulo e válido, menor que 40 caracteres;
-     *  <li> Endereço: não nulo e menor que 40 caracteres.
+     * <li> Nome: não nulo e menor que 40 caracteres;
+     * <li> CPF: não nulo, válido, e com 11 caracteres - no formato
+     * ###.###.###-##;
+     * <li> LOGIN: Ser menor que 10 caracteres, não nulo e único - é realizada
+     * consulta no banco de dados;
+     * <li> Password: maior que 6 e menor que 15 caracteres, não sendo nulo;
+     * <li> Email: não nulo e válido, menor que 40 caracteres;
+     * <li> Endereço: não nulo e menor que 40 caracteres.
      * </ul>
-     * 
+     *
      * @return true caso os campos estejam corretos, false caso contrário.
      */
     private boolean validacaoDeCampos() {
@@ -427,7 +443,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
             msgErro += "Email inválido. O campo deve ser válido, não nulo e menor que 40 caracteres\n";
             jTextFieldEmailTreinador.setText(""); //Limpa o campo de email
         }
-        
+
         //Checa o campo Nome
         campo = jTextFieldNomeTreinador.getText();
         if (("".equals(campo)) || (campo.length() > 40)) {
@@ -435,7 +451,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
             msgErro += "Nome inválido. O campo deve não deve ser nulo e deve ser menor que 40 caracteres\n";
             jTextFieldNomeTreinador.setText("");// Limpa o campo de nome
         }
-        
+
         //Checa o campo CPF
         campo = jFormattedTextFieldCpfTreinador.getText();
         if (campo.replaceAll("[^0123456789]", "").length() != 11) {
@@ -443,11 +459,11 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
             msgErro += "CPF inválido. O campo deve ter apenas números e deve ser na forma 123.123.123-99\n";
             jFormattedTextFieldCpfTreinador.setValue(null);; //Limpa campo CPF
         }
-        
+
         //Checa o campo login
         campo = jTextFieldLoginTreinador.getText();
         if ((campo.length() < 10) && !("".equals(campo))) {
-		    //Campo possivelmente válido
+            //Campo possivelmente válido
             //Checar unicidade
             //INFO: Código Legado modificado.
             if ((flagAnterior == INSERIR) || (!campo.equals(treinadorAlterar.getLogin()))) {
@@ -471,7 +487,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
             msgErro += "Login inválido. O campo não deve ser nulo e deve ser menor que 10 caracteres\n";
             jTextFieldNomeTreinador.setText("");
         }
-        
+
         //Checa o campo password
         campo = String.valueOf(jPasswordFieldSenhaTreinador.getPassword());
         if ((campo.length() < 6) || (campo.length() > 15)) {
@@ -479,7 +495,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
             msgErro += "Senha inválida. O campo deve ter pelo menos 6 caracteres, mas não mais que 15\n";
             jPasswordFieldSenhaTreinador.setText("");
         }
-        
+
         //Checa o campo endereço
         campo = jTextFieldEnderecoTreinador.getText();
         if (("".equals(campo)) || (campo.length() > 40)) {
@@ -487,7 +503,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
             msgErro += "Endereço inválido. O campo deve não deve ser nulo e deve ser menor que 40 caracteres\n";
             jTextFieldEnderecoTreinador.setText("");
         }
-        
+
         if (!valido) {
             JOptionPane.showMessageDialog(null, msgErro, "Campos Errados!", JOptionPane.ERROR_MESSAGE);
         }
@@ -606,7 +622,7 @@ public class JInternalFrameCadastroTreinador extends javax.swing.JInternalFrame 
 
     private int flagAnterior; //Define qual botão foi clicado
     private Treinador treinador; //Endereça objetos criados
-     //Flags para identificar que botão foi clicado anteriormente.
+    //Flags para identificar que botão foi clicado anteriormente.
     private final int INSERIR = 1;
     private final int ALTERAR = 2;
     //Aluno para ser alterado

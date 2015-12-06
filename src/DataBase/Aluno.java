@@ -92,7 +92,7 @@ public class Aluno implements Serializable {
     @Column(name = "login", nullable = false, length = 10)
     private String login;
     @Basic(optional = false)
-    @Column(name = "senha", nullable = false, length = 15)
+    @Column(name = "senha", nullable = false, length = 150)
     private String senha;
     @Basic(optional = false)
     @Column(name = "email", nullable = false, length = 40)

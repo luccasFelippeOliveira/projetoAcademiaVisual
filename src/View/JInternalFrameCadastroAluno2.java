@@ -7,6 +7,7 @@ package View;
 
 import DAO.AlunoJpaController;
 import DataBase.Aluno;
+import academiavisual.FormPrincipal;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -18,6 +19,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.swing.JOptionPane;
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 
 /**
  *
@@ -29,7 +32,12 @@ public class JInternalFrameCadastroAluno2 extends javax.swing.JInternalFrame {
      * Creates new form JInternalFrameCadastroAluno2
      */
     public JInternalFrameCadastroAluno2() {
-        initComponents();
+        initComponents();         
+        if(TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)){
+            jButtonInserirAluno.setEnabled(false);
+            jButtonAlterarAluno.setEnabled(false);
+            jButtonExcluirAluno.setEnabled(false);            
+        }
         abaConsulta();
         System.out.println("AlunoList Class : " + alunoList.getClass().getName());
         System.out.println("Size: " + alunoList.size());
@@ -453,7 +461,7 @@ public class JInternalFrameCadastroAluno2 extends javax.swing.JInternalFrame {
         a.setLogin(jTextFieldLoginAluno.getText());
         a.setNome(jTextFieldNomeAluno.getText());
         a.setPeso(Float.parseFloat(jTextFieldPesoAluno.getText()));
-        a.setSenha(new String(jPasswordFieldSenhaAluno.getPassword()));
+        a.setSenha(Hashing.sha256().hashString(jPasswordFieldSenhaAluno.getText(), Charsets.UTF_8).toString());
         a.setUltimaEntrada((Date) jFormattedTextFieldUltimaEntradaAluno.getValue());
         a.setValidade((Date) jFormattedTextFieldValidadeAluno.getValue());
 

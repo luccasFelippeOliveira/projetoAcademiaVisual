@@ -37,5 +37,7 @@ public class Permissao {
         return permissaoUsuario == P_TREINADOR;
     }
     
-    
+    public boolean isAdministrador() {
+        return permissaoUsuario == P_ADMINISTRADOR;
+    }
 }

@@ -9,6 +9,7 @@ import DAO.ModalidadesJpaController;
 import DAO.ProdutosJpaController;
 import DataBase.Modalidades;
 import DataBase.Produtos;
+import academiavisual.FormPrincipal;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -25,6 +26,11 @@ public class JInternalFrameCadastroProduto extends javax.swing.JInternalFrame {
      */
     public JInternalFrameCadastroProduto() {
         initComponents();
+        if(TelaInicial.verificarAdministrador(FormPrincipal.TREINADORID)){
+            jButtonInserirProduto.setEnabled(false);
+            jButtonAlterarProduto.setEnabled(false);
+            jButtonExcluirProduto.setEnabled(false);            
+        }
         abaConsulta();
         System.out.println("produtosList1 Class : " + produtosList1.getClass().getName());
         System.out.println("Size: " + produtosList1.size());

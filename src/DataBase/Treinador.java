@@ -76,7 +76,7 @@ public class Treinador implements Serializable {
     @Column(name = "login", nullable = false, length = 15)
     private String login;
     @Basic(optional = false)
-    @Column(name = "senha", nullable = false, length = 60)
+    @Column(name = "senha", nullable = false, length = 150)
     private String senha;
     @Basic(optional = false)
     @Column(name = "administrador", nullable = false)
