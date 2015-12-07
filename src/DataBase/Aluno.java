@@ -250,15 +250,7 @@ public class Aluno implements Serializable {
     }
     @Override
     public String toString() {
-        StringBuilder st = new StringBuilder();
-        st.append("ID: ").append(getId());
-        st.append("Nome: ").append(getNome());
-        st.append("CPF: ").append(getCpf());
-        st.append("Nascimento: ").append(getDataNascimento());
-        st.append("PESO: ").append(getPeso());
-        st.append("Altura: ").append(getAltura());
-        /*Todo: Acresentar os outros itens*/
-        return st.toString();
+        return nome;
     }
     @Override
     public int hashCode() {

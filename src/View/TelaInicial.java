@@ -56,10 +56,7 @@ public class TelaInicial extends javax.swing.JFrame {
             jMenuCadastros.setEnabled(false);
             jMenuTreinos.setEnabled(false);
         } else {
-            if (permissao.isTreinador()) {
-                /*Desabilita as opções de aluno*/
-                jMenuAluno.setEnabled(false);
-            }
+            jMenuAluno.setEnabled(false);
         }
     }
 
@@ -97,6 +94,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItemCadastroProduto = new javax.swing.JMenuItem();
         jMenuTreinos = new javax.swing.JMenu();
         jMenuItemAdicionarTreino = new javax.swing.JMenuItem();
+        jMenuItemAvaliacaoAluno = new javax.swing.JMenuItem();
         jMenuProdutos = new javax.swing.JMenu();
         jMenuItemConsultaProdutos = new javax.swing.JMenuItem();
         jMenuAluno = new javax.swing.JMenu();
@@ -217,6 +215,9 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         jMenuTreinos.add(jMenuItemAdicionarTreino);
+
+        jMenuItemAvaliacaoAluno.setText("Avaliação do Aluno");
+        jMenuTreinos.add(jMenuItemAvaliacaoAluno);
 
         jMenuBar1.add(jMenuTreinos);
 
@@ -495,6 +496,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItemAdicionarModalidade;
     private javax.swing.JMenuItem jMenuItemAdicionarTreino;
+    private javax.swing.JMenuItem jMenuItemAvaliacaoAluno;
     private javax.swing.JMenuItem jMenuItemCadastroAluno;
     private javax.swing.JMenuItem jMenuItemCadastroExercicio;
     private javax.swing.JMenuItem jMenuItemCadastroModalidade;

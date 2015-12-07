@@ -149,6 +149,9 @@ public class JInternalFrameConsultaTreino extends javax.swing.JInternalFrame {
             treinosList.clear();
             treinosList.addAll(listTreinos);
             jTableProdutos.repaint();
+        }else {
+            treinosList.clear();
+            jTableProdutos.repaint();
         }
         
     }

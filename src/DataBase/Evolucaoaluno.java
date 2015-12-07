@@ -5,6 +5,8 @@
  */
 package DataBase;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -19,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,6 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Evolucaoaluno.findByPeso", query = "SELECT e FROM Evolucaoaluno e WHERE e.peso = :peso"),
     @NamedQuery(name = "Evolucaoaluno.findById", query = "SELECT e FROM Evolucaoaluno e WHERE e.id = :id")})
 public class Evolucaoaluno implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "percGordura", nullable = false)
@@ -78,7 +83,9 @@ public class Evolucaoaluno implements Serializable {
     }
 
     public void setPercGordura(float percGordura) {
+        float oldPercGordura = this.percGordura;
         this.percGordura = percGordura;
+        changeSupport.firePropertyChange("percGordura", oldPercGordura, percGordura);
     }
 
     public float getPercMassaMagra() {
@@ -86,7 +93,9 @@ public class Evolucaoaluno implements Serializable {
     }
 
     public void setPercMassaMagra(float percMassaMagra) {
+        float oldPercMassaMagra = this.percMassaMagra;
         this.percMassaMagra = percMassaMagra;
+        changeSupport.firePropertyChange("percMassaMagra", oldPercMassaMagra, percMassaMagra);
     }
 
     public Date getDataMedicao() {
@@ -94,7 +103,9 @@ public class Evolucaoaluno implements Serializable {
     }
 
     public void setDataMedicao(Date dataMedicao) {
+        Date oldDataMedicao = this.dataMedicao;
         this.dataMedicao = dataMedicao;
+        changeSupport.firePropertyChange("dataMedicao", oldDataMedicao, dataMedicao);
     }
 
     public float getPeso() {
@@ -102,7 +113,9 @@ public class Evolucaoaluno implements Serializable {
     }
 
     public void setPeso(float peso) {
+        float oldPeso = this.peso;
         this.peso = peso;
+        changeSupport.firePropertyChange("peso", oldPeso, peso);
     }
 
     public Integer getId() {
@@ -110,7 +123,9 @@ public class Evolucaoaluno implements Serializable {
     }
 
     public void setId(Integer id) {
+        Integer oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public Aluno getAlunoId() {
@@ -118,7 +133,9 @@ public class Evolucaoaluno implements Serializable {
     }
 
     public void setAlunoId(Aluno alunoId) {
+        Aluno oldAlunoId = this.alunoId;
         this.alunoId = alunoId;
+        changeSupport.firePropertyChange("alunoId", oldAlunoId, alunoId);
     }
 
     @Override
@@ -144,6 +161,14 @@ public class Evolucaoaluno implements Serializable {
     @Override
     public String toString() {
         return "DataBase.Evolucaoaluno[ id=" + id + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }
