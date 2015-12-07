@@ -5,6 +5,7 @@
  */
 package DataBase;
 
+import DAO.ExerciciosJpaController;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
@@ -13,14 +14,17 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.swing.JOptionPane;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -120,7 +124,37 @@ public class Exercicios implements Serializable {
     public String toString() {
         return "DataBase.Exercicios[ id=" + id + " ]";
     }
-
+    //funções para incluir, alterar e excluir utilizando o jpaController.
+    //TODO: As funçoes a seguir estão conceitualmente no lugar errado -> MUDAR para o objeto DAO.
+    public void incluir(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            ExerciciosJpaController treinadorController = new ExerciciosJpaController(emf);
+            treinadorController.create(this);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void alterar(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            ExerciciosJpaController treinadorController = new ExerciciosJpaController(emf);
+            treinadorController.edit(this);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void excluir(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            ExerciciosJpaController treinadorController = new ExerciciosJpaController(emf);
+            treinadorController.destroy(this.getId());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     @XmlTransient
     public Collection<Treinos> getTreinosCollection() {
         return treinosCollection;

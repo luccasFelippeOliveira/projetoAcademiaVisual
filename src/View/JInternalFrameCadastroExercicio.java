@@ -5,7 +5,10 @@
  */
 package View;
 
+import DataBase.Exercicios;
 import academiavisual.FormPrincipal;
+import javax.persistence.Query;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,43 +31,31 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        jButtonExcluirExercicio = new javax.swing.JButton();
-        jButtonFecharExercicio = new javax.swing.JButton();
-        jTabbedPaneAluno = new javax.swing.JTabbedPane();
-        jPanelConsultaAluno = new javax.swing.JPanel();
+        entityManagerExercicios = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("AcademiaVisualPU").createEntityManager();
+        exerciciosQuery = java.beans.Beans.isDesignTime() ? null : entityManagerExercicios.createQuery("SELECT e FROM Exercicios e");
+        exerciciosList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : exerciciosQuery.getResultList();
+        jButtonExcluirExercicios = new javax.swing.JButton();
+        jButtonFecharExercicios = new javax.swing.JButton();
+        jTabbedPaneExercicios = new javax.swing.JTabbedPane();
+        jPanelConsultaExercicios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableAluno = new javax.swing.JTable();
-        jLabelProcurarAluno = new javax.swing.JLabel();
-        jTextFieldProcurarAluno = new javax.swing.JTextField();
-        jComboBoxProcurarAluno = new javax.swing.JComboBox();
-        jButtonProcurarAluno = new javax.swing.JButton();
-        jPanelAlterarAluno = new javax.swing.JPanel();
-        jLabelNomeAluno = new javax.swing.JLabel();
-        jLabelCpfAluno = new javax.swing.JLabel();
-        jLabelDataNascimentoAluno = new javax.swing.JLabel();
-        jLabelPesoAluno = new javax.swing.JLabel();
-        jLabelAlturaAluno = new javax.swing.JLabel();
-        jLabelEnderecoAluno = new javax.swing.JLabel();
-        jLabelLoginAluno = new javax.swing.JLabel();
-        jLabelSenhaAluno = new javax.swing.JLabel();
-        jLabelEmailAluno = new javax.swing.JLabel();
-        jLabelValidadeAluno = new javax.swing.JLabel();
-        jTextFieldNomeAluno = new javax.swing.JTextField();
-        jTextFieldCpfAluno = new javax.swing.JTextField();
-        jTextFieldDataNascimentoAluno = new javax.swing.JTextField();
-        jTextFieldPesoAluno = new javax.swing.JTextField();
-        jTextFieldAlturaAluno = new javax.swing.JTextField();
-        jTextFieldEnderecoAluno = new javax.swing.JTextField();
-        jTextFieldLoginAluno = new javax.swing.JTextField();
-        jTextFieldEmailAluno = new javax.swing.JTextField();
-        jTextFieldValidadeAluno = new javax.swing.JTextField();
-        jButtonBuscarDataAluno = new javax.swing.JButton();
-        jPasswordFieldSenhaAluno = new javax.swing.JPasswordField();
-        jButtonCancelarExercicio = new javax.swing.JButton();
-        jButtonConfirmarExercicio = new javax.swing.JButton();
-        jButtonInserirExercicio = new javax.swing.JButton();
-        jButtonAlterarExercicio = new javax.swing.JButton();
+        jTableExercicios = new javax.swing.JTable();
+        jLabelProcurarExercicios = new javax.swing.JLabel();
+        jTextFieldProcurarExercicios = new javax.swing.JTextField();
+        jComboBoxProcurarExercicios = new javax.swing.JComboBox();
+        jButtonProcurarExercicios = new javax.swing.JButton();
+        jPanelAlterarExercicios = new javax.swing.JPanel();
+        jLabelExerciciosNome = new javax.swing.JLabel();
+        jTextFieldExerciciosNome = new javax.swing.JTextField();
+        jLabelDescricaoExercicios = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextAreaDescricaoExercicios = new javax.swing.JTextArea();
+        jButtonCancelarExercicios = new javax.swing.JButton();
+        jButtonConfirmarExercicios = new javax.swing.JButton();
+        jButtonInserirExercicios = new javax.swing.JButton();
+        jButtonAlterarExercicios = new javax.swing.JButton();
 
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
@@ -84,279 +75,394 @@ public class JInternalFrameCadastroExercicio extends javax.swing.JInternalFrame 
             }
         });
 
-        jButtonExcluirExercicio.setText("Excluir");
-
-        jButtonFecharExercicio.setText("Fechar");
-        jButtonFecharExercicio.addActionListener(new java.awt.event.ActionListener() {
+        jButtonExcluirExercicios.setText("Excluir");
+        jButtonExcluirExercicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonFecharExercicioActionPerformed(evt);
+                jButtonExcluirExerciciosActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setViewportView(jTableAluno);
-
-        jLabelProcurarAluno.setText("Opção De Busca");
-
-        jTextFieldProcurarAluno.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFecharExercicios.setText("Fechar");
+        jButtonFecharExercicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldProcurarAlunoActionPerformed(evt);
+                jButtonFecharExerciciosActionPerformed(evt);
             }
         });
 
-        jComboBoxProcurarAluno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Nome", "CPF", "Validade" }));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, exerciciosList, jTableExercicios);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
+        columnBinding.setColumnName("Id");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
+        jScrollPane1.setViewportView(jTableExercicios);
 
-        jButtonProcurarAluno.setText("Buscar");
-        jButtonProcurarAluno.setMaximumSize(new java.awt.Dimension(75, 23));
-        jButtonProcurarAluno.setMinimumSize(new java.awt.Dimension(75, 23));
-        jButtonProcurarAluno.setPreferredSize(new java.awt.Dimension(75, 23));
+        jLabelProcurarExercicios.setText("Opção De Busca");
 
-        javax.swing.GroupLayout jPanelConsultaAlunoLayout = new javax.swing.GroupLayout(jPanelConsultaAluno);
-        jPanelConsultaAluno.setLayout(jPanelConsultaAlunoLayout);
-        jPanelConsultaAlunoLayout.setHorizontalGroup(
-            jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jTextFieldProcurarExercicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldProcurarExerciciosActionPerformed(evt);
+            }
+        });
+
+        jComboBoxProcurarExercicios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Id", "Nome" }));
+
+        jButtonProcurarExercicios.setText("Buscar");
+        jButtonProcurarExercicios.setMaximumSize(new java.awt.Dimension(75, 23));
+        jButtonProcurarExercicios.setMinimumSize(new java.awt.Dimension(75, 23));
+        jButtonProcurarExercicios.setPreferredSize(new java.awt.Dimension(75, 23));
+
+        javax.swing.GroupLayout jPanelConsultaExerciciosLayout = new javax.swing.GroupLayout(jPanelConsultaExercicios);
+        jPanelConsultaExercicios.setLayout(jPanelConsultaExerciciosLayout);
+        jPanelConsultaExerciciosLayout.setHorizontalGroup(
+            jPanelConsultaExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
-            .addGroup(jPanelConsultaAlunoLayout.createSequentialGroup()
+            .addGroup(jPanelConsultaExerciciosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabelProcurarAluno)
+                .addComponent(jLabelProcurarExercicios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBoxProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxProcurarExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldProcurarExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonProcurarExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanelConsultaAlunoLayout.setVerticalGroup(
-            jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelConsultaAlunoLayout.createSequentialGroup()
+        jPanelConsultaExerciciosLayout.setVerticalGroup(
+            jPanelConsultaExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultaExerciciosLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelConsultaAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelProcurarAluno)
-                    .addComponent(jTextFieldProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxProcurarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelConsultaExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelProcurarExercicios)
+                    .addComponent(jTextFieldProcurarExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonProcurarExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxProcurarExercicios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
-        jTabbedPaneAluno.addTab("Consulta", jPanelConsultaAluno);
+        jTabbedPaneExercicios.addTab("Consulta", jPanelConsultaExercicios);
 
-        jLabelNomeAluno.setText("Nome:");
+        jLabelExerciciosNome.setText("Nome:");
 
-        jLabelCpfAluno.setText("CPF:");
+        jLabelDescricaoExercicios.setText("Descrição:");
 
-        jLabelDataNascimentoAluno.setText("Data Nascimento:");
+        jTextAreaDescricaoExercicios.setColumns(20);
+        jTextAreaDescricaoExercicios.setRows(5);
+        jScrollPane2.setViewportView(jTextAreaDescricaoExercicios);
 
-        jLabelPesoAluno.setText("Peso:");
-
-        jLabelAlturaAluno.setText("Altura:");
-
-        jLabelEnderecoAluno.setText("Endereco:");
-
-        jLabelLoginAluno.setText("Login:");
-
-        jLabelSenhaAluno.setText("Senha:");
-
-        jLabelEmailAluno.setText("Email:");
-
-        jLabelValidadeAluno.setText("Validade:");
-
-        jButtonBuscarDataAluno.setText("...");
-
-        javax.swing.GroupLayout jPanelAlterarAlunoLayout = new javax.swing.GroupLayout(jPanelAlterarAluno);
-        jPanelAlterarAluno.setLayout(jPanelAlterarAlunoLayout);
-        jPanelAlterarAlunoLayout.setHorizontalGroup(
-            jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelSenhaAluno)
-                    .addComponent(jLabelLoginAluno)
-                    .addComponent(jLabelEnderecoAluno)
-                    .addComponent(jLabelAlturaAluno)
-                    .addComponent(jLabelPesoAluno)
-                    .addComponent(jLabelDataNascimentoAluno)
-                    .addComponent(jLabelCpfAluno)
-                    .addComponent(jLabelEmailAluno)
-                    .addComponent(jLabelValidadeAluno)
-                    .addComponent(jLabelNomeAluno))
-                .addGap(97, 97, 97)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addComponent(jTextFieldNomeAluno)
-                    .addComponent(jTextFieldCpfAluno)
-                    .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                    .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBuscarDataAluno)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanelAlterarExerciciosLayout = new javax.swing.GroupLayout(jPanelAlterarExercicios);
+        jPanelAlterarExercicios.setLayout(jPanelAlterarExerciciosLayout);
+        jPanelAlterarExerciciosLayout.setHorizontalGroup(
+            jPanelAlterarExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAlterarExerciciosLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanelAlterarExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelDescricaoExercicios)
+                    .addComponent(jLabelExerciciosNome))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelAlterarExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+                    .addComponent(jTextFieldExerciciosNome))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
-        jPanelAlterarAlunoLayout.setVerticalGroup(
-            jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAlterarAlunoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelNomeAluno)
-                    .addComponent(jTextFieldNomeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelCpfAluno)
-                    .addComponent(jTextFieldCpfAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelDataNascimentoAluno)
-                    .addComponent(jTextFieldDataNascimentoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPesoAluno)
-                    .addComponent(jTextFieldPesoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAlturaAluno)
-                    .addComponent(jTextFieldAlturaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEnderecoAluno)
-                    .addComponent(jTextFieldEnderecoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelLoginAluno)
-                    .addComponent(jTextFieldLoginAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelSenhaAluno)
-                    .addComponent(jPasswordFieldSenhaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelEmailAluno)
-                    .addComponent(jTextFieldEmailAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelAlterarAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelValidadeAluno)
-                    .addComponent(jTextFieldValidadeAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBuscarDataAluno))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanelAlterarExerciciosLayout.setVerticalGroup(
+            jPanelAlterarExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAlterarExerciciosLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanelAlterarExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelExerciciosNome)
+                    .addComponent(jTextFieldExerciciosNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelAlterarExerciciosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelDescricaoExercicios)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
 
-        jTabbedPaneAluno.addTab("Alterar", jPanelAlterarAluno);
+        jTabbedPaneExercicios.addTab("Alterar", jPanelAlterarExercicios);
 
-        jButtonCancelarExercicio.setText("Cancelar");
-
-        jButtonConfirmarExercicio.setText("Confirmar");
-
-        jButtonInserirExercicio.setText("Inserir");
-        jButtonInserirExercicio.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCancelarExercicios.setText("Cancelar");
+        jButtonCancelarExercicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonInserirExercicioActionPerformed(evt);
+                jButtonCancelarExerciciosActionPerformed(evt);
             }
         });
 
-        jButtonAlterarExercicio.setText("Alterar");
+        jButtonConfirmarExercicios.setText("Confirmar");
+        jButtonConfirmarExercicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConfirmarExerciciosActionPerformed(evt);
+            }
+        });
+
+        jButtonInserirExercicios.setText("Inserir");
+        jButtonInserirExercicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInserirExerciciosActionPerformed(evt);
+            }
+        });
+
+        jButtonAlterarExercicios.setText("Alterar");
+        jButtonAlterarExercicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarExerciciosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPaneAluno)
+            .addComponent(jTabbedPaneExercicios)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonInserirExercicio)
+                .addComponent(jButtonInserirExercicios)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonAlterarExercicio)
+                .addComponent(jButtonAlterarExercicios)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonExcluirExercicio)
+                .addComponent(jButtonExcluirExercicios)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonConfirmarExercicio)
+                .addComponent(jButtonConfirmarExercicios)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonCancelarExercicio)
+                .addComponent(jButtonCancelarExercicios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonFecharExercicio)
+                .addComponent(jButtonFecharExercicios)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPaneAluno)
+                .addComponent(jTabbedPaneExercicios)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonInserirExercicio)
-                    .addComponent(jButtonAlterarExercicio)
-                    .addComponent(jButtonExcluirExercicio)
-                    .addComponent(jButtonFecharExercicio)
-                    .addComponent(jButtonCancelarExercicio)
-                    .addComponent(jButtonConfirmarExercicio))
+                    .addComponent(jButtonInserirExercicios)
+                    .addComponent(jButtonAlterarExercicios)
+                    .addComponent(jButtonExcluirExercicios)
+                    .addComponent(jButtonFecharExercicios)
+                    .addComponent(jButtonCancelarExercicios)
+                    .addComponent(jButtonConfirmarExercicios))
                 .addContainerGap())
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonFecharExercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharExercicioActionPerformed
+    private void popularCampos(Exercicios e) {
+        if(e == null) {
+           jTextFieldExerciciosNome.setText("");
+           jTextAreaDescricaoExercicios.setText("");
+        }else {
+            jTextFieldExerciciosNome.setText(e.getNome());
+            jTextAreaDescricaoExercicios.setText(e.getDescricao());
+        }
+    }
+    
+    private void popularObjeto(Exercicios e) {
+        e.setNome(jTextFieldExerciciosNome.getText());
+        e.setDescricao(jTextAreaDescricaoExercicios.getText());
+    }
+    
+    /**
+     * Entra na Aba de Consulta
+     */
+    private void abaConsulta() {
+        jTabbedPaneExercicios.setSelectedIndex(0);
+        jTabbedPaneExercicios.setEnabledAt(0, true);
+        jTabbedPaneExercicios.setEnabledAt(1, false);
+        jButtonConfirmarExercicios.setEnabled(false);
+        jButtonCancelarExercicios.setEnabled(false);
+        jButtonInserirExercicios.setEnabled(true);
+        jButtonAlterarExercicios.setEnabled(true);
+        jButtonExcluirExercicios.setEnabled(true);
+    }
+
+    /**
+     * Entra na Aba de Alterar
+     */
+    private void abaAlterar() {
+        jTabbedPaneExercicios.setSelectedIndex(1);
+        jTabbedPaneExercicios.setEnabledAt(1, true);
+        jTabbedPaneExercicios.setEnabledAt(0, false);
+        jButtonInserirExercicios.setEnabled(false);
+        jButtonAlterarExercicios.setEnabled(false);
+        jButtonExcluirExercicios.setEnabled(false);
+        jButtonConfirmarExercicios.setEnabled(true);
+        jButtonCancelarExercicios.setEnabled(true);
+
+    }
+    private boolean validacaoDeCampos() {
+       boolean valido = true;
+       String msgErro = "";
+       String campo;
+       
+       campo = jTextFieldExerciciosNome.getText();
+       if("".equals(campo) || (campo.length() > 40)) {
+           valido = false;
+           msgErro += "Nome inválido. O campo prescisa ser não nulo e menor que 40 caracteres";
+       }
+       
+       if(!valido) {
+           JOptionPane.showMessageDialog(null, msgErro, "Campos Errados!", JOptionPane.ERROR_MESSAGE);
+       }
+       return valido;
+    }
+    
+    private void jButtonFecharExerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFecharExerciciosActionPerformed
         dispose();
-    }//GEN-LAST:event_jButtonFecharExercicioActionPerformed
+    }//GEN-LAST:event_jButtonFecharExerciciosActionPerformed
 
-    private void jTextFieldProcurarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarAlunoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldProcurarAlunoActionPerformed
+    private void jTextFieldProcurarExerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldProcurarExerciciosActionPerformed
+        try {
+            Query query = null;
+            if(jTextFieldProcurarExercicios.getText().length() > 0) {
+                if(jComboBoxProcurarExercicios.getSelectedIndex() == 0) {
+                    query = entityManagerExercicios.createNamedQuery("Exercicios.findById");
+                    query.setParameter("id", Long.valueOf(jTextFieldProcurarExercicios.getText()));
+                }
+                if(jComboBoxProcurarExercicios.getSelectedIndex() == 1) {
+                    query = entityManagerExercicios.createNamedQuery("Exercicios.findByNome");
+                    query.setParameter("nome", jTextFieldProcurarExercicios.getText());
+                }
+            } else {
+                query = exerciciosQuery;
+            }
+            exerciciosList.clear();
+            exerciciosList.addAll(query.getResultList());
+            jTableExercicios.repaint();
+        }catch(Exception e) {
+            JOptionPane.showMessageDialog(this, e);
+        }
+    }//GEN-LAST:event_jTextFieldProcurarExerciciosActionPerformed
 
-    private void jButtonInserirExercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirExercicioActionPerformed
-        jTabbedPaneAluno.setSelectedIndex(1);
-        jTabbedPaneAluno.setEnabledAt(0, false);
-        jButtonFecharExercicio.setEnabled(false);
-        jButtonConfirmarExercicio.setEnabled(true);
-        jButtonCancelarExercicio.setEnabled(true);
-    }//GEN-LAST:event_jButtonInserirExercicioActionPerformed
+    private void jButtonInserirExerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirExerciciosActionPerformed
+        flagAnterior = INSERIR;
+        popularCampos(null);
+        abaAlterar();
+    }//GEN-LAST:event_jButtonInserirExerciciosActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         if(TelaInicial.verificarAdministrador()){
-            jButtonInserirExercicio.setEnabled(false);
-            jButtonAlterarExercicio.setEnabled(false);
-            jButtonExcluirExercicio.setEnabled(false);            
+            jButtonInserirExercicios.setEnabled(false);
+            jButtonAlterarExercicios.setEnabled(false);
+            jButtonExcluirExercicios.setEnabled(false);            
         }
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void jButtonAlterarExerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarExerciciosActionPerformed
+        if (!exerciciosList.isEmpty() && jTableExercicios.getSelectedRow() != -1) {
+            flagAnterior = ALTERAR;
+            exerciciosAlterar = exerciciosList.get(jTableExercicios.getSelectedRow());
+            popularCampos(exerciciosAlterar);
+            abaAlterar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um exercicio !");
+        }
+     
+    }//GEN-LAST:event_jButtonAlterarExerciciosActionPerformed
 
+    private void jButtonExcluirExerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirExerciciosActionPerformed
+        if (!exerciciosList.isEmpty() && jTableExercicios.getSelectedRow() != -1) {
+            int option = JOptionPane.showConfirmDialog(this, "Verifique com atenção os dados que deseja excluir!\n"
+                    + "Clique em sim se esse for mesmo o aluno que deseja excluir.\n"
+                    + "Clique em cancelar para voltar.");
+            if (option == JOptionPane.YES_OPTION) {
+                try {
+                    /*
+                     EXCLUIR O USUARIO DE TODOS AS TABELAS QUE UTILIZAM O MESMO !
+                     Acho que não é necessário -- Luccas.
+                     */
+                    exerciciosList.get(jTableExercicios.getSelectedRow()).excluir();
+                    exerciciosList.remove(jTableExercicios.getSelectedRow());
+                    jTableExercicios.updateUI();
+                    jTableExercicios.repaint();
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Exclusão cancelada !");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um exercicios !");
+        }
+    }//GEN-LAST:event_jButtonExcluirExerciciosActionPerformed
+
+    private void jButtonConfirmarExerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmarExerciciosActionPerformed
+        boolean atualizacaoFeita = false; /*Indica que a atualização/inserção foi feita com sucesso,
+         mantendo a aba de alteração focada.
+         */
+
+        if (flagAnterior == INSERIR) {
+            //Verifica se os campos estão corretos antes de modificá-los.
+            if (validacaoDeCampos()) {
+                exercicios = new Exercicios(); //Cria um aluno vazio
+                popularObjeto(exercicios); //Popula o objeto
+                //Insere o objeto no banco de dados
+                exercicios.incluir();
+                /*Coisas do bind: Para adicionar elemento por ultimo na tabela inserir na penultima posição
+                 tipo: list.size() - 1 -> Não faz sentido, mas é assim que o bind funciona...
+                 */
+                //TODO: Consertar o bug que dá quando são feitas as primeiras inserções.(primeira e segunda apenas TRATAR ESSES CASOS).
+                exerciciosList.add(exerciciosList.size() - 1, exercicios);
+                jTableExercicios.repaint();
+                atualizacaoFeita = true;
+            }
+        }
+        if (flagAnterior == ALTERAR) {
+            //Verifica se os campos estão corretos para atualizá-los
+            if (validacaoDeCampos()) {
+                popularObjeto(exerciciosAlterar);
+                //altera o aluno no banco de dados
+                exerciciosAlterar.alterar();
+                jTableExercicios.repaint();
+                atualizacaoFeita = true;
+            }
+        }
+        if (atualizacaoFeita) {
+            abaConsulta();
+        }
+    }//GEN-LAST:event_jButtonConfirmarExerciciosActionPerformed
+
+    private void jButtonCancelarExerciciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarExerciciosActionPerformed
+        abaConsulta();
+    }//GEN-LAST:event_jButtonCancelarExerciciosActionPerformed
+
+    private int flagAnterior; //Define qual botão foi clicado
+    private Exercicios exercicios; //Endereça objetos criados
+    //Flags para identificar que botão foi clicado anteriormente.
+    private final int INSERIR = 1;
+    private final int ALTERAR = 2;
+    //Aluno para ser alterado
+    private Exercicios exerciciosAlterar;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAlterarExercicio;
-    private javax.swing.JButton jButtonBuscarDataAluno;
-    private javax.swing.JButton jButtonCancelarExercicio;
-    private javax.swing.JButton jButtonConfirmarExercicio;
-    private javax.swing.JButton jButtonExcluirExercicio;
-    private javax.swing.JButton jButtonFecharExercicio;
-    private javax.swing.JButton jButtonInserirExercicio;
-    private javax.swing.JButton jButtonProcurarAluno;
-    private javax.swing.JComboBox jComboBoxProcurarAluno;
-    private javax.swing.JLabel jLabelAlturaAluno;
-    private javax.swing.JLabel jLabelCpfAluno;
-    private javax.swing.JLabel jLabelDataNascimentoAluno;
-    private javax.swing.JLabel jLabelEmailAluno;
-    private javax.swing.JLabel jLabelEnderecoAluno;
-    private javax.swing.JLabel jLabelLoginAluno;
-    private javax.swing.JLabel jLabelNomeAluno;
-    private javax.swing.JLabel jLabelPesoAluno;
-    private javax.swing.JLabel jLabelProcurarAluno;
-    private javax.swing.JLabel jLabelSenhaAluno;
-    private javax.swing.JLabel jLabelValidadeAluno;
-    private javax.swing.JPanel jPanelAlterarAluno;
-    private javax.swing.JPanel jPanelConsultaAluno;
-    private javax.swing.JPasswordField jPasswordFieldSenhaAluno;
+    private javax.persistence.EntityManager entityManagerExercicios;
+    private java.util.List<DataBase.Exercicios> exerciciosList;
+    private javax.persistence.Query exerciciosQuery;
+    private javax.swing.JButton jButtonAlterarExercicios;
+    private javax.swing.JButton jButtonCancelarExercicios;
+    private javax.swing.JButton jButtonConfirmarExercicios;
+    private javax.swing.JButton jButtonExcluirExercicios;
+    private javax.swing.JButton jButtonFecharExercicios;
+    private javax.swing.JButton jButtonInserirExercicios;
+    private javax.swing.JButton jButtonProcurarExercicios;
+    private javax.swing.JComboBox jComboBoxProcurarExercicios;
+    private javax.swing.JLabel jLabelDescricaoExercicios;
+    private javax.swing.JLabel jLabelExerciciosNome;
+    private javax.swing.JLabel jLabelProcurarExercicios;
+    private javax.swing.JPanel jPanelAlterarExercicios;
+    private javax.swing.JPanel jPanelConsultaExercicios;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPaneAluno;
-    private javax.swing.JTable jTableAluno;
-    private javax.swing.JTextField jTextFieldAlturaAluno;
-    private javax.swing.JTextField jTextFieldCpfAluno;
-    private javax.swing.JTextField jTextFieldDataNascimentoAluno;
-    private javax.swing.JTextField jTextFieldEmailAluno;
-    private javax.swing.JTextField jTextFieldEnderecoAluno;
-    private javax.swing.JTextField jTextFieldLoginAluno;
-    private javax.swing.JTextField jTextFieldNomeAluno;
-    private javax.swing.JTextField jTextFieldPesoAluno;
-    private javax.swing.JTextField jTextFieldProcurarAluno;
-    private javax.swing.JTextField jTextFieldValidadeAluno;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPaneExercicios;
+    private javax.swing.JTable jTableExercicios;
+    private javax.swing.JTextArea jTextAreaDescricaoExercicios;
+    private javax.swing.JTextField jTextFieldExerciciosNome;
+    private javax.swing.JTextField jTextFieldProcurarExercicios;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

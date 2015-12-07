@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.persistence.EntityManager" name="entityManagerExercicios">
+      <Properties>
+        <Property name="persistenceUnit" type="java.lang.String" value="AcademiaVisualPU"/>
+      </Properties>
+    </Component>
+    <Component class="javax.persistence.Query" name="exerciciosQuery">
+      <Properties>
+        <Property name="query" type="java.lang.String" value="SELECT e FROM Exercicios e"/>
+        <Property name="entityManager" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$EMProperty$EntityManagerEditor">
+          <ComponentRef name="entityManagerExercicios"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="java.util.List" name="exerciciosList">
+      <Properties>
+        <Property name="query" type="java.lang.Object" editor="org.netbeans.modules.form.j2ee.J2EEPropertyModifier$QueryBeanProperty$QueryEditor">
+          <ComponentRef name="exerciciosQuery"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;DataBase.Exercicios&gt;"/>
+      </AuxValues>
+    </Component>
+  </NonVisualComponents>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -22,20 +47,20 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPaneAluno" alignment="0" max="32767" attributes="0"/>
+          <Component id="jTabbedPaneExercicios" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButtonInserirExercicio" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonInserirExercicios" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonAlterarExercicio" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonAlterarExercicios" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonExcluirExercicio" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonExcluirExercicios" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonConfirmarExercicio" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonConfirmarExercicios" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButtonCancelarExercicio" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonCancelarExercicios" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButtonFecharExercicio" min="-2" max="-2" attributes="0"/>
+              <Component id="jButtonFecharExercicios" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -43,15 +68,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPaneAluno" max="32767" attributes="0"/>
+              <Component id="jTabbedPaneExercicios" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonInserirExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonAlterarExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonExcluirExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonFecharExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonCancelarExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButtonConfirmarExercicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonInserirExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonAlterarExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonExcluirExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonFecharExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonCancelarExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonConfirmarExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -59,24 +84,27 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButtonExcluirExercicio">
+    <Component class="javax.swing.JButton" name="jButtonExcluirExercicios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonExcluirExerciciosActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonFecharExercicio">
+    <Component class="javax.swing.JButton" name="jButtonFecharExercicios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fechar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFecharExercicioActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonFecharExerciciosActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPaneAluno">
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPaneExercicios">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="jPanelConsultaAluno">
+        <Container class="javax.swing.JPanel" name="jPanelConsultaExercicios">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Consulta">
@@ -91,13 +119,13 @@
                   <Component id="jScrollPane1" alignment="0" pref="574" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabelProcurarAluno" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelProcurarExercicios" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jComboBoxProcurarAluno" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxProcurarExercicios" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextFieldProcurarAluno" min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="jTextFieldProcurarExercicios" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButtonProcurarAluno" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonProcurarExercicios" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -108,10 +136,10 @@
                       <Component id="jScrollPane1" pref="227" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxProcurarAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelProcurarExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldProcurarExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonProcurarExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxProcurarExercicios" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -126,38 +154,49 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTableAluno">
+                <Component class="javax.swing.JTable" name="jTableExercicios">
                   <Properties>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0"/>
+                    </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <BindingProperties>
+                    <BindingProperty name="elements" source="exerciciosList" target="jTableExercicios" targetPath="elements" updateStrategy="0" immediately="true">
+                      <Subbinding sourcePath="${id}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${nome}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                      </Subbinding>
+                    </BindingProperty>
+                  </BindingProperties>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabelProcurarAluno">
+            <Component class="javax.swing.JLabel" name="jLabelProcurarExercicios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Op&#xe7;&#xe3;o De Busca"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldProcurarAluno">
+            <Component class="javax.swing.JTextField" name="jTextFieldProcurarExercicios">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldProcurarAlunoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldProcurarExerciciosActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBoxProcurarAluno">
+            <Component class="javax.swing.JComboBox" name="jComboBoxProcurarExercicios">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
+                  <StringArray count="2">
                     <StringItem index="0" value="Id"/>
                     <StringItem index="1" value="Nome"/>
-                    <StringItem index="2" value="CPF"/>
-                    <StringItem index="3" value="Validade"/>
                   </StringArray>
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButtonProcurarAluno">
+            <Component class="javax.swing.JButton" name="jButtonProcurarExercicios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -173,7 +212,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanelAlterarAluno">
+        <Container class="javax.swing.JPanel" name="jPanelAlterarExercicios">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Alterar">
@@ -186,199 +225,101 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabelSenhaAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelLoginAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEnderecoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelAlturaAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelPesoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelDataNascimentoAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelCpfAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelEmailAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelValidadeAluno" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabelNomeAluno" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelDescricaoExercicios" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelExerciciosNome" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jPasswordFieldSenhaAluno" alignment="0" pref="321" max="32767" attributes="0"/>
-                          <Component id="jTextFieldNomeAluno" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextFieldCpfAluno" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jTextFieldDataNascimentoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldPesoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldAlturaAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEnderecoAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldLoginAluno" alignment="1" max="32767" attributes="0"/>
-                          <Component id="jTextFieldEmailAluno" alignment="1" pref="321" max="32767" attributes="0"/>
-                          <Component id="jTextFieldValidadeAluno" alignment="1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="233" max="32767" attributes="0"/>
+                          <Component id="jTextFieldExerciciosNome" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonBuscarDataAluno" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="242" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelNomeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldNomeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelExerciciosNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldExerciciosNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelCpfAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldCpfAluno" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelDescricaoExercicios" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelDataNascimentoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldDataNascimentoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelPesoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldPesoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelAlturaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldAlturaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelEnderecoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldEnderecoAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelLoginAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldLoginAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelSenhaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jPasswordFieldSenhaAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelEmailAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldEmailAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelValidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextFieldValidadeAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonBuscarDataAluno" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="131" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabelNomeAluno">
+            <Component class="javax.swing.JLabel" name="jLabelExerciciosNome">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nome:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelCpfAluno">
+            <Component class="javax.swing.JTextField" name="jTextFieldExerciciosNome">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabelDescricaoExercicios">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CPF:"/>
+                <Property name="text" type="java.lang.String" value="Descri&#xe7;&#xe3;o:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabelDataNascimentoAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Data Nascimento:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelPesoAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Peso:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelAlturaAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Altura:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelEnderecoAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Endereco:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelLoginAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Login:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelSenhaAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Senha:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelEmailAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Email:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabelValidadeAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Validade:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldNomeAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldCpfAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldDataNascimentoAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldPesoAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldAlturaAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldEnderecoAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldLoginAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldEmailAluno">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextFieldValidadeAluno">
-            </Component>
-            <Component class="javax.swing.JButton" name="jButtonBuscarDataAluno">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="..."/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JPasswordField" name="jPasswordFieldSenhaAluno">
-            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="jTextAreaDescricaoExercicios">
+                  <Properties>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonCancelarExercicio">
+    <Component class="javax.swing.JButton" name="jButtonCancelarExercicios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelarExerciciosActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonConfirmarExercicio">
+    <Component class="javax.swing.JButton" name="jButtonConfirmarExercicios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConfirmarExerciciosActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonInserirExercicio">
+    <Component class="javax.swing.JButton" name="jButtonInserirExercicios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Inserir"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInserirExercicioActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInserirExerciciosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonAlterarExercicio">
+    <Component class="javax.swing.JButton" name="jButtonAlterarExercicios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAlterarExerciciosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
