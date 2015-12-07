@@ -71,8 +71,8 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jTabbedPaneAdicionarTreino" min="-2" pref="327" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Component id="jTabbedPaneAdicionarTreino" pref="333" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonInserirTreino" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonAlterarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -105,11 +105,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="jLabelProcurarTreino" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jComboBoxProcurarTreino" min="-2" pref="110" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jTextFieldProcurarTreino" min="-2" pref="184" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonProcurarTreino" min="-2" max="-2" attributes="0"/>
@@ -120,13 +120,13 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="258" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="261" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabelProcurarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBoxProcurarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextFieldProcurarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonProcurarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxProcurarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelProcurarTreino" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -236,11 +236,9 @@
             <Component class="javax.swing.JComboBox" name="jComboBoxProcurarTreino">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
+                  <StringArray count="2">
+                    <StringItem index="0" value="Id"/>
+                    <StringItem index="1" value="Nome"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -347,7 +345,7 @@
                           <Component id="jTextFieldModalidadeTreino" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonEscolhaModalidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="57" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
