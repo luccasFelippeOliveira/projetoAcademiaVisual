@@ -75,6 +75,8 @@ public class TelaInicial extends javax.swing.JFrame {
     private JInternalFrameCadastroModalidade cadastroModalidade = null;
     private JInternalFrameCadastroProduto cadastroProduto = null;
     private JInternalFrameCadastroAluno2 cadastroAluno2 = null;
+    private JInternalFrameReportar reportar = null;
+    private JInternalFrameAdicionarTreino addTreino = null;
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -99,6 +101,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuItemConsultaEvolucao = new javax.swing.JMenuItem();
         jMenuItemAdicionarModalidade = new javax.swing.JMenuItem();
         jMenuAjuda = new javax.swing.JMenu();
+        jMenuItemReportar = new javax.swing.JMenuItem();
         jMenuItemInfo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -200,6 +203,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuTreinos.setName("treinosMenu"); // NOI18N
 
         jMenuItemAdicionarTreino.setText("Adicionar Treino");
+        jMenuItemAdicionarTreino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemAdicionarTreinoActionPerformed(evt);
+            }
+        });
         jMenuTreinos.add(jMenuItemAdicionarTreino);
 
         jMenuBar1.add(jMenuTreinos);
@@ -225,6 +233,14 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuBar1.add(jMenuAluno);
 
         jMenuAjuda.setText("Ajuda");
+
+        jMenuItemReportar.setText("Reportar");
+        jMenuItemReportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReportarActionPerformed(evt);
+            }
+        });
+        jMenuAjuda.add(jMenuItemReportar);
 
         jMenuItemInfo.setText("Info");
         jMenuItemInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -271,7 +287,7 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemFecharActionPerformed
 
     private void jMenuItemInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemInfoActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Em caso de duvida entre em contato:\n email: academiaVisual@hotmail.com\n telefone: (34) 9999-9999");
+        JOptionPane.showMessageDialog(rootPane, "Em caso de duvida entre em contato:\n email: projetoacademiavisual@gmail.com\n telefone: (34) 9999-9999");
     }//GEN-LAST:event_jMenuItemInfoActionPerformed
 
     private void jMenuItemCadastroTreinadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroTreinadorActionPerformed
@@ -331,6 +347,32 @@ public class TelaInicial extends javax.swing.JFrame {
         }
         cadastroProduto.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroProdutoActionPerformed
+
+    private void jMenuItemReportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportarActionPerformed
+        if ((reportar == null) || (reportar.isClosed())) {
+            reportar = new JInternalFrameReportar();
+            jDesktopPaneInicial.add(reportar);
+        }
+        try {
+            reportar.setMaximum(rootPaneCheckingEnabled);
+        } catch (PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        reportar.setVisible(true);
+    }//GEN-LAST:event_jMenuItemReportarActionPerformed
+
+    private void jMenuItemAdicionarTreinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAdicionarTreinoActionPerformed
+        if ((addTreino == null) || (addTreino.isClosed())) {
+            addTreino = new JInternalFrameAdicionarTreino();
+            jDesktopPaneInicial.add(addTreino);
+        }
+        try {
+            addTreino.setMaximum(rootPaneCheckingEnabled);
+        } catch (PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        addTreino.setVisible(true);
+    }//GEN-LAST:event_jMenuItemAdicionarTreinoActionPerformed
 
 //    /**
 //     * @param args the command line arguments
@@ -406,6 +448,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemFechar;
     private javax.swing.JMenuItem jMenuItemInfo;
     private javax.swing.JMenuItem jMenuItemLogout;
+    private javax.swing.JMenuItem jMenuItemReportar;
     private javax.swing.JMenu jMenuProdutos;
     private javax.swing.JMenu jMenuTreinos;
     // End of variables declaration//GEN-END:variables

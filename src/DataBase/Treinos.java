@@ -5,17 +5,24 @@
  */
 package DataBase;
 
+import DAO.TreinosJpaController;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Persistence;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.swing.JOptionPane;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,6 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Treinos.findByDia", query = "SELECT t FROM Treinos t WHERE t.dia = :dia"),
     @NamedQuery(name = "Treinos.findById", query = "SELECT t FROM Treinos t WHERE t.id = :id")})
 public class Treinos implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "repeticoes", nullable = false)
@@ -75,7 +84,9 @@ public class Treinos implements Serializable {
     }
 
     public void setRepeticoes(int repeticoes) {
+        int oldRepeticoes = this.repeticoes;
         this.repeticoes = repeticoes;
+        changeSupport.firePropertyChange("repeticoes", oldRepeticoes, repeticoes);
     }
 
     public int getSeries() {
@@ -83,7 +94,9 @@ public class Treinos implements Serializable {
     }
 
     public void setSeries(int series) {
+        int oldSeries = this.series;
         this.series = series;
+        changeSupport.firePropertyChange("series", oldSeries, series);
     }
 
     public int getDia() {
@@ -91,7 +104,9 @@ public class Treinos implements Serializable {
     }
 
     public void setDia(int dia) {
+        int oldDia = this.dia;
         this.dia = dia;
+        changeSupport.firePropertyChange("dia", oldDia, dia);
     }
 
     public Integer getId() {
@@ -99,7 +114,9 @@ public class Treinos implements Serializable {
     }
 
     public void setId(Integer id) {
+        Integer oldId = this.id;
         this.id = id;
+        changeSupport.firePropertyChange("id", oldId, id);
     }
 
     public Aluno getAlunoId() {
@@ -107,7 +124,9 @@ public class Treinos implements Serializable {
     }
 
     public void setAlunoId(Aluno alunoId) {
+        Aluno oldAlunoId = this.alunoId;
         this.alunoId = alunoId;
+        changeSupport.firePropertyChange("alunoId", oldAlunoId, alunoId);
     }
 
     public Exercicios getExercicioId() {
@@ -115,7 +134,9 @@ public class Treinos implements Serializable {
     }
 
     public void setExercicioId(Exercicios exercicioId) {
+        Exercicios oldExercicioId = this.exercicioId;
         this.exercicioId = exercicioId;
+        changeSupport.firePropertyChange("exercicioId", oldExercicioId, exercicioId);
     }
 
     public Modalidades getModalidadeId() {
@@ -123,7 +144,9 @@ public class Treinos implements Serializable {
     }
 
     public void setModalidadeId(Modalidades modalidadeId) {
+        Modalidades oldModalidadeId = this.modalidadeId;
         this.modalidadeId = modalidadeId;
+        changeSupport.firePropertyChange("modalidadeId", oldModalidadeId, modalidadeId);
     }
 
     @Override
@@ -149,6 +172,44 @@ public class Treinos implements Serializable {
     @Override
     public String toString() {
         return "DataBase.Treinos[ id=" + id + " ]";
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
+    }
+    
+    public void incluir(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            TreinosJpaController treinoController = new TreinosJpaController(emf);
+            treinoController.create(this);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void alterar(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            TreinosJpaController treinoController = new TreinosJpaController(emf);
+            treinoController.edit(this);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    public void excluir(){
+        try{
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("AcademiaVisualPU");
+            TreinosJpaController treinoController = new TreinosJpaController(emf);
+            treinoController.destroy(this.getId());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
 }
