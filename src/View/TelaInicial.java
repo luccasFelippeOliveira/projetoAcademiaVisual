@@ -77,6 +77,9 @@ public class TelaInicial extends javax.swing.JFrame {
     private JInternalFrameCadastroAluno2 cadastroAluno2 = null;
     private JInternalFrameReportar reportar = null;
     private JInternalFrameAdicionarTreino addTreino = null;
+    private JInternalFrameConsultaProdutos consultaProdutos = null;
+    private JInternalFrameConsultaTreino consultaTreinos = null;
+    private JInternalFrameCadastroExercicio cadastroExercicio = null;
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -179,6 +182,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuCadastros.add(jMenuItemCadastroTreinador);
 
         jMenuItemCadastroExercicio.setText("Cadastro Exercicio");
+        jMenuItemCadastroExercicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroExercicioActionPerformed(evt);
+            }
+        });
         jMenuCadastros.add(jMenuItemCadastroExercicio);
 
         jMenuItemCadastroModalidade.setText("Cadastro Modalidade");
@@ -215,6 +223,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuProdutos.setText("Produtos");
 
         jMenuItemConsultaProdutos.setText("Consulta Produtos");
+        jMenuItemConsultaProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsultaProdutosActionPerformed(evt);
+            }
+        });
         jMenuProdutos.add(jMenuItemConsultaProdutos);
 
         jMenuBar1.add(jMenuProdutos);
@@ -222,6 +235,11 @@ public class TelaInicial extends javax.swing.JFrame {
         jMenuAluno.setText("Aluno");
 
         jMenuItemConsultaTreino.setText("Consulta Treino");
+        jMenuItemConsultaTreino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsultaTreinoActionPerformed(evt);
+            }
+        });
         jMenuAluno.add(jMenuItemConsultaTreino);
 
         jMenuItemConsultaEvolucao.setText("Grafico Evolucao");
@@ -374,6 +392,45 @@ public class TelaInicial extends javax.swing.JFrame {
         addTreino.setVisible(true);
     }//GEN-LAST:event_jMenuItemAdicionarTreinoActionPerformed
 
+    private void jMenuItemConsultaProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsultaProdutosActionPerformed
+        if ((consultaProdutos == null) || (consultaProdutos.isClosed())) {
+            consultaProdutos = new JInternalFrameConsultaProdutos();
+            jDesktopPaneInicial.add(consultaProdutos);
+        }
+        try {
+            consultaProdutos.setMaximum(rootPaneCheckingEnabled);
+        } catch (PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        consultaProdutos.setVisible(true);
+    }//GEN-LAST:event_jMenuItemConsultaProdutosActionPerformed
+
+    private void jMenuItemConsultaTreinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsultaTreinoActionPerformed
+        if ((consultaTreinos == null) || (consultaTreinos.isClosed())) {
+            consultaTreinos = new JInternalFrameConsultaTreino();
+            jDesktopPaneInicial.add(consultaTreinos);
+        }
+        try {
+            consultaTreinos.setMaximum(rootPaneCheckingEnabled);
+        } catch (PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        consultaTreinos.setVisible(true);
+    }//GEN-LAST:event_jMenuItemConsultaTreinoActionPerformed
+
+    private void jMenuItemCadastroExercicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroExercicioActionPerformed
+        if ((cadastroExercicio == null) || (cadastroExercicio.isClosed())) {
+            cadastroExercicio = new JInternalFrameCadastroExercicio();
+            jDesktopPaneInicial.add(cadastroExercicio);
+        }
+        try {
+            cadastroExercicio.setMaximum(rootPaneCheckingEnabled);
+        } catch (PropertyVetoException e) {
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        cadastroExercicio.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroExercicioActionPerformed
+
 //    /**
 //     * @param args the command line arguments
 //     */
@@ -428,6 +485,7 @@ public class TelaInicial extends javax.swing.JFrame {
         }        
         return administrador;
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPaneInicial;
     private javax.swing.JMenu jMenuAjuda;

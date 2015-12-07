@@ -206,6 +206,20 @@ public class TreinosJpaController implements Serializable {
             em.close();
         }
     }
+    public List<Treinos> findTreinosByAlunoId(Aluno alunoID) {
+        EntityManager em = getEntityManager();
+        List<Treinos> l;
+        try {
+            Query q;
+            q = em.createNamedQuery("Treinos.findByAlunoId");
+            q.setParameter("alunoId", alunoID);
+            l = q.getResultList();
+            return l;
+        }finally {
+            em.close();
+        }
+        
+    }
 
     public Treinos findTreinos(Integer id) {
         EntityManager em = getEntityManager();

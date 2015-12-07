@@ -122,7 +122,7 @@ public class Exercicios implements Serializable {
 
     @Override
     public String toString() {
-        return "DataBase.Exercicios[ id=" + id + " ]";
+        return nome;
     }
     //funções para incluir, alterar e excluir utilizando o jpaController.
     //TODO: As funçoes a seguir estão conceitualmente no lugar errado -> MUDAR para o objeto DAO.

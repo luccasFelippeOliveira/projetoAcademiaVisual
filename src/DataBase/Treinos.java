@@ -37,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Treinos.findByRepeticoes", query = "SELECT t FROM Treinos t WHERE t.repeticoes = :repeticoes"),
     @NamedQuery(name = "Treinos.findBySeries", query = "SELECT t FROM Treinos t WHERE t.series = :series"),
     @NamedQuery(name = "Treinos.findByDia", query = "SELECT t FROM Treinos t WHERE t.dia = :dia"),
-    @NamedQuery(name = "Treinos.findById", query = "SELECT t FROM Treinos t WHERE t.id = :id")})
+    @NamedQuery(name = "Treinos.findById", query = "SELECT t FROM Treinos t WHERE t.id = :id"),
+    @NamedQuery(name = "Treinos.findByAlunoId", query = "SELECT t FROM Treinos t WHERE t.alunoId = :alunoId")})
 public class Treinos implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);

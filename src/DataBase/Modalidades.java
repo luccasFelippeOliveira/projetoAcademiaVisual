@@ -172,7 +172,7 @@ public class Modalidades implements Serializable {
 
     @Override
     public String toString() {
-        return "DataBase.Modalidades[ id=" + id + " ]";
+        return nome;
     }
 
     @XmlTransient
